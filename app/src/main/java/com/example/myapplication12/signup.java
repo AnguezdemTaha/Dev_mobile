@@ -1,21 +1,11 @@
 package com.example.myapplication12;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
-import com.example.myapplication12.Model.Personne;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class signup extends AppCompatActivity {
 
@@ -30,7 +20,7 @@ public class signup extends AppCompatActivity {
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in=new Intent(signup.this,login1.class);
+                Intent in=new Intent(signup.this, Login.class);
                 startActivity(in);
             }
         });
@@ -46,7 +36,7 @@ public class signup extends AppCompatActivity {
                 //Exm.createUser(var);
                 Personne test1 = new Personne(Nom,Email,Num_telephone,Mot_de_passe);
                 db1.collection("Personne").add(test1);
-                Intent in=new Intent(signup.this,login1.class);
+                Intent in=new Intent(signup.this,Login.class);
                 startActivity(in);
             }
         });*/

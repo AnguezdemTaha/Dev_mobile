@@ -5,24 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.myapplication12.Model.Personne;
-import com.example.myapplication12.Services.Exm;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.core.Tag;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.proto.TargetGlobal;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,12 +37,12 @@ public class MainActivity extends AppCompatActivity {
         Map<String, Object> user = new HashMap<>();
         user.put("first", "Ada");
         user.put("last", "Lovelace");
-        user.put("born", 1815);
-        db.collection("test1")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        user.put("born", 1816);
+        /*db.collection("test2").document("testxd")
+                .update(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
+                    public void onSuccess(Void documentReference) {
 
                     }
                 })
@@ -59,7 +51,38 @@ public class MainActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
 
                     }
-                });
+                });*/
+
+        /*final DocumentReference sfDocRef = db.collection("test2").document("testxd");
+
+        db.runTransaction(new Transaction.Function<Double>() {
+            @Override
+            public Double apply(Transaction transaction) throws FirebaseFirestoreException {
+                DocumentSnapshot snapshot = transaction.get(sfDocRef);
+                double newPopulation = snapshot.getDouble("born") + 1;
+                if (newPopulation <= 2000) {
+                    transaction.update(sfDocRef, "born", newPopulation);
+                    return newPopulation;
+                } else {
+                    throw new FirebaseFirestoreException("Population too high",
+                            FirebaseFirestoreException.Code.ABORTED);
+                }
+            }
+        }).addOnSuccessListener(new OnSuccessListener<Double>() {
+            @Override
+            public void onSuccess(Double result) {
+
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });*/
+
+
+
 
 
         /*
@@ -81,16 +104,34 @@ public class MainActivity extends AppCompatActivity {
                 //DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("tese1");
                 //reference1.setValue("ok");
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
-                DocumentReference docRef = db.collection("utisateur").document("ahmed");
-                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
+                CollectionReference docRef = db.collection("Personne");
+                docRef.whereEqualTo("Nom","ahmed").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Personne p = document.toObject(Personne.class);
+                                String nom=p.getEmail();
+                                mytext=(TextView)findViewById(R.id.t);
+
+                                mytext.setText(nom);
+                            }
+                        } else {
+
+                        }
+                    }
+
+                    /*
+                    @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             Personne p = documentSnapshot.toObject(Personne.class);
                             String nom=p.getNom();
                             mytext=(TextView)findViewById(R.id.t);
 
                             mytext.setText(nom);
-                        }
+
+
+                        }*/
                     });
 
 
@@ -101,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                 //Personne user1 = new Personne(var);
                 //db1.collection("utisateur").add(user1);
 
-                Intent in=new Intent(MainActivity.this,login1.class);
+                Intent in=new Intent(MainActivity.this, Login.class);
                 startActivity(in);
             }
         });

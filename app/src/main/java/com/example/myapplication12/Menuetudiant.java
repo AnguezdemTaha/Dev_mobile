@@ -20,7 +20,7 @@ public class Menuetudiant extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in=new Intent(Menuetudiant.this,Chat.class);
+                Intent in=new Intent(Menuetudiant.this, Listmessage.class);
                 startActivity(in);
             }
         });

@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Addprof"></activity>
+        <activity android:name=".Editetudiant"></activity>
+        <activity android:name=".Editcours" />
+        <activity android:name=".Addprof" />
         <activity android:name=".Addetudiant" />
         <activity android:name=".Listetudiant" />
         <activity android:name=".Listcours" />
@@ -24,11 +26,10 @@
         <activity android:name=".Editevent" />
         <activity android:name=".Listevent" />
         <activity android:name=".Menuevent" />
-        <activity android:name=".Chat" />
+        <activity android:name=".Listmessage" />
         <activity android:name=".Menuprof" />
-        <activity android:name=".Messages" />
         <activity android:name=".signup" />
-        <activity android:name=".login1" />
+        <activity android:name=".Login" />
         <activity android:name=".Menuetudiant" />
         <activity android:name=".MainActivity">
             <intent-filter>

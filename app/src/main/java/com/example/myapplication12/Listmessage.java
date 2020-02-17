@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-public class Chat extends AppCompatActivity {
+public class Listmessage extends AppCompatActivity {
 
     private LinearLayout l1,l2;
     private ImageView imageadd;
@@ -25,21 +25,21 @@ public class Chat extends AppCompatActivity {
         l1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in=new Intent(Chat.this, Discussion.class);
+                Intent in=new Intent(Listmessage.this, Discussion.class);
                 startActivity(in);
             }
         });
         l2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in=new Intent(Chat.this, Discussion.class);
+                Intent in=new Intent(Listmessage.this, Discussion.class);
                 startActivity(in);
             }
         });
         imageadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in=new Intent(Chat.this,Addmessage.class);
+                Intent in=new Intent(Listmessage.this,Addmessage.class);
                 startActivity(in);
             }
         });

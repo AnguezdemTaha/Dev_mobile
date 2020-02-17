@@ -4,12 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class Messages extends AppCompatActivity {
+public class Editetudiant extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_messages);
-        getSupportActionBar().hide();
+        setContentView(R.layout.activity_editetudiant);
     }
 }

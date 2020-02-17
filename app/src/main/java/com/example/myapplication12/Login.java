@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class login1 extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
     private TextView text,text2;
     @Override
@@ -20,14 +20,14 @@ public class login1 extends AppCompatActivity {
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in=new Intent(login1.this, Menuetudiant.class);
+                Intent in=new Intent(Login.this, Menuetudiant.class);
                 startActivity(in);
             }
         });
         text2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in=new Intent(login1.this,signup.class);
+                Intent in=new Intent(Login.this,signup.class);
                 startActivity(in);
             }
         });
