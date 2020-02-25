@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class Menuevent extends AppCompatActivity {
 
     private Button button1,button2,button3;
     private ImageView image_add_evn;
+    private TextView nomuser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +23,8 @@ public class Menuevent extends AppCompatActivity {
         button2=(Button) findViewById(R.id.Partipe_evns);
         button3=(Button) findViewById(R.id.Autre_evns);
         image_add_evn=(ImageView) findViewById(R.id.Add_evn);
+
+
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override

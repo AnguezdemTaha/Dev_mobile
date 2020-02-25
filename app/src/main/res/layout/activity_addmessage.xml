@@ -52,138 +52,18 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#4a5a71"></LinearLayout>
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listdespersonnesmsg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:gravity="left"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="20dp">
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/usrusr"
-                    android:layout_gravity="center"/>
-                <CheckBox
-                    android:id="@+id/nomzmi"
-                    android:layout_width="280dp"
-                    android:layout_height="wrap_content"
-                    android:hint="user1"
-                    android:textColorHint="#000000"
-                    android:layout_marginLeft="15dp"
-                    android:background="#00000000"
-                    android:letterSpacing="0.1"
-                    android:textSize="16dp"
-                    android:inputType="text"
-                    android:textColor="#fff" />
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:gravity="left"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="20dp">
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/usrusr"
-                    android:layout_gravity="center"/>
-
-                <CheckBox
-                    android:id="@+id/nommpi"
-                    android:layout_width="280dp"
-                    android:layout_height="wrap_content"
-                    android:hint="user2"
-                    android:textColorHint="#000000"
-                    android:layout_marginLeft="15dp"
-                    android:background="#00000000"
-                    android:letterSpacing="0.1"
-                    android:textSize="16dp"
-                    android:inputType="text"
-                    android:textColor="#fff" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:gravity="left"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="20dp"
-                >
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/usrusr"
-                    android:layout_gravity="center"/>
-                <CheckBox
-                    android:id="@+id/nommopi"
-                    android:layout_width="280dp"
-                    android:layout_height="wrap_content"
-                    android:hint="user3"
-                    android:textColorHint="#000000"
-                    android:layout_marginLeft="15dp"
-                    android:background="#00000000"
-                    android:letterSpacing="0.1"
-                    android:textSize="16dp"
-                    android:inputType="text"
-                    android:textColor="#fff" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:gravity="left"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="20dp"
-                >
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/usrusr"
-                    android:layout_gravity="center"/>
-                <CheckBox
-                    android:id="@+id/nommzopi"
-                    android:layout_width="280dp"
-                    android:layout_height="wrap_content"
-                    android:hint="user4"
-                    android:textColorHint="#000000"
-                    android:layout_marginLeft="15dp"
-                    android:background="#00000000"
-                    android:letterSpacing="0.1"
-                    android:textSize="16dp"
-                    android:inputType="text"
-                    android:textColor="#fff" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:gravity="left"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="20dp">
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/usrusr"
-                    android:layout_gravity="center"/>
-                <CheckBox
-                    android:id="@+id/nomizmi"
-                    android:layout_width="280dp"
-                    android:layout_height="wrap_content"
-                    android:hint="user5"
-                    android:textColorHint="#000000"
-                    android:layout_marginLeft="15dp"
-                    android:background="#00000000"
-                    android:letterSpacing="0.1"
-                    android:textSize="16dp"
-                    android:inputType="text"
-                    android:textColor="#fff" />
-            </LinearLayout>
 
 
-        </LinearLayout>
+
+
+        </androidx.recyclerview.widget.RecyclerView>
 
 
 

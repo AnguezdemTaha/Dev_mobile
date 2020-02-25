@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.myapplication12.Model.Message;
 import com.example.myapplication12.Model.Personne;
+import com.example.myapplication12.Services.Methodes_msg_evt_;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -100,18 +102,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Personne p1 =new Personne("ahmed","ahmed","ahmed@gcom","060666","Prof");
+
                 //se connecter avec la base de donnée + getref(cree ou ecrire dans le child
                 //DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("tese1");
                 //reference1.setValue("ok");
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
-                CollectionReference docRef = db.collection("Personne");
-                docRef.whereEqualTo("Nom","ahmed").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                CollectionReference docRef = db.collection("Message");
+                Methodes_msg_evt_.GetMessages(p1).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Personne p = document.toObject(Personne.class);
-                                String nom=p.getEmail();
+                                Message p = document.toObject(Message.class);
+                                String nom=p.getPer_envoye().getEmail();
                                 mytext=(TextView)findViewById(R.id.t);
 
                                 mytext.setText(nom);
@@ -138,11 +142,11 @@ public class MainActivity extends AppCompatActivity {
 
                 FirebaseFirestore db1 = FirebaseFirestore.getInstance();
                 String var="test11";
-                //Exm.createUser(var);
+                //Methodes_personne.createUser(var);
                 //Personne user1 = new Personne(var);
                 //db1.collection("utisateur").add(user1);
 
-                Intent in=new Intent(MainActivity.this, Login.class);
+                Intent in=new Intent(MainActivity.this, Addmessage.class);
                 startActivity(in);
             }
         });

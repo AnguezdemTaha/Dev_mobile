@@ -72,7 +72,7 @@
                     android:src="@drawable/usrusr"
                     android:layout_gravity="center"/>
                 <EditText
-                    android:id="@+id/mail"
+                    android:id="@+id/nomeventajout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nom de l'evenement"
@@ -82,7 +82,7 @@
                     android:letterSpacing="0.1"
                     android:textSize="16dp"
                     android:inputType="text"
-                    android:textColor="#fff"
+                    android:textColor="#000000"
                     />
             </LinearLayout>
             <LinearLayout
@@ -110,7 +110,7 @@
                     android:letterSpacing="0.1"
                     android:textSize="16dp"
                     android:inputType="text"
-                    android:textColor="#fff"
+                    android:textColor="#000000"
                     />
             </LinearLayout>
             <LinearLayout
@@ -128,7 +128,7 @@
                     android:src="@drawable/description"
                     android:layout_gravity="center"/>
                 <EditText
-                    android:id="@+id/pswrdd"
+                    android:id="@+id/discriptionevenajout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Discription"
@@ -138,7 +138,7 @@
                     android:inputType="textPassword"
                     android:letterSpacing="0.1"
                     android:textSize="16dp"
-                    android:textColor="#fff"
+                    android:textColor="#000000"
                     />
             </LinearLayout>
             <LinearLayout
@@ -166,7 +166,7 @@
                     android:letterSpacing="0.1"
                     android:textSize="16dp"
                     android:inputType="number"
-                    android:textColor="#fff"
+                    android:textColor="#000000"
                     />
                 <ImageView
                     android:layout_width="20dp"
@@ -189,7 +189,7 @@
         android:gravity="bottom"
         android:layout_marginBottom="20dp">
         <TextView
-            android:id="@+id/sup"
+            android:id="@+id/ajoutevent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#000000"

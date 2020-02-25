@@ -23,7 +23,7 @@
             android:src="@drawable/profile"
             android:layout_gravity="center"/>
         <TextView
-            android:id="@+id/nrom"
+            android:id="@+id/nomcurentuser"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:hint="Votre nom"
@@ -33,7 +33,7 @@
             android:letterSpacing="0.1"
             android:textSize="16dp"
             android:inputType="text"
-            android:textColor="#fff" />
+            android:textColor="#000000" />
 
 
 
