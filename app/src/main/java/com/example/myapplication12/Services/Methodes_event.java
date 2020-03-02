@@ -27,4 +27,19 @@ public class Methodes_event {
         return getUsersCollection().add(p);
 
     }
+    public static Task<QuerySnapshot> GetAllEvens() {
+
+
+        return getUsersCollection().get();
+
+    }
+    public static Task<QuerySnapshot> deleteEven(String nom1) {
+        return Methodes_personne.getUsersCollection().whereEqualTo("Nom",nom1).get();
+    }
+    public static Task<QuerySnapshot> Geteventbynom(String nom) {
+
+
+        return getUsersCollection().whereEqualTo("Nom_event",nom).get();
+
+    }
 }

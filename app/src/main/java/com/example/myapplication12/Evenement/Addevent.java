@@ -1,4 +1,4 @@
-package com.example.myapplication12;
+package com.example.myapplication12.Evenement;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,8 +11,8 @@ import android.widget.Toast;
 
 import com.example.myapplication12.Model.Evenement;
 import com.example.myapplication12.Model.Personne;
+import com.example.myapplication12.R;
 import com.example.myapplication12.Services.Methodes_event;
-import com.example.myapplication12.Services.Methodes_personne;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,11 +46,11 @@ public class Addevent extends AppCompatActivity {
                 //String pass= String.valueOf(pass1.getText());
                 //String type="Etudiant";
                 int id_event=2;
-                Date date_event=null;
+                String date_event=null;
                 ArrayList<Personne> per_participes= null;
 
 
-                Evenement e=new Evenement(id_event,nom,date_event,discription_event,per_participes);
+                Evenement e=new Evenement(nom,date_event,discription_event,per_participes);
                 Methodes_event.creatEvent(e);
                 Toast.makeText(getApplicationContext(), "Votre evenemenet a été ajouter avec succe", Toast.LENGTH_LONG).show();
 

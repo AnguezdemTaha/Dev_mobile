@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="150dp">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:gravity="left"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:orientation="horizontal"
         android:padding="20dp">
         <ImageView
@@ -14,11 +14,17 @@
             android:layout_height="100dp"
             android:src="@drawable/eventexm"
             android:layout_gravity="center"/>
-        <TextView
-            android:id="@+id/nomevent"
-            android:layout_width="120dp"
+        <LinearLayout
+            android:layout_width="140dp"
+            android:gravity="left"
             android:layout_height="wrap_content"
-            android:hint="Even1:description[]++"
+            android:orientation="vertical"
+            android:padding="20dp">
+        <TextView
+            android:id="@+id/even_nom"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="Evennom"
             android:textColorHint="#000000"
             android:layout_marginLeft="15dp"
             android:background="#00000000"
@@ -26,18 +32,31 @@
             android:textSize="16dp"
             android:inputType="text"
             android:textColor="#000000" />
+            <TextView
+                android:id="@+id/even_description"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:hint="Evendesctption"
+                android:textColorHint="#000000"
+                android:layout_marginLeft="15dp"
+                android:background="#00000000"
+                android:letterSpacing="0.1"
+                android:textSize="16dp"
+                android:inputType="text"
+                android:textColor="#000000" />
+        </LinearLayout>
         <ImageView
-            android:id="@+id/evenvoir"
+            android:id="@+id/edit_even"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/cherch"
             android:layout_marginLeft="15dp"
             android:layout_gravity="center"/>
         <ImageView
-            android:id="@+id/evenmodifier"
+            android:id="@+id/delet_even"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/modif"
+            android:src="@drawable/supprimer"
             android:layout_marginLeft="15dp"
             android:layout_gravity="center"/>
 

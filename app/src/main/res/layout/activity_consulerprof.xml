@@ -27,18 +27,19 @@
                 android:src="@drawable/profile"
                 android:layout_gravity="center"/>
             <TextView
-                android:id="@+id/nom"
+                android:id="@+id/nom_prof"
                 android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:hint="Mmmmmmm"
+                android:hint="Nom prof"
                 android:textColorHint="#000000"
                 android:layout_marginLeft="15dp"
                 android:background="#00000000"
                 android:letterSpacing="0.1"
                 android:textSize="16dp"
                 android:inputType="text"
-                android:textColor="#fff" />
+                android:textColor="#000000" />
             <ImageView
+                android:id="@+id/save_prof"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/enreg"
@@ -86,64 +87,75 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="20dp">
-                <TextView
-                    android:id="@+id/notfm"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#4a5a71"></LinearLayout>
+                <EditText
+                    android:id="@+id/nom_prof2"
                     android:layout_width="260dp"
                     android:layout_height="wrap_content"
-                    android:hint="aattribut1:NOM_EXEMPLE"
+                    android:hint="nom de prof"
                     android:textColorHint="#000000"
                     android:layout_marginLeft="15dp"
                     android:background="#00000000"
                     android:letterSpacing="0.1"
-                    android:textSize="16dp"
+                    android:textSize="20dp"
                     android:inputType="text"
-                    android:textColor="#fff" />
-                <TextView
-                    android:id="@+id/noopfm"
+                    android:textColor="#000000" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#4a5a71"></LinearLayout>
+                <EditText
+                    android:id="@+id/gmail_prof2"
                     android:layout_width="260dp"
                     android:layout_height="wrap_content"
-                    android:hint="attrubut2:NOM_EXEMPLE"
+                    android:hint="Email de prof/etud"
                     android:textColorHint="#000000"
                     android:layout_marginLeft="15dp"
                     android:background="#00000000"
                     android:letterSpacing="0.1"
-                    android:textSize="16dp"
+                    android:textSize="20dp"
                     android:inputType="text"
-                    android:textColor="#fff" />
-                <TextView
-                    android:id="@+id/nofmmm"
+                    android:textColor="#000000" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#4a5a71"></LinearLayout>
+                <EditText
+                    android:id="@+id/telephone_prof2"
                     android:layout_width="260dp"
                     android:layout_height="wrap_content"
-                    android:hint="attribut3:NOM_EXEMPLE"
+                    android:hint="Tele prof/etud"
                     android:textColorHint="#000000"
                     android:layout_marginLeft="15dp"
                     android:background="#00000000"
                     android:letterSpacing="0.1"
-                    android:textSize="16dp"
+                    android:textSize="20dp"
                     android:inputType="text"
-                    android:textColor="#fff" />
+                    android:textColor="#000000" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#4a5a71"></LinearLayout>
                 <TextView
-                    android:id="@+id/nofm"
+                    android:id="@+id/autre"
                     android:layout_width="260dp"
                     android:layout_height="wrap_content"
-                    android:hint="attribut4:NOM_EXEMPLE"
+                    android:hint="autre attributs apres"
                     android:textColorHint="#000000"
                     android:layout_marginLeft="15dp"
                     android:background="#00000000"
                     android:letterSpacing="0.1"
-                    android:textSize="16dp"
+                    android:textSize="20dp"
                     android:inputType="text"
                     android:textColor="#fff" />
-                <CheckBox android:id="@+id/checkbox_meat"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="Interissé"
-                    android:onClick="onCheckboxClicked"/>
-                <CheckBox android:id="@+id/checkbox_cheese"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="AAAAA"
-                    android:onClick="onCheckboxClicked"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#4a5a71"></LinearLayout>
+
                 
 
             </LinearLayout>

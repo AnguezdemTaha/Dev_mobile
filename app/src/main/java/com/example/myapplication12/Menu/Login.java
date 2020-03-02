@@ -1,4 +1,4 @@
-package com.example.myapplication12;
+package com.example.myapplication12.Menu;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,16 +10,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.myapplication12.Model.Message;
 import com.example.myapplication12.Model.Personne;
-import com.example.myapplication12.Services.Methodes_msg_evt_;
+import com.example.myapplication12.R;
 import com.example.myapplication12.Services.Methodes_personne;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.ArrayList;
 
 public class Login extends AppCompatActivity {
 
@@ -106,7 +103,7 @@ public class Login extends AppCompatActivity {
         text2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in=new Intent(Login.this,signup.class);
+                Intent in=new Intent(Login.this, signup.class);
                 startActivity(in);
             }
         });

@@ -1,11 +1,14 @@
-package com.example.myapplication12;
+package com.example.myapplication12.Evenement;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,34 +18,93 @@ import android.widget.TextView;
 
 import com.example.myapplication12.Model.Evenement;
 import com.example.myapplication12.Model.Personne;
+import com.example.myapplication12.R;
 import com.example.myapplication12.Services.Methodes_event;
 import com.example.myapplication12.Services.Methodes_personne;
+import com.example.myapplication12.Services.MyAdapter;
+import com.example.myapplication12.Services.MyAdapterEven;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Date;
+import java.util.LinkedList;
 
 public class Listevent extends AppCompatActivity {
 
     private ImageView text,text2,text3;
-    private LinearLayout t21;
-    private TextView t211,text4;
+    //private LinearLayout t21;
+    //private TextView t211,text4;
+    private TextView mytext;
+    private ImageView addprof;
+    public RecyclerView r;
+    private Evenement e=new Evenement();
+    private Object LayoutManager;
+    //private ArrayList<ContactsContract.CommonDataKinds.Note> mNotes =new ArrayList<>();
+    private LinkedList<Personne> ps;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event1);
         getSupportActionBar().hide();
 
-        final Date[] date_event = new Date[1];
+
+        r = (RecyclerView) findViewById(R.id.listdesevents);
+
+
+
+        final LinkedList<Evenement> evns = new LinkedList<Evenement>();
+        final Context context = this;
+        //final MyAdapter.OnNoteListener note = this;
+        Methodes_event.GetAllevents().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                //Personne p = new Personne();
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        //String idd= document.getId();
+
+                        e = document.toObject(Evenement.class);
+                        evns.add(e);
+                        //System.out.println("le nom ="+p.getNom());
+                    }
+                    /*SharedPreferences.Editor editor = sharedpreferences.edit();
+
+                    editor.putString(nome,n)
+                    editor.commit();*/
+
+                    r.setHasFixedSize(true);
+                    LayoutManager = new LinearLayoutManager(context);
+                    r.setLayoutManager((RecyclerView.LayoutManager) LayoutManager);
+                    MyAdapterEven myAdapter = new MyAdapterEven(evns, context);
+                    r.setAdapter(myAdapter);
+                    //r.setHasFixedSize(true);
+                    //LayoutManager = new LinearLayoutManager(this);
+                    //System.out.println("le nom ="+p.getNom());
+
+
+                } else {
+
+                }
+            }
+
+
+        });
+
+
+
+
+
+
+        /*final Date[] date_event = new Date[1];
         final String[] description = new String[1];
         final int[] id = new int[1];
-        final String[] nomevent = new String[1];
+        final String[] nomevent = new String[1];*/
         //final String[] msguser = new String[1];
 
         //Personne p1 =new Personne("ahmed","ahmed","ahmed@gcom","060666","Prof");
-        Methodes_event.GetAllevents().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        /*Methodes_event.GetAllevents().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
@@ -93,19 +155,8 @@ public class Listevent extends AppCompatActivity {
                 }
             }
 
-                    /*
-                    @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            Personne p = documentSnapshot.toObject(Personne.class);
-                            String nom=p.getNom();
-                            mytext=(TextView)findViewById(R.id.t);
 
-                            mytext.setText(nom);
-
-
-                        }*/
-
-        });
+        });*/
 
 
 
@@ -132,7 +183,7 @@ public class Listevent extends AppCompatActivity {
         text3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in=new Intent(Listevent.this,Addevent.class);
+                Intent in=new Intent(Listevent.this, Addevent.class);
                 startActivity(in);
             }
         });

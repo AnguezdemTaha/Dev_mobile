@@ -1,4 +1,4 @@
-package com.example.myapplication12;
+package com.example.myapplication12.Menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication12.Model.Personne;
+import com.example.myapplication12.R;
 import com.example.myapplication12.Services.Methodes_personne;
 
 public class signup extends AppCompatActivity {

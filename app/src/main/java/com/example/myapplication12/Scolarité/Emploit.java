@@ -1,14 +1,16 @@
-package com.example.myapplication12;
+package com.example.myapplication12.Scolarité;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class Addcours extends AppCompatActivity {
+import com.example.myapplication12.R;
+
+public class Emploit extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ajoutercours);
+        setContentView(R.layout.activity_emploit);
     }
 }

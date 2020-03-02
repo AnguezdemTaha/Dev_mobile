@@ -1,4 +1,4 @@
-package com.example.myapplication12;
+package com.example.myapplication12.Messagerie;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -16,8 +15,8 @@ import android.widget.TextView;
 
 import com.example.myapplication12.Model.Message;
 import com.example.myapplication12.Model.Personne;
+import com.example.myapplication12.R;
 import com.example.myapplication12.Services.Methodes_msg_evt_;
-import com.example.myapplication12.Services.Methodes_personne;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -175,7 +174,7 @@ public class Listmessage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent in=new Intent(Listmessage.this,Addmessage.class);
+                Intent in=new Intent(Listmessage.this, Addmessage.class);
                 startActivity(in);
             }
         });

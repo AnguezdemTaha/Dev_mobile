@@ -1,8 +1,10 @@
-package com.example.myapplication12;
+package com.example.myapplication12.Gestion_etudiant_prof;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.myapplication12.R;
 
 public class Addetudiant extends AppCompatActivity {
 

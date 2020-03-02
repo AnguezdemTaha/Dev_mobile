@@ -35,14 +35,14 @@
             android:textColorHint="#000000"
             android:textSize="16dp" />
         <ImageView
-            android:id="@+id/evenvoir"
+            android:id="@+id/edit_personne"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/cherch"
             android:layout_marginLeft="15dp"
             android:layout_gravity="center"/>
         <ImageView
-            android:id="@+id/evenmodifier"
+            android:id="@+id/delet_personne"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/supprimer"

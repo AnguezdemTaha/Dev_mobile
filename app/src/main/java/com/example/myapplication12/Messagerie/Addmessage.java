@@ -1,10 +1,11 @@
-package com.example.myapplication12;
+package com.example.myapplication12.Messagerie;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 
 import com.example.myapplication12.Model.Message;
 import com.example.myapplication12.Model.Personne;
+import com.example.myapplication12.R;
+import com.example.myapplication12.Services.GetAllContactsOnCompleteListener;
 import com.example.myapplication12.Services.Methodes_msg_evt_;
 import com.example.myapplication12.Services.Methodes_personne;
 import com.example.myapplication12.Services.MyAdapter;
@@ -22,6 +25,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import static androidx.recyclerview.widget.RecyclerView.*;
@@ -30,8 +34,11 @@ public class Addmessage extends AppCompatActivity {
 
     private LinearLayout t21;
     private TextView t211,t212;
-    RecyclerView r;
+    public RecyclerView r;
     private Object LayoutManager;
+
+
+    private  Personne p=new Personne();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,7 @@ public class Addmessage extends AppCompatActivity {
         r=(RecyclerView) findViewById(R.id.listdespersonnesmsg);
 
         final LinkedList<Personne> prs =new LinkedList<Personne>();
+        final Context context=this;
 
 
 
@@ -50,7 +58,7 @@ public class Addmessage extends AppCompatActivity {
         final String[] nomuser = new String[1];
         //final String[] msguser = new String[1];
 
-        Personne p1 =new Personne("ahmed","ahmed","ahmed@gcom","060666","Prof");
+        /*Personne p1 =new Personne("ahmed","ahmed","ahmed@gcom","060666","Prof");
         Personne p2 =new Personne("ahmed","ahmed","ahmed@gcom","060666","Prof");
         Personne p3 =new Personne("ahmed","ahmed","ahmed@gcom","060666","Prof");
 
@@ -59,18 +67,26 @@ public class Addmessage extends AppCompatActivity {
         LayoutManager = new LinearLayoutManager(this);
         r.setLayoutManager((RecyclerView.LayoutManager) LayoutManager);
         MyAdapter myAdapter =new MyAdapter(prs,this);
-        r.setAdapter(myAdapter);
+        r.setAdapter(myAdapter);*/
 
-        /*Methodes_personne.GetAllUsers().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        Methodes_personne.GetAllUsers().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                //Personne p = new Personne();
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        Personne p = document.toObject(Personne.class);
+                        p = document.toObject(Personne.class);
                         prs.add(p);
+                        //System.out.println("le nom ="+p.getNom());
                     }
-                    r.setHasFixedSize(true);
+                    /*r.setHasFixedSize(true);
+                    LayoutManager = new LinearLayoutManager(context);
+                    r.setLayoutManager((RecyclerView.LayoutManager) LayoutManager);
+                    MyAdapter myAdapter =new MyAdapter(prs,context);
+                    r.setAdapter(myAdapter);*/
+                    //r.setHasFixedSize(true);
                     //LayoutManager = new LinearLayoutManager(this);
+                    //System.out.println("le nom ="+p.getNom());
 
                 } else {
 
@@ -78,7 +94,16 @@ public class Addmessage extends AppCompatActivity {
             }
 
 
-        });*/
+        });
+       // Methodes_personne.GetAllUsers(new GetAllContactsOnCompleteListener());
+
+
+        System.out.println("le nom nomnomnmnomnomnmn ="+p.getNom());
+        /*ArrayList<Personne> ps=new ArrayList<>();
+        ps=Methodes_personne.getallUsers1();
+        for(Personne p:ps){
+            System.out.println("le nom ="+p.getNom());
+        }*/
 
 
         //Personne p1 =new Personne("ahmed","ahmed","ahmed@gcom","060666","Prof");

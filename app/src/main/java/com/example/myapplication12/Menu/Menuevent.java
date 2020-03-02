@@ -1,4 +1,4 @@
-package com.example.myapplication12;
+package com.example.myapplication12.Menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.myapplication12.Evenement.Addevent;
+import com.example.myapplication12.Evenement.Listevent;
+import com.example.myapplication12.R;
 
 public class Menuevent extends AppCompatActivity {
 
@@ -50,7 +54,7 @@ public class Menuevent extends AppCompatActivity {
         image_add_evn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in=new Intent(Menuevent.this,Addevent.class);
+                Intent in=new Intent(Menuevent.this, Addevent.class);
                 startActivity(in);
             }
         });
