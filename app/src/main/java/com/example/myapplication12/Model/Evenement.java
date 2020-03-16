@@ -6,8 +6,9 @@ import java.util.Date;
 public class Evenement {
     //private String Id_event;
     private String Nom_event;
-    private String Date_event;
+    private Date Date_event;
     private String Description_event;
+    private String Image_event;
     //.
 
     private ArrayList<Personne> per_participes=new ArrayList<Personne>();
@@ -16,21 +17,13 @@ public class Evenement {
 
     }
 
-    public Evenement( String nom_event, String date_event, String description_event, ArrayList<Personne> per_participes) {
-        //Id_event =id_event;
+    public Evenement(String nom_event, Date date_event, String description_event, String image_event, ArrayList<Personne> per_participes) {
         Nom_event = nom_event;
         Date_event = date_event;
         Description_event = description_event;
+        Image_event = image_event;
         this.per_participes = per_participes;
     }
-
-    /*public int getId_event() {
-        return Id_event;
-    }*/
-
-    /*public void setId_event(int id_event) {
-        Id_event = id_event;
-    }*/
 
     public String getNom_event() {
         return Nom_event;
@@ -40,11 +33,11 @@ public class Evenement {
         Nom_event = nom_event;
     }
 
-    public String getDate_event() {
+    public Date getDate_event() {
         return Date_event;
     }
 
-    public void setDate_event(String date_event) {
+    public void setDate_event(Date date_event) {
         Date_event = date_event;
     }
 
@@ -54,6 +47,14 @@ public class Evenement {
 
     public void setDescription_event(String description_event) {
         Description_event = description_event;
+    }
+
+    public String getImage_event() {
+        return Image_event;
+    }
+
+    public void setImage_event(String image_event) {
+        Image_event = image_event;
     }
 
     public ArrayList<Personne> getPer_participes() {

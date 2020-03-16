@@ -83,7 +83,7 @@
             android:padding="20dp">
 
             <EditText
-                android:id="@+id/nrom"
+                android:id="@+id/msg"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:hint="Msg a ecrire ici"
@@ -93,8 +93,9 @@
                 android:letterSpacing="0.1"
                 android:textSize="16dp"
                 android:inputType="text"
-                android:textColor="#fff" />
+                android:textColor="#000000" />
             <ImageView
+                android:id="@+id/envoyermsg2"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/envoyermsg"

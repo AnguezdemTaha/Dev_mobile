@@ -4,9 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -17,15 +20,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.downloader.PRDownloader;
+import com.example.myapplication12.Evenement.Addevent;
 import com.example.myapplication12.Evenement.Listevent;
+import com.example.myapplication12.Gestion_etudiant_prof.Addprof;
 import com.example.myapplication12.Gestion_etudiant_prof.Listetudiant;
 import com.example.myapplication12.Gestion_etudiant_prof.Listprof;
 import com.example.myapplication12.Menu.signup;
 import com.example.myapplication12.Messagerie.Addmessage;
+import com.example.myapplication12.Messagerie.Discussion;
+import com.example.myapplication12.Messagerie.Listmessage;
+import com.example.myapplication12.Model.Emploi;
 import com.example.myapplication12.Model.Message;
 import com.example.myapplication12.Model.Personne;
+import com.example.myapplication12.Scolarité.Addcours;
+import com.example.myapplication12.Scolarité.Emploit;
+import com.example.myapplication12.Scolarité.Listcours;
+import com.example.myapplication12.Services.DownloadTask;
 import com.example.myapplication12.Services.Methodes_msg_evt_;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -34,6 +48,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -42,9 +57,14 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.DirectoryIteratorException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
+import io.grpc.Context;
+
+import static android.os.Environment.DIRECTORY_PICTURES;
 
 public class MainActivity extends Activity {
 
@@ -55,6 +75,7 @@ public class MainActivity extends Activity {
     private Uri filePath;
     FirebaseStorage storage;
     StorageReference storageReference;
+    //SharedPreferences shared = getApplicationContext().getSharedPreferences("YourSessionName", MODE_PRIVATE);
 
     private final int PICK_IMAGE_REQUEST = 71;
     @Override
@@ -71,13 +92,56 @@ public class MainActivity extends Activity {
         //storage = FirebaseStorage.getInstance();
         storageReference =  FirebaseStorage.getInstance().getReference();
 
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference("evenexm2.jpg");
+        //StorageReference storageReference = FirebaseStorage.getInstance().getReference("evenexm2.jpg");
+        //StorageReference storageReference = storage.getReference();
+        StorageReference pathReference = storageReference.child("/evenexm2.jpg");
         //StorageReference photoReference= storageReference.child("evenexm2.jpg");
         //StorageReference gsReference = storage.getReferenceFromUrl("gs://iwim-e513e.appspot.com/evenexm2.jpg");
 
-        Glide.with(this.getBaseContext() /* context */)
-                .load(storageReference)
-                .into(i1);
+        //Glide.with(this.getBaseContext() /* context */)
+          //      .load(storageReference)
+            //    .into(i1);
+
+
+
+        File localFile = null;
+        try {
+            localFile = File.createTempFile("images", "jpg");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        final File finalLocalFile = localFile;
+        pathReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                Bitmap bitmap = BitmapFactory.decodeFile(finalLocalFile.getAbsolutePath());
+                i1.setImageBitmap(bitmap);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+            }
+        });
+
+
+
+        pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+             //   downloadfile("test3",".jpg", DIRECTORY_PICTURES,uri.toString());
+                //new DownloadTask(MainActivity.this, uri.toString());
+                //PRDownloader.initialize(getApplicationContext());
+                //PRDownloader.download(uri.toString(), "images", "test2");
+                // Got the download URL for 'users/me/profile.png'
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+            }
+        });
 
 
 
@@ -201,7 +265,8 @@ public class MainActivity extends Activity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Message p = document.toObject(Message.class);
-                                String nom = p.getPer_recus().get(0).getEmail();
+                                //String nom = p.getPer_recus().get(0).getEmail();
+                                String nom="testt";
                                 mytext = (TextView) findViewById(R.id.t);
 
                                 mytext.setText(nom);
@@ -211,7 +276,7 @@ public class MainActivity extends Activity {
                         }
 
 
-                        Intent in = new Intent(MainActivity.this, Listevent.class);
+                        Intent in = new Intent(MainActivity.this, Listmessage.class);
                         startActivity(in);
                     }
                 });
@@ -226,7 +291,8 @@ public class MainActivity extends Activity {
     }
     private void chooseImage() {
         Intent intent = new Intent();
-        intent.setType("image/*");
+        //intent.setType("image/*");
+        intent.setType("application/pdf");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
@@ -255,7 +321,7 @@ public class MainActivity extends Activity {
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
-            StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
+            StorageReference ref = storageReference.child("files/"+ UUID.randomUUID().toString());
             ref.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -280,5 +346,13 @@ public class MainActivity extends Activity {
                         }
                     });
         }
+    }
+    public  void downloadfile( String filename, String fileextension, String destinationderectory, String url){
+        DownloadManager downloadManager =(DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+        Uri uri =Uri.parse(url);
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_ONLY_COMPLETION);
+        request.setDestinationInExternalFilesDir(this,destinationderectory,filename+fileextension);
+        downloadManager.enqueue(request);
     }
 }

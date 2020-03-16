@@ -3,10 +3,11 @@ package com.example.myapplication12.Model;
 import com.example.myapplication12.Model.Evenement;
 import com.example.myapplication12.Model.Message;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class Personne {
+public class Personne implements Serializable {
     private String Nom;
     private String Mot_de_passe;
     private String Email;

@@ -57,23 +57,22 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#4a5a71"></LinearLayout>
-        <LinearLayout
-            android:id="@+id/allmessages"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listdesmessages"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="left"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
-            android:orientation="vertical" >
+            android:gravity="center"
+            android:orientation="vertical">
 
 
 
 
+        </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
 
 
 
-    </LinearLayout>
+    
 </RelativeLayout>
 
 

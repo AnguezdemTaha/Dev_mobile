@@ -2,7 +2,10 @@ package com.example.myapplication12.Messagerie;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,26 +16,37 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.myapplication12.Model.Evenement;
 import com.example.myapplication12.Model.Message;
 import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.R;
 import com.example.myapplication12.Services.Methodes_msg_evt_;
+import com.example.myapplication12.Services.MyAdapterEven;
+import com.example.myapplication12.Services.MyAdapterMessage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Listmessage extends AppCompatActivity {
 
-     static ArrayList<Message> messages1 =new ArrayList<>();
+    static ArrayList<Message> messages1 = new ArrayList<>();
 
-    private LinearLayout l1,l2,t21;
+    private LinearLayout l1, l2, t21;
     private ImageView imageadd;
-    private TextView t1,mytext7,t211,t212;
-    private ListView t2,t3;
-    final  ArrayList<Message> messages =new ArrayList<>();
+    private TextView t1, mytext7, t211, t212;
+    private ListView t2, t3;
+    public RecyclerView r;
+    final ArrayList<Message> messages = new ArrayList<>();
+    private Object LayoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,19 +55,10 @@ public class Listmessage extends AppCompatActivity {
         getSupportActionBar().hide();
         //l1=(LinearLayout) findViewById(R.id.User1);
         //l2=(LinearLayout) findViewById(R.id.User2);
-        imageadd=(ImageView) findViewById(R.id.Add_msg);
-        t1=(TextView) findViewById(R.id.Msguser);
+        imageadd = (ImageView) findViewById(R.id.Add_msg);
+        t1 = (TextView) findViewById(R.id.Msguser);
         mytext7 = (TextView) findViewById(R.id.nom8);
-        /*for(int i=0;i<10;i++) {
-            t21 = (ListView) findViewById(R.id.allmessages);
-            LayoutInflater v2 = (LayoutInflater) getApplicationContext().getSystemService(getApplicationContext().LAYOUT_INFLATER_SERVICE);
-            View v = v2.inflate(R.layout.unmsg, null, false);
-            t21.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            //LinearLayout y2 = (LinearLayout) findViewById(R.id.allmessages);
-            //LayoutInflater x2 = (LayoutInflater) getApplicationContext().getSystemService(getApplicationContext().LAYOUT_INFLATER_SERVICE);
-            //View x = x2.inflate(R.layout.unmsg, null, false);
-            //y2.addView(x, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        }*/
+
         //t2 = (ListView) findViewById(R.id.allmessages);
         //Personne p1 =new Personne("ahmed","ahmed","ahmed@gcom","060666","Prof");
         //Message m=new Message();
@@ -63,61 +68,72 @@ public class Listmessage extends AppCompatActivity {
         final String[] nomuser = new String[1];
         final String[] msguser = new String[1];
 
-        Personne p1 =new Personne("ahmed","ahmed","ahmed@gcom","060666","Prof");
-        Methodes_msg_evt_.GetMessages(p1).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        r = (RecyclerView) findViewById(R.id.listdesmessages);
+        final LinkedList<Message> msgs = new LinkedList<Message>();
+        final Context context = this;
+
+        /*Personne p1 =new Personne("ahmed","ahmed","ahmed@gcom","060666","Prof");
+        Methodes_msg_evt_.GetMessagesrecu(p1).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Message m = document.toObject(Message.class);
-                        nom[0] =m.getPer_envoye().getEmail();
-                        //mytext7.setText(nom[0]);
 
-                        nomuser[0] =m.getPer_envoye().getNom();
-                        msguser[0] =m.getContenu_msg();
+                        msgs.add(m);
 
-
-
-                        t21 = (LinearLayout) findViewById(R.id.allmessages);
-                        LayoutInflater v2 = (LayoutInflater) getApplicationContext().getSystemService(getApplicationContext().LAYOUT_INFLATER_SERVICE);
-                        View v = v2.inflate(R.layout.unmsg, null, false);
-                        t21.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
-                        t211 = (TextView) findViewById(R.id.Nomuser);
-                        t211.setText(nomuser[0]);
-                        t212 = (TextView) findViewById(R.id.Msguser);
-                        t212.setText(msguser[0]);
-
-                        //System.out.println("here is :"+mytext7.getText().toString());
-                        /*t212.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent in=new Intent(Listmessage.this, Discussion.class);
-                                in.putExtra("nom_user",nomuser[0]);
-                                in.putExtra("msg_user",msguser[0]);
-                                startActivity(in);
-                            }
-                        });*/
                     }
+                    r.setHasFixedSize(true);
+                    LayoutManager = new LinearLayoutManager(context);
+                    r.setLayoutManager((RecyclerView.LayoutManager) LayoutManager);
+                    MyAdapterMessage myAdapter = new MyAdapterMessage(msgs, context);
+                    r.setAdapter(myAdapter);
 
                 } else {
 
                 }
             }
 
-                    /*
-                    @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            Personne p = documentSnapshot.toObject(Personne.class);
-                            String nom=p.getNom();
-                            mytext=(TextView)findViewById(R.id.t);
-
-                            mytext.setText(nom);
 
 
-                        }*/
+        });*/
+        Personne p1 = new Personne("ahmed", "ahmed", "ahmed@gcom", "060666", "Prof");
+        Task task1 = Methodes_msg_evt_.GetMessages(p1);
+        Task task2 = Methodes_msg_evt_.GetMessagesrecu(p1);
+        Task<List<QuerySnapshot>> alltask = Tasks.whenAllSuccess(task1, task2);
+        alltask.addOnCompleteListener(new OnCompleteListener<List<QuerySnapshot>>() {
+            @Override
+            public void onComplete(@NonNull Task<List<QuerySnapshot>> task) {
+                if (task.isSuccessful()) {
+                    for (QuerySnapshot document : task.getResult()) {
+                        for (QueryDocumentSnapshot document1 : document) {
+                            Message m = document1.toObject(Message.class);
 
+                            msgs.add(m);
+
+                        }
+
+
+                    }
+                    Collections.sort(msgs, new Comparator<Message>() {
+                        @Override
+                        public int compare(Message o1, Message o2) {
+                            return o1.getPer_envoye().getNom().compareTo(o2.getPer_envoye().getNom());
+                        }
+
+
+                    });
+                    r.setHasFixedSize(true);
+                    LayoutManager = new LinearLayoutManager(context);
+                    r.setLayoutManager((RecyclerView.LayoutManager) LayoutManager);
+                    MyAdapterMessage myAdapter = new MyAdapterMessage(msgs, context);
+                    r.setAdapter(myAdapter);
+                } else {
+
+                }
+            }
         });
+
 
         /*System.out.println("here is :"+ nom[0]);
 
@@ -174,11 +190,10 @@ public class Listmessage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent in=new Intent(Listmessage.this, Addmessage.class);
+                Intent in = new Intent(Listmessage.this, Addmessage.class);
                 startActivity(in);
             }
         });
-
 
 
     }

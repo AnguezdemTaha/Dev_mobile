@@ -2,6 +2,8 @@ package com.example.myapplication12.Services;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +22,17 @@ import com.example.myapplication12.Model.Evenement;
 import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 
 
@@ -31,6 +40,7 @@ import java.util.LinkedList;
         private LinkedList<Evenement> evns;
         private Context context;
         private TextView nom;
+        private ImageView i1;
         //private ArrayList<ContactsContract.CommonDataKinds.Note> mNotes =new ArrayList<>();
         //private MyAdapterEven.OnNoteListener mOnNoteListener ;
 
@@ -50,9 +60,31 @@ import java.util.LinkedList;
         }
 
         @Override
-        public void onBindViewHolder(MyAdapterEven.MyViewHolder holder, int position){
+        public void onBindViewHolder(final MyAdapterEven.MyViewHolder holder, int position){
             holder.nom_e.setText(evns.get(position).getNom_event());
             holder.description.setText(evns.get(position).getDescription_event());
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+            StorageReference pathReference = storageReference.child("/events/"+holder.nom_e.getText().toString());
+            File localFile = null;
+            try {
+                localFile = File.createTempFile("images", "jpg");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            final File finalLocalFile = localFile;
+            pathReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    Bitmap bitmap = BitmapFactory.decodeFile(finalLocalFile.getAbsolutePath());
+                    holder.i1.setImageBitmap(bitmap);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle any errors
+                }
+            });
             //holder.
             //...
             // StorageReference storageReference = FirebaseStorage.getInstance().getReference(ps.get(position).getIma);
@@ -66,7 +98,8 @@ import java.util.LinkedList;
 
         public  static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
             public  TextView nom_e,description;
-            public ImageView delete;
+            public ImageView delete,i1;
+            //public final ImageView i1;
             public ImageView edit;
 
             public Context context;
@@ -79,6 +112,7 @@ import java.util.LinkedList;
                 this.context=context;
                 nom_e=itemLayoutView.findViewById(R.id.even_nom);
                 description=itemLayoutView.findViewById(R.id.even_description);
+                i1=itemLayoutView.findViewById(R.id.imageevent1);
                 delete=itemLayoutView.findViewById(R.id.delet_even);
                 edit=itemLayoutView.findViewById(R.id.edit_even);
                 this.onNoteListener = onNoteListener;
@@ -111,7 +145,7 @@ import java.util.LinkedList;
 
                                     for (QueryDocumentSnapshot document : task.getResult()) {
                                         String idd= document.getId();
-                                        Methodes_personne.getUsersCollection().document(idd).delete();
+                                        Methodes_event.getUsersCollection().document(idd).delete();
 
                                         Intent in=new Intent(v.getContext(), Listevent.class);
                                         v.getContext().startActivity(in);

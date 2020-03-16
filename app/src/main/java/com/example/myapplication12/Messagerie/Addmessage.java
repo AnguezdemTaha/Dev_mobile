@@ -6,17 +6,24 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.myapplication12.MainActivity;
 import com.example.myapplication12.Model.Message;
 import com.example.myapplication12.Model.Personne;
+import com.example.myapplication12.Model.Professeur;
 import com.example.myapplication12.R;
 import com.example.myapplication12.Services.GetAllContactsOnCompleteListener;
+import com.example.myapplication12.Services.Methodes_cours;
 import com.example.myapplication12.Services.Methodes_msg_evt_;
 import com.example.myapplication12.Services.Methodes_personne;
 import com.example.myapplication12.Services.MyAdapter;
@@ -26,19 +33,22 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 
 import static androidx.recyclerview.widget.RecyclerView.*;
 
-public class Addmessage extends AppCompatActivity {
+public class Addmessage extends AppCompatActivity implements MyAdapter.OnNoteListener {
 
     private LinearLayout t21;
-    private TextView t211,t212;
+    private TextView t211, t212, msg;
     public RecyclerView r;
     private Object LayoutManager;
+    private ImageView envoyer_msg;
 
 
-    private  Personne p=new Personne();
+    private Personne p = new Personne();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +56,13 @@ public class Addmessage extends AppCompatActivity {
         setContentView(R.layout.activity_addmessage);
         getSupportActionBar().hide();
 
+        msg = (TextView) findViewById(R.id.msg);
+        envoyer_msg = (ImageView) findViewById(R.id.envoyermsg2);
 
-        r=(RecyclerView) findViewById(R.id.listdespersonnesmsg);
+        r = (RecyclerView) findViewById(R.id.listdespersonnesmsg);
 
-        final LinkedList<Personne> prs =new LinkedList<Personne>();
-        final Context context=this;
-
+        final LinkedList<Personne> prs = new LinkedList<Personne>();
+        final Context context = this;
 
 
         final String[] nom = new String[1];
@@ -69,6 +80,7 @@ public class Addmessage extends AppCompatActivity {
         MyAdapter myAdapter =new MyAdapter(prs,this);
         r.setAdapter(myAdapter);*/
 
+        final MyAdapter.OnNoteListener note = (MyAdapter.OnNoteListener) this;
         Methodes_personne.GetAllUsers().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -79,14 +91,16 @@ public class Addmessage extends AppCompatActivity {
                         prs.add(p);
                         //System.out.println("le nom ="+p.getNom());
                     }
-                    /*r.setHasFixedSize(true);
+                    r.setHasFixedSize(true);
                     LayoutManager = new LinearLayoutManager(context);
                     r.setLayoutManager((RecyclerView.LayoutManager) LayoutManager);
-                    MyAdapter myAdapter =new MyAdapter(prs,context);
-                    r.setAdapter(myAdapter);*/
-                    //r.setHasFixedSize(true);
-                    //LayoutManager = new LinearLayoutManager(this);
-                    //System.out.println("le nom ="+p.getNom());
+                    MyAdapter myAdapter = new MyAdapter(prs, context, note);
+                    r.setAdapter(myAdapter);
+
+
+                    //del=(ImageView) findViewById(R.id.delet_personne);
+                    //del.setVisibility(View.INVISIBLE);
+
 
                 } else {
 
@@ -95,10 +109,44 @@ public class Addmessage extends AppCompatActivity {
 
 
         });
-       // Methodes_personne.GetAllUsers(new GetAllContactsOnCompleteListener());
+
+        envoyer_msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("test", MODE_PRIVATE);
+                ArrayList<Personne> pers=new ArrayList<>();
+                //5 nbr users in list checked
+                for (int i = 0; i <5 ; i++) {
+                    String nom="nom"+i;
+                    nom =pref.getString("nom"+i, String.valueOf(false));
+                    System.out.println("les utilisateur de la list :"+nom);
+                }
+                String contenu = String.valueOf(msg.getText());
+
+                Professeur p2 = new Professeur("ahmedxxx", "ahmed", "ahmed@gcom", "060666", "Prof");
+                Professeur p1 = new Professeur("tarik", "rachid", "tarik@gcom", "0606466", "Prof");
+                //String tele = String.valueOf(tele1.getText());
+                //String pass= String.valueOf(pass1.getText());
+                //String type="Etudiant";
+                Date currentTime = Calendar.getInstance().getTime();
+
+                ArrayList<Personne> ps = new ArrayList<>();
+                ps.add(p2);
+
+                Date date_msg = null;
+                Message m = new Message(currentTime, contenu, p1, ps);
+                Methodes_msg_evt_.creatMessage(m);
+                Toast.makeText(getApplicationContext(), "Votre message a été ajouter avec succe", Toast.LENGTH_LONG).show();
+                Intent in = new Intent(Addmessage.this, Addmessage.class);
+                startActivity(in);
+
+            }
+        });
+        // Methodes_personne.GetAllUsers(new GetAllContactsOnCompleteListener());
 
 
-        System.out.println("le nom nomnomnmnomnomnmn ="+p.getNom());
+
         /*ArrayList<Personne> ps=new ArrayList<>();
         ps=Methodes_personne.getallUsers1();
         for(Personne p:ps){
@@ -140,6 +188,10 @@ public class Addmessage extends AppCompatActivity {
             }
 
        });*/
+
+    }
+
+    public void OnNoteClick(int position) {
 
     }
 }

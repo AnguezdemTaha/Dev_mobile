@@ -63,11 +63,7 @@ android:background="@drawable/grdnt">
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="20dp">
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/usrusr"
-                android:layout_gravity="center"/>
+
             <TextView
                 android:id="@+id/nomzmi"
                 android:layout_width="280dp"
@@ -75,98 +71,23 @@ android:background="@drawable/grdnt">
                 android:hint="msg1 de distinateur"
                 android:textColorHint="#000000"
                 android:layout_marginLeft="15dp"
-                android:background="#00000000"
+                android:background="#000489"
                 android:letterSpacing="0.1"
                 android:textSize="16dp"
                 android:inputType="text"
                 android:textColor="#fff" />
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:gravity="left"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="20dp">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listdesmessagesd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/nommpi"
-                android:layout_width="280dp"
-                android:layout_height="wrap_content"
-                android:hint="votre msg1( source )"
-                android:textColorHint="#000000"
-                android:layout_marginLeft="15dp"
-                android:background="#00000000"
-                android:letterSpacing="0.1"
-                android:textSize="16dp"
-                android:inputType="text"
-                android:textColor="#fff" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:gravity="left"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="20dp"
-            >
 
-            <TextView
-                android:id="@+id/nommopi"
-                android:layout_width="280dp"
-                android:layout_height="wrap_content"
-                android:hint="votre msg2( source )"
-                android:textColorHint="#000000"
-                android:layout_marginLeft="15dp"
-                android:background="#00000000"
-                android:letterSpacing="0.1"
-                android:textSize="16dp"
-                android:inputType="text"
-                android:textColor="#fff" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:gravity="left"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="20dp"
-            >
 
-            <TextView
-                android:id="@+id/nommzopi"
-                android:layout_width="280dp"
-                android:layout_height="wrap_content"
-                android:hint="votre msg3( source )"
-                android:textColorHint="#000000"
-                android:layout_marginLeft="15dp"
-                android:background="#00000000"
-                android:letterSpacing="0.1"
-                android:textSize="16dp"
-                android:inputType="text"
-                android:textColor="#fff" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:gravity="left"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="20dp">
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/usrusr"
-                android:layout_gravity="center"/>
-            <TextView
-                android:id="@+id/nomizmi"
-                android:layout_width="280dp"
-                android:layout_height="wrap_content"
-                android:hint="msg1 de distinateur"
-                android:textColorHint="#000000"
-                android:layout_marginLeft="15dp"
-                android:background="#00000000"
-                android:letterSpacing="0.1"
-                android:textSize="16dp"
-                android:inputType="text"
-                android:textColor="#fff" />
-        </LinearLayout>
+
+        </androidx.recyclerview.widget.RecyclerView>
 
 
     </LinearLayout>
@@ -189,7 +110,7 @@ android:background="@drawable/grdnt">
         android:padding="20dp">
 
         <EditText
-            android:id="@+id/nrom"
+            android:id="@+id/messageaenvoye"
             android:layout_width="290dp"
             android:layout_height="wrap_content"
             android:hint="Msg a ecrire ici"
@@ -201,6 +122,7 @@ android:background="@drawable/grdnt">
             android:inputType="text"
             android:textColor="#fff" />
         <ImageView
+            android:id="@+id/envoyermsg"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/add"
