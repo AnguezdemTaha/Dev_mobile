@@ -1,9 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Editcours">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/grdnt">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="left"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:gravity="left"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="20dp"
+            >
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/profile"
+                android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/cours_nom1"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:hint="Mmmmm"
+                android:textColorHint="#000000"
+                android:layout_marginLeft="15dp"
+                android:background="#00000000"
+                android:letterSpacing="0.1"
+                android:textSize="16dp"
+                android:inputType="text"
+                android:textColor="#000000" />
+            <ImageView
+                android:id="@+id/save_even"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/enreg"
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="center"/>
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#4a5a71"></LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#4a5a71"></LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#4a5a71"></LinearLayout>
+                <TextView
+                    android:id="@+id/cours_nom2"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Date_cours:NOM_EXEMPLE"
+                    android:textColorHint="#000000"
+                    android:layout_marginLeft="15dp"
+                    android:background="#00000000"
+                    android:letterSpacing="0.1"
+                    android:textSize="20dp"
+                    android:inputType="text"
+                    android:textColor="#000000" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#4a5a71"></LinearLayout>
+                <TextView
+                    android:id="@+id/cours_description2"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Nom_cours:NOM_EXEMPLE"
+                    android:textColorHint="#000000"
+                    android:layout_marginLeft="15dp"
+                    android:background="#00000000"
+                    android:letterSpacing="0.1"
+                    android:textSize="20dp"
+                    android:inputType="text"
+                    android:textColor="#000000" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#4a5a71"></LinearLayout>
+                <TextView
+                    android:id="@+id/descriptioncours"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Description_cours:NOM_EXEMPLE"
+                    android:textColorHint="#000000"
+                    android:layout_marginLeft="15dp"
+                    android:background="#00000000"
+                    android:letterSpacing="0.1"
+                    android:textSize="20dp"
+                    android:inputType="text"
+                    android:textColor="#000000" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#4a5a71"></LinearLayout>
+
+
+
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
+
+
+

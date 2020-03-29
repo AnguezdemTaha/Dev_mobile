@@ -2,36 +2,43 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myapplication12">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".Editetudiant"></activity>
-        <activity android:name=".Editcours" />
-        <activity android:name=".Addprof" />
-        <activity android:name=".Addetudiant" />
-        <activity android:name=".Listetudiant" />
-        <activity android:name=".Listcours" />
-        <activity android:name=".Emploit" />
-        <activity android:name=".Menuscolarite" />
-        <activity android:name=".Listprof" />
-        <activity android:name=".Addcours" />
-        <activity android:name=".Editprof" />
-        <activity android:name=".Addevent" />
-        <activity android:name=".Addmessage" />
-        <activity android:name=".Discussion" />
-        <activity android:name=".Editevent" />
-        <activity android:name=".Listevent" />
-        <activity android:name=".Menuevent" />
-        <activity android:name=".Listmessage" />
-        <activity android:name=".Menuprof" />
-        <activity android:name=".signup" />
-        <activity android:name=".Login" />
-        <activity android:name=".Menuetudiant" />
-        <activity android:name=".MainActivity">
+        android:theme="@style/AppTheme"
+        android:largeHeap="true">
+        <activity android:name=".Evenement.Consultevnt"></activity>
+        <activity android:name=".Scolarité.AddEmploit" />
+        <activity android:name=".Gestion_etudiant_prof.Editetudiant" />
+        <activity android:name=".Scolarité.Editcours" />
+        <activity android:name=".Gestion_etudiant_prof.Addprof" />
+        <activity android:name=".Gestion_etudiant_prof.Addetudiant" />
+        <activity android:name=".Gestion_etudiant_prof.Listetudiant" />
+        <activity android:name=".Scolarité.Listcours" />
+        <activity android:name=".Scolarité.Emploit" />
+        <activity android:name=".Menu.Menuscolarite" />
+        <activity android:name=".Gestion_etudiant_prof.Listprof" />
+        <activity android:name=".Scolarité.Addcours" />
+        <activity android:name=".Gestion_etudiant_prof.Editprof" />
+        <activity android:name=".Evenement.Addevent" />
+        <activity android:name=".Messagerie.Addmessage" />
+        <activity android:name=".Messagerie.Discussion" />
+        <activity android:name=".Evenement.Editevent" />
+        <activity android:name=".Evenement.Listevent" />
+        <activity android:name=".Menu.Menuevent" />
+        <activity android:name=".Messagerie.Listmessage" />
+        <activity android:name=".Menu.Menuprof" />
+        <activity android:name=".Menu.signup" />
+        <activity android:name="MainActivity" />
+        <activity android:name=".Menu.Menuetudiant" />
+        <activity android:name=".Menu.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
