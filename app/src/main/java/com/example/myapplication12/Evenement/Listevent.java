@@ -25,9 +25,13 @@ import com.example.myapplication12.Services.MyAdapter;
 import com.example.myapplication12.Services.MyAdapterEven;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.common.reflect.TypeToken;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -92,6 +96,17 @@ public class Listevent extends AppCompatActivity {
 
         });
 
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = pref.getString("personne_c", "");
+        Personne p = gson.fromJson(json, Personne.class);
+
+        text3=(ImageView) findViewById(R.id.evenadd);
+
+        if(p.getType().equals("Prof") || p.getType().equals("Etudiant")){
+            text3.setVisibility(View.INVISIBLE);
+        }
+        //System.out.println("l'utisateur connecter est :" +p.getEmail());
 
 
 
@@ -179,7 +194,7 @@ public class Listevent extends AppCompatActivity {
         });
 
          */
-        text3=(ImageView) findViewById(R.id.evenadd);
+
         text3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

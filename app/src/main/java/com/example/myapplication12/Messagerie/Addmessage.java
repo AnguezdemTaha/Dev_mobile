@@ -29,13 +29,17 @@ import com.example.myapplication12.Services.Methodes_personne;
 import com.example.myapplication12.Services.MyAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.common.reflect.TypeToken;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 
 import static androidx.recyclerview.widget.RecyclerView.*;
 
@@ -115,17 +119,44 @@ public class Addmessage extends AppCompatActivity implements MyAdapter.OnNoteLis
             public void onClick(View v) {
 
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("test", MODE_PRIVATE);
-                ArrayList<Personne> pers=new ArrayList<>();
+                ArrayList<Personne> pers = new ArrayList<>();
                 //5 nbr users in list checked
-                for (int i = 0; i <5 ; i++) {
-                    String nom="nom"+i;
-                    nom =pref.getString("nom"+i, String.valueOf(false));
-                    System.out.println("les utilisateur de la list :"+nom);
+                /*for (int i = 0; i < pref.getAll().size(); i++) {
+                    String nom = "nom" + i;
+                    nom = pref.getString("nom" + i, String.valueOf(false));
+                    String email=pref.getString("email" + i, String.valueOf(false));
+                    String tele=pref.getString("tele" + i, String.valueOf(false));
+                    String mot_de_pass=pref.getString("mot_de_pass" + i, String.valueOf(false));
+                    String type=pref.getString("type" + i, String.valueOf(false));
+                    Personne p=new Personne(nom,mot_de_pass,email,tele,type);
+
+                    System.out.println("les utilisateur de la list :" + nom+mot_de_pass);
+                    pers.add(p);
+
+                }*/
+                Gson gson = new Gson();
+                String json = pref.getString("ok", "");
+                //!!!! to get type(class) of list personne
+                Type type = new TypeToken<ArrayList<Personne>>() {
+                }.getType();
+                ArrayList<Personne> obj = gson.fromJson(json, type);
+                for (Personne p : obj) {
+                    System.out.println("les utilisateur de la list :" + p.getEmail());
                 }
+
+
+                context.getSharedPreferences("test", 0).edit().clear().commit();
+
+
                 String contenu = String.valueOf(msg.getText());
 
                 Professeur p2 = new Professeur("ahmedxxx", "ahmed", "ahmed@gcom", "060666", "Prof");
-                Professeur p1 = new Professeur("tarik", "rachid", "tarik@gcom", "0606466", "Prof");
+                SharedPreferences pref1 = getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
+                Gson gson1 = new Gson();
+                String json1 = pref1.getString("personne_c", "");
+                final Personne p1 = gson1.fromJson(json1, Personne.class);
+                //Professeur p1 = new Professeur("tarik", "rachid", "tarik@gcom", "0606466", "Prof");
+
                 //String tele = String.valueOf(tele1.getText());
                 //String pass= String.valueOf(pass1.getText());
                 //String type="Etudiant";
@@ -133,12 +164,20 @@ public class Addmessage extends AppCompatActivity implements MyAdapter.OnNoteLis
 
                 ArrayList<Personne> ps = new ArrayList<>();
                 ps.add(p2);
+                for (Personne p : obj) {
+                    ps.add(p);
+                }
 
                 Date date_msg = null;
-                Message m = new Message(currentTime, contenu, p1, ps);
-                Methodes_msg_evt_.creatMessage(m);
+                for (Personne p3 : ps) {
+                    ArrayList<Personne> p4 = new ArrayList<>();
+                    p4.add(p3);
+                    Message m = new Message(currentTime, contenu, p1, p4);
+                    Methodes_msg_evt_.creatMessage(m);
+                }
+
                 Toast.makeText(getApplicationContext(), "Votre message a été ajouter avec succe", Toast.LENGTH_LONG).show();
-                Intent in = new Intent(Addmessage.this, Addmessage.class);
+                Intent in = new Intent(Addmessage.this, Listmessage.class);
                 startActivity(in);
 
             }

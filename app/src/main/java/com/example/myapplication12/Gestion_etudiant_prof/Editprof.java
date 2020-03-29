@@ -25,7 +25,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class Editprof extends AppCompatActivity {
 
-    private EditText nom2,email2,tele2;
+    private EditText nom2,email2,tele2,mot_de_passe2;
     private TextView nom1;
     private ImageView save;
     @Override
@@ -38,10 +38,11 @@ public class Editprof extends AppCompatActivity {
         email2=(EditText) findViewById(R.id.gmail_prof2);
         tele2=(EditText) findViewById(R.id.telephone_prof2);
         save=(ImageView) findViewById(R.id.save_prof);
+        mot_de_passe2=(EditText) findViewById(R.id.mot_de_passe2);
 
 
         Bundle extras = getIntent().getExtras();
-        String nom=extras.getString("nom_prof");
+        String nom=extras.getString("nom_prof_etudiant");
         Methodes_personne.Getuserbynom(nom).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 
             @Override
@@ -51,17 +52,20 @@ public class Editprof extends AppCompatActivity {
                     String nomuser = null;
                     String email=null;
                     String tele =null;
+                    String mot_de_passe=null;
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Personne p = document.toObject(Personne.class);
                         //Type = p.getType();
                         nomuser=p.getNom();
                         email=p.getEmail();
                         tele=p.getNum_telephone();
+                        mot_de_passe=p.getMot_de_passe();
 
                         nom1.setText(nomuser);
                         nom2.setText(nomuser);
                         email2.setText(email);
                         tele2.setText(tele);
+                        mot_de_passe2.setText(mot_de_passe);
 
                     }
 
@@ -76,8 +80,9 @@ public class Editprof extends AppCompatActivity {
                 String nom22 =nom2.getText().toString();
                 String email22 =email2.getText().toString();
                 String tele22 =tele2.getText().toString();
+                final String mot_de_passe22=mot_de_passe2.getText().toString();
 
-                final Personne p= new Personne(nom22,"t1",email22,tele22,"Prof");
+                final Personne p= new Personne(nom22,mot_de_passe22,email22,tele22,"Prof");
                 //Methodes_personne.updateUser(nom11,p);
                 Methodes_personne.updateUser(nom11,p).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -87,7 +92,7 @@ public class Editprof extends AppCompatActivity {
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 String idd= document.getId();
-                                Methodes_personne.getUsersCollection().document(idd).update("Nom",p.getNom(),"Email",p.getEmail(),"Num_telephone",p.getNum_telephone());
+                                Methodes_personne.getUsersCollection().document(idd).update("nom",p.getNom(),"mot_de_passe",p.getMot_de_passe(),"email",p.getEmail(),"num_telephone",p.getNum_telephone());
                                 Intent in=new Intent(Editprof.this, Listprof.class);
                                 startActivity(in);
                                 Toast.makeText(getApplicationContext(),"Votre modification a été enregistré avec succe :",Toast.LENGTH_SHORT).show();

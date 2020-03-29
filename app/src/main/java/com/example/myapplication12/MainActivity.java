@@ -26,6 +26,7 @@ import com.example.myapplication12.Evenement.Listevent;
 import com.example.myapplication12.Gestion_etudiant_prof.Addprof;
 import com.example.myapplication12.Gestion_etudiant_prof.Listetudiant;
 import com.example.myapplication12.Gestion_etudiant_prof.Listprof;
+import com.example.myapplication12.Menu.Login;
 import com.example.myapplication12.Menu.signup;
 import com.example.myapplication12.Messagerie.Addmessage;
 import com.example.myapplication12.Messagerie.Discussion;
@@ -276,7 +277,7 @@ public class MainActivity extends Activity {
                         }
 
 
-                        Intent in = new Intent(MainActivity.this, Listmessage.class);
+                        Intent in = new Intent(MainActivity.this, Login.class);
                         startActivity(in);
                     }
                 });

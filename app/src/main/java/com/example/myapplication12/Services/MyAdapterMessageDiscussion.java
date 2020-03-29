@@ -2,16 +2,22 @@ package com.example.myapplication12.Services;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication12.Messagerie.Discussion;
 import com.example.myapplication12.Model.Message;
+import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.R;
+import com.google.gson.Gson;
 
 import java.util.LinkedList;
 
@@ -40,7 +46,34 @@ public class MyAdapterMessageDiscussion extends  RecyclerView.Adapter<MyAdapterM
     @Override
     public void onBindViewHolder(MyAdapterMessageDiscussion.MyViewHolder holder, int position){
         //holder.nom_e.setText(msgs.get(position).getPer_envoye().getNom());
+        String ms =msgs.get(position).getContenu_msg();
+        //holder.contenu.setText(ms);
+        String m = null, msgfinal = null;
+        int i=ms.length()/40 ;
+        /*for (int j = 0; j <i ; j++) {
+
+
+            m=ms.substring(j*40, Math.min(ms.length(), 40));
+            msgfinal+=m+"\n";
+
+        }*/
+        //msgfinal="test \"\n\" anothertest";
+
         holder.contenu.setText(msgs.get(position).getContenu_msg());
+        SharedPreferences pref1 = context.getApplicationContext().getSharedPreferences("personne_connecte", 0);
+        Gson gson1 = new Gson();
+        String json1 = pref1.getString("personne_c", "");
+        final Personne p1 = gson1.fromJson(json1, Personne.class);
+
+        if (msgs.get(position).getPer_envoye().getNom().equals(p1.getNom()) && (context instanceof Discussion)) {
+            holder.contenu.setBackgroundColor(Color.rgb(200, 200, 200));
+        }
+        else{
+            holder.image_msg2.setVisibility(View.INVISIBLE);
+            holder.contenu.setGravity(Gravity.RIGHT);
+        }
+
+
         //holder.
         //...
         // StorageReference storageReference = FirebaseStorage.getInstance().getReference(ps.get(position).getIma);
@@ -54,6 +87,7 @@ public class MyAdapterMessageDiscussion extends  RecyclerView.Adapter<MyAdapterM
 
     public  static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public  TextView nom_e,contenu;
+        public ImageView image_msg2;
 
 
 
@@ -67,6 +101,7 @@ public class MyAdapterMessageDiscussion extends  RecyclerView.Adapter<MyAdapterM
             this.context=context;
             nom_e=itemLayoutView.findViewById(R.id.Nomuser);
             contenu=itemLayoutView.findViewById(R.id.Msguser);
+            image_msg2=itemLayoutView.findViewById(R.id.imagemsg2);
 
             this.onNoteListener = onNoteListener;
             itemView.setOnClickListener(this);

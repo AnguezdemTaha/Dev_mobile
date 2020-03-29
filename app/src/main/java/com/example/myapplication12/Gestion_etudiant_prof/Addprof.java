@@ -17,7 +17,7 @@ import com.example.myapplication12.Services.Methodes_personne;
 
 public class Addprof extends AppCompatActivity {
 
-    private TextView text,text2,text3;
+    private TextView text,text2,text3,title_pe;
     private EditText nom1,email1,tele1,pass1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +32,10 @@ public class Addprof extends AppCompatActivity {
         nom1=(EditText) findViewById(R.id.nom_proff);
         email1=(EditText) findViewById(R.id.email_prof);
         tele1=(EditText) findViewById(R.id.tele_prof);
-        //pass1=(EditText) findViewById(R.id.password);
+        pass1=(EditText) findViewById(R.id.mot_de_passe11);
+        title_pe=(TextView) findViewById(R.id.title_pe);
 
+        title_pe.setText("Add professeur");
 
         text3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,9 +45,9 @@ public class Addprof extends AppCompatActivity {
                 String nom = String.valueOf(nom1.getText());
                 String email = String.valueOf(email1.getText());
                 String tele = String.valueOf(tele1.getText());
-                //String pass= String.valueOf(pass1.getText());
-                String pass="";
-                String type="Etudiant";
+                String pass= String.valueOf(pass1.getText());
+
+                String type="Prof";
 
                 Personne p=new Personne(nom,pass,email,tele,type);
                 Methodes_personne.createUser(p);

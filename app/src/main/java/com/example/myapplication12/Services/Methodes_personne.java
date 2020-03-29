@@ -35,7 +35,7 @@ public class Methodes_personne {
 
     public static Task<QuerySnapshot> updateUser(String nom1, Personne p) {
         //return Methodes_personne.getUsersCollection().document(nom1).update("Nom",p.getNom(),"Email",p.getEmail(),"Num_telephone",p.getNum_telephone());
-        return Methodes_personne.getUsersCollection().whereEqualTo("Nom",nom1).get();
+        return Methodes_personne.getUsersCollection().whereEqualTo("nom",nom1).get();
                 //document(nom1).update("Nom",p.getNom(),"Email",p.getEmail(),"Num_telephone",p.getNum_telephone());
 
     }
@@ -48,13 +48,13 @@ public class Methodes_personne {
     // --- DELETE ---
 
     public static Task<QuerySnapshot> deleteUser(String nom1) {
-        return Methodes_personne.getUsersCollection().whereEqualTo("Nom",nom1).get();
+        return Methodes_personne.getUsersCollection().whereEqualTo("nom",nom1).get();
     }
 
     public static Task<QuerySnapshot> GetUsers(String nom, String mot_de_passe) {
 
 
-        return getUsersCollection().whereEqualTo("Nom", nom).whereEqualTo("Mot_de_passe",mot_de_passe).get();
+        return getUsersCollection().whereEqualTo("nom", nom).whereEqualTo("mot_de_passe",mot_de_passe).get();
 
     }
     /*public static Task<QuerySnapshot> GetAllUsers(OnCompleteListener<QuerySnapshot> onCompleteListener) {
@@ -72,20 +72,20 @@ public class Methodes_personne {
     public static Task<QuerySnapshot> GetAllProfs() {
 
 
-        return getUsersCollection().whereEqualTo("Type","Prof").get();
+        return getUsersCollection().whereEqualTo("type","Prof").get();
 
     }
 
     public static Task<QuerySnapshot> Getuserbynom(String nom) {
 
 
-        return getUsersCollection().whereEqualTo("Nom",nom).get();
+        return getUsersCollection().whereEqualTo("nom",nom).get();
 
     }
     public static Task<QuerySnapshot> GetAllEtudiants() {
 
 
-        return getUsersCollection().whereEqualTo("Type","Etudiant").get();
+        return getUsersCollection().whereEqualTo("type","Etudiant").get();
 
     }
 

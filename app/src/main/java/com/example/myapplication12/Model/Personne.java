@@ -8,11 +8,11 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Personne implements Serializable {
-    private String Nom;
-    private String Mot_de_passe;
-    private String Email;
-    private String Num_telephone;
-    private String Type;
+    private String nom;
+    private String mot_de_passe;
+    private String email;
+    private String num_telephone;
+    private String type;
 
     //attribus
 
@@ -23,51 +23,51 @@ public class Personne implements Serializable {
     public Personne() {
     }
 
-    public Personne(String nom, String mot_de_passe, String email, String num_telephone, String Type) {
-        Nom = nom;
-        Mot_de_passe = mot_de_passe;
-        Email = email;
-        Num_telephone = num_telephone;
-        this.Type = Type;
+    public Personne(String Nom, String Mot_de_passe, String Email, String Num_telephone, String Type) {
+        nom = Nom;
+        mot_de_passe = Mot_de_passe;
+        email = Email;
+        num_telephone = Num_telephone;
+        this.type = Type;
     }
 
     public String getType() {
-        return Type;
+        return type;
     }
 
-    public void setType(String type) {
-        Type = type;
+    public void setType(String Type) {
+        type = Type;
     }
 
     public String getNom() {
-        return Nom;
+        return nom;
     }
 
-    public void setNom(String nom) {
-        Nom = nom;
+    public void setNom(String Nom) {
+        nom = Nom;
     }
 
     public String getMot_de_passe() {
-        return Mot_de_passe;
+        return mot_de_passe;
     }
 
-    public void setMot_de_passe(String mot_de_passe) {
-        Mot_de_passe = mot_de_passe;
+    public void setMot_de_passe(String Mot_de_passe) {
+        mot_de_passe = Mot_de_passe;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
-    public void setEmail(String email) {
-        Email = email;
+    public void setEmail(String Email) {
+        email = Email;
     }
 
     public String getNum_telephone() {
-        return Num_telephone;
+        return num_telephone;
     }
 
-    public void setNum_telephone(String num_telephone) {
-        Num_telephone = num_telephone;
+    public void setNum_telephone(String Num_telephone) {
+        num_telephone = Num_telephone;
     }
 }

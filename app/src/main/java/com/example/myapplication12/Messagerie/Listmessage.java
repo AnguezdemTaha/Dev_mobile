@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -70,6 +72,8 @@ public class Listmessage extends AppCompatActivity {
 
         r = (RecyclerView) findViewById(R.id.listdesmessages);
         final LinkedList<Message> msgs = new LinkedList<Message>();
+        final ArrayList<String> persmsgs1 = new ArrayList<String>();
+
         final Context context = this;
 
         /*Personne p1 =new Personne("ahmed","ahmed","ahmed@gcom","060666","Prof");
@@ -97,7 +101,12 @@ public class Listmessage extends AppCompatActivity {
 
 
         });*/
-        Personne p1 = new Personne("ahmed", "ahmed", "ahmed@gcom", "060666", "Prof");
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = pref.getString("personne_c", "");
+        final Personne p1 = gson.fromJson(json, Personne.class);
+        //final Personne p1 = new Personne("ahmed", "ahmed", "ahmed@gcom", "060666", "Prof");
+        persmsgs1.add(p1.getNom());
         Task task1 = Methodes_msg_evt_.GetMessages(p1);
         Task task2 = Methodes_msg_evt_.GetMessagesrecu(p1);
         Task<List<QuerySnapshot>> alltask = Tasks.whenAllSuccess(task1, task2);
@@ -105,16 +114,45 @@ public class Listmessage extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<List<QuerySnapshot>> task) {
                 if (task.isSuccessful()) {
+
+                    /*Message msg1=new Message();
+                    msg1.setPer_envoye(p1); //not existed one
+                    msgs.add(msg1);*/
                     for (QuerySnapshot document : task.getResult()) {
                         for (QueryDocumentSnapshot document1 : document) {
                             Message m = document1.toObject(Message.class);
 
-                            msgs.add(m);
+                            if (!persmsgs1.contains(m.getPer_envoye().getNom())) {
+                                persmsgs1.add(m.getPer_envoye().getNom());
+
+                                msgs.add(m);
+                            }
+
+
+                            for (int i = 0; i < m.getPer_recus().size(); i++) {
+                                if (!persmsgs1.contains(m.getPer_recus().get(i).getNom())) {
+                                    persmsgs1.add(m.getPer_recus().get(i).getNom());
+                                    msgs.add(m);
+                                }
+                            }
+
 
                         }
 
 
                     }
+                    //il faut classer les msgs
+                    /*int i=0;
+                    for (Message m2 : msgs) {
+                        for (Message m1 : msgs) {
+                            if (m2.getPer_envoye().equals(m1.getPer_envoye())) {
+                                i+=1;
+                            }
+                        }
+                        if(i>1){
+                            msgs.remove(m2);
+                        }
+                    }*/
                     Collections.sort(msgs, new Comparator<Message>() {
                         @Override
                         public int compare(Message o1, Message o2) {

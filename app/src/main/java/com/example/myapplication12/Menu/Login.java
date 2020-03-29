@@ -4,34 +4,41 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication12.Evenement.Listevent;
+import com.example.myapplication12.Messagerie.Listmessage;
 import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.R;
+import com.example.myapplication12.Scolarité.Listcours;
 import com.example.myapplication12.Services.Methodes_personne;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
 
 public class Login extends AppCompatActivity {
 
-    private TextView text,text2;
-    private EditText Nom,Mot_de_passe;
+    private TextView text, text2;
+    private EditText Nom, Mot_de_passe;
+    SharedPreferences pref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
-        text=(TextView) findViewById(R.id.login);
-        text2=(TextView) findViewById(R.id.signup);
+        text = (TextView) findViewById(R.id.login);
+        text2 = (TextView) findViewById(R.id.signup);
 
-        Nom=(EditText) findViewById(R.id.nom);
-        Mot_de_passe=(EditText) findViewById(R.id.mot_de_passe);
+        Nom = (EditText) findViewById(R.id.nom);
+        Mot_de_passe = (EditText) findViewById(R.id.mot_de_passe);
 
 
         text.setOnClickListener(new View.OnClickListener() {
@@ -45,33 +52,34 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            String Type=null;
+                            String Type = null;
                             String nomuser = null;
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Personne p = document.toObject(Personne.class);
                                 Type = p.getType();
-                                nomuser=p.getNom();
+                                nomuser = p.getNom();
+
+                                pref = getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = pref.edit();
+                                Gson gson = new Gson();
+
+
+                                String json = gson.toJson(p);
+                                editor.putString("personne_c", json);
+                                editor.commit();
 
                             }
-                            if("Prof".equals(Type)){
+                            if ("Prof".equals(Type) || "Chef".equals(Type) || "Delegue".equals(Type) || "Etudiant".equals(Type)) {
                                 Intent in = new Intent(Login.this, Menuetudiant.class);
-                                in.putExtra("nom_user",nomuser);
+                                //in.putExtra("nom_user", nomuser);
                                 startActivity(in);
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Votre informations sont incorectes", Toast.LENGTH_LONG).show();
                             }
-                            else{
-                                if("Etudiant".equals(Type)){
-                                Intent in = new Intent(Login.this, Menuprof.class);
-                                in.putExtra("nom_user",nomuser);
-                                startActivity(in);}
-                                else{
-                                    Toast.makeText(getApplicationContext(), "Votre informations sont incorectes", Toast.LENGTH_LONG).show();
-                                }
-                            }
+
                         } else {
 
                         }
-
-
 
 
                         //ArrayList<Personne> ps = Methodes_personne.FindUser(nom,mot_de_passe);
@@ -99,11 +107,12 @@ public class Login extends AppCompatActivity {
                     }
                 });
 
-            }});
+            }
+        });
         text2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in=new Intent(Login.this, signup.class);
+                Intent in = new Intent(Login.this, signup.class);
                 startActivity(in);
             }
         });

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,32 +15,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.myapplication12.Evenement.Addevent;
-import com.example.myapplication12.Evenement.Listevent;
-import com.example.myapplication12.MainActivity;
 import com.example.myapplication12.Model.Cours;
-import com.example.myapplication12.Model.Evenement;
+import com.example.myapplication12.Model.Emploi;
 import com.example.myapplication12.Model.Matiere;
-import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.Model.Professeur;
 import com.example.myapplication12.R;
 import com.example.myapplication12.Services.Methodes_cours;
-import com.example.myapplication12.Services.Methodes_event;
+import com.example.myapplication12.Services.Methodes_eml;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.google.gson.Gson;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.UUID;
 
-public class Addcours extends AppCompatActivity {
+public class AddEmploit extends AppCompatActivity {
 
     private EditText nom1,matiere1,date1,per1,id1;
     private TextView text3;
@@ -54,7 +46,7 @@ public class Addcours extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ajoutercours);
+        setContentView(R.layout.activity_add_emploit);
         getSupportActionBar().hide();
 
         nom1=(EditText) findViewById(R.id.cours_nom2);
@@ -81,32 +73,29 @@ public class Addcours extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                String nom = String.valueOf(nom1.getText());
+                //String nom = String.valueOf(nom1.getText());
                 //String nom_matiere = String.valueOf(matiere1.getText());
-                SharedPreferences pref = getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
-                Gson gson = new Gson();
-                String json = pref.getString("personne_c", "");
-                Professeur p1 = gson.fromJson(json, Professeur.class);
-
+                //Professeur p1 = new Professeur("ahmed", "ahmed", "ahmed@gcom", "060666", "Prof");
                 //String tele = String.valueOf(tele1.getText());
                 //String pass= String.valueOf(pass1.getText());
                 //String type="Etudiant";
 
                 Date date_cours=null;
-                String contenu =nom;
+                //String contenu =nom;
 
                 Date currentTime = Calendar.getInstance().getTime();
 
-                Matiere m1 =new Matiere();
+                //Matiere m1 =new Matiere(nom_matiere,null,null);
 
 
 
-                Cours c=new Cours(nom,contenu, currentTime,m1,p1);
-                Methodes_cours.creatcours(c);
-                uploadImage(contenu);
-                Toast.makeText(getApplicationContext(), "Votre cours a été ajouter avec succe", Toast.LENGTH_LONG).show();
+                //Cours c=new Cours(nom,contenu, null,m1,p1);
+                Emploi e=new Emploi("2eme_annee",currentTime.toString(),currentTime);
+                Methodes_eml.createvent(e);
+                uploadImage(currentTime.toString());
+                Toast.makeText(getApplicationContext(), "Votre emploit a été ajouter avec succe", Toast.LENGTH_LONG).show();
 
-                Intent in=new Intent(Addcours.this, Listcours.class);
+                Intent in=new Intent(AddEmploit.this, Emploit.class);
                 startActivity(in);
             }
         });
@@ -143,20 +132,20 @@ public class Addcours extends AppCompatActivity {
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
-            StorageReference ref = storageReference.child("cours/"+ contenu);
+            StorageReference ref = storageReference.child("emploi/"+ contenu);
             ref.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
-                            Toast.makeText(Addcours.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddEmploit.this, "Uploaded", Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             progressDialog.dismiss();
-                            Toast.makeText(Addcours.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddEmploit.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {

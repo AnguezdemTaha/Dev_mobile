@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -13,9 +12,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-
-        <activity android:name=".Gestion_etudiant_prof.Editetudiant"></activity>
+        android:theme="@style/AppTheme"
+        android:largeHeap="true">
+        <activity android:name=".Evenement.Consultevnt"></activity>
+        <activity android:name=".Scolarité.AddEmploit" />
+        <activity android:name=".Gestion_etudiant_prof.Editetudiant" />
         <activity android:name=".Scolarité.Editcours" />
         <activity android:name=".Gestion_etudiant_prof.Addprof" />
         <activity android:name=".Gestion_etudiant_prof.Addetudiant" />
@@ -35,9 +36,9 @@
         <activity android:name=".Messagerie.Listmessage" />
         <activity android:name=".Menu.Menuprof" />
         <activity android:name=".Menu.signup" />
-        <activity android:name=".Menu.Login" />
+        <activity android:name="MainActivity" />
         <activity android:name=".Menu.Menuetudiant" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Menu.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

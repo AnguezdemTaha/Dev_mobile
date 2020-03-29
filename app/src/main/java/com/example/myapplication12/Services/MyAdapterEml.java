@@ -15,11 +15,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication12.Evenement.Editevent;
-import com.example.myapplication12.Evenement.Listevent;
-import com.example.myapplication12.Messagerie.Listmessage;
 import com.example.myapplication12.Model.Cours;
-import com.example.myapplication12.Model.Evenement;
+import com.example.myapplication12.Model.Emploi;
 import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.R;
 import com.example.myapplication12.Scolarité.Editcours;
@@ -28,29 +25,30 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.common.net.InternetDomainName;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.gson.Gson;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 
-import static android.content.Context.DOWNLOAD_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
 import static android.os.Environment.DIRECTORY_PICTURES;
 
-public class MyAdapterCours extends RecyclerView.Adapter<MyAdapterCours.MyViewHolder> {
-    private LinkedList<Cours> cours;
+public class MyAdapterEml extends RecyclerView.Adapter<MyAdapterEml.MyViewHolder> {
+    private LinkedList<Emploi> cours;
     private Context context;
     private TextView nom;
     StorageReference storageReference;
     //private ArrayList<ContactsContract.CommonDataKinds.Note> mNotes =new ArrayList<>();
     //private MyAdapterEven.OnNoteListener mOnNoteListener ;
 
-    public MyAdapterCours(LinkedList<Cours> cours , Context context ){
-        this.cours=new LinkedList<Cours>();
+    public MyAdapterEml(LinkedList<Emploi> cours , Context context ){
+        this.cours=new LinkedList<Emploi>();
 
         //????
         this.cours.addAll(cours);
@@ -58,24 +56,30 @@ public class MyAdapterCours extends RecyclerView.Adapter<MyAdapterCours.MyViewHo
         //this.mOnNoteListener=onNoteListener;
     }
     @Override
-    public MyAdapterCours.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        View itemLayoutView= LayoutInflater.from(parent.getContext()).inflate(R.layout.uncours , parent,false);
-        MyAdapterCours.MyViewHolder vh = new MyAdapterCours.MyViewHolder(itemLayoutView);
+    public MyAdapterEml.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+        View itemLayoutView= LayoutInflater.from(parent.getContext()).inflate(R.layout.unemploit , parent,false);
+        MyAdapterEml.MyViewHolder vh = new MyAdapterEml.MyViewHolder(itemLayoutView);
         return  vh;
     }
 
     @Override
-    public void onBindViewHolder(MyAdapterCours.MyViewHolder holder, int position){
-        holder.nom_e.setText(cours.get(position).getNom_cours());
-        holder.matiere.setText(cours.get(position).getPrf().getNom());
+    public void onBindViewHolder(MyAdapterEml.MyViewHolder holder, int position){
+        Date d=cours.get(position).getDate_semaine();
+
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String date = dateFormat.format(d);
+
+        holder.nom_e.setText(date);
+        holder.matiere.setText(cours.get(position).getAnnee());
 
         SharedPreferences pref = context.getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = pref.getString("personne_c", "");
         Personne p = gson.fromJson(json, Personne.class);
 
-        if(p.getType().equals("Etudiant") || p.getType().equals("Delegue") || (!cours.get(position).getPrf().getNom().equals(p.getNom()))){
-            holder.edit.setVisibility(View.INVISIBLE);
+        if(p.getType().equals("Etudiant") || p.getType().equals("Delegue") || p.getType().equals("Prof")){
+            //holder.edit.setVisibility(View.INVISIBLE);
             holder.delete.setVisibility(View.INVISIBLE);
 
         }
@@ -109,7 +113,7 @@ public class MyAdapterCours extends RecyclerView.Adapter<MyAdapterCours.MyViewHo
             nom_e=itemLayoutView.findViewById(R.id.cours_nom);
             matiere=itemLayoutView.findViewById(R.id.cours_matiere);
             delete=itemLayoutView.findViewById(R.id.delet_cours);
-            edit=itemLayoutView.findViewById(R.id.edit_cours);
+            //edit=itemLayoutView.findViewById(R.id.edit_cours);
             telecharger=itemLayoutView.findViewById(R.id.download_cours);
             this.onNoteListener = onNoteListener;
             itemView.setOnClickListener(this);
@@ -119,7 +123,7 @@ public class MyAdapterCours extends RecyclerView.Adapter<MyAdapterCours.MyViewHo
         public void onClick(View v){
             //onNoteListener.OnNoteClick(getAdapterPosition());
 
-            edit.setOnClickListener(new View.OnClickListener() {
+            /*edit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent in=new Intent(v.getContext(), Editcours.class);
@@ -128,7 +132,7 @@ public class MyAdapterCours extends RecyclerView.Adapter<MyAdapterCours.MyViewHo
 
                     Toast.makeText(v.getContext().getApplicationContext(),"Le cous :"+m,Toast.LENGTH_SHORT).show();
                     v.getContext().startActivity(in);
-                }});
+                }});*/
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {

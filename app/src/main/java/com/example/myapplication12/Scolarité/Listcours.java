@@ -5,38 +5,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.myapplication12.Evenement.Addevent;
-import com.example.myapplication12.Evenement.Listevent;
 import com.example.myapplication12.Model.Cours;
-import com.example.myapplication12.Model.Evenement;
 import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.R;
 import com.example.myapplication12.Services.Methodes_cours;
-import com.example.myapplication12.Services.Methodes_event;
 import com.example.myapplication12.Services.MyAdapterCours;
-import com.example.myapplication12.Services.MyAdapterEven;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.common.net.InternetDomainName;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.gson.Gson;
 
 import java.util.LinkedList;
-
-import static android.os.Environment.DIRECTORY_PICTURES;
 
 public class Listcours extends AppCompatActivity {
 
@@ -103,6 +93,16 @@ public class Listcours extends AppCompatActivity {
 
         });
         text3=(ImageView) findViewById(R.id.evenadd);
+
+        SharedPreferences pref = context.getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = pref.getString("personne_c", "");
+        Personne p = gson.fromJson(json, Personne.class);
+
+        if(p.getType().equals("Etudiant") || p.getType().equals("Delegue")){
+            //text3.setVisibility(View.INVISIBLE);
+
+        }
         text3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

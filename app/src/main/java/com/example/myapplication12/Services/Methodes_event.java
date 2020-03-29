@@ -39,7 +39,19 @@ public class Methodes_event {
     public static Task<QuerySnapshot> Geteventbynom(String nom) {
 
 
-        return getUsersCollection().whereEqualTo("Nom_event",nom).get();
+        return getUsersCollection().whereEqualTo("nom_event",nom).get();
+
+    }
+    public static Task<QuerySnapshot> updateevent(String nom1) {
+
+        return Methodes_event.getUsersCollection().whereEqualTo("nom_event",nom1).get();
+
+
+    }
+    public static Task<QuerySnapshot> updateeventpar(String nom1) {
+
+        return Methodes_event.getUsersCollection().whereEqualTo("nom_event",nom1).get();
+
 
     }
 }

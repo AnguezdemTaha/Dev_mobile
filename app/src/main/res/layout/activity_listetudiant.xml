@@ -39,7 +39,7 @@
                 android:inputType="text"
                 android:textColor="#fff" />
             <ImageView
-                android:id="@+id/evenadd"
+                android:id="@+id/add_etudiant"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/add"

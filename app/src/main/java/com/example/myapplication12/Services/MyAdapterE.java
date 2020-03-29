@@ -1,5 +1,6 @@
 package com.example.myapplication12.Services;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -40,7 +41,7 @@ import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class MyAdapterE extends RecyclerView.Adapter<MyAdapterE.MyViewHolder> {
     private LinkedList<Personne> ps;
     private Context context;
     private TextView nom;
@@ -49,7 +50,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private OnNoteListener mOnNoteListener;
     ArrayList<Personne> arrayListUser = new ArrayList<>();
 
-    public MyAdapter(LinkedList<Personne> ps, Context context, OnNoteListener onNoteListener) {
+    public MyAdapterE(LinkedList<Personne> ps, Context context, OnNoteListener onNoteListener) {
 
         this.ps = new LinkedList<Personne>();
 
@@ -82,7 +83,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             @Override
             public void onClick(View arg0) {
                 boolean isChecked = holder.choisir_personne.isChecked();
-                //pourqoiu le declerer il peut etre null here
                 pref = context.getApplicationContext().getSharedPreferences("test", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
                 Gson gson = new Gson();
@@ -160,11 +160,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 public void onClick(View v) {
 
 
-                    Intent in = new Intent(v.getContext(), Editprof.class);
+                    Intent in = new Intent(v.getContext(), Editetudiant.class);
                     String m = nom_e.getText().toString();
                     in.putExtra("nom_prof_etudiant", m);
 
-                    Toast.makeText(v.getContext().getApplicationContext(), "Le professeur :" + m, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext().getApplicationContext(), "L'etudiant :" + m, Toast.LENGTH_SHORT).show();
                     v.getContext().startActivity(in);
 
                 }
@@ -278,3 +278,4 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return mDataset.length;
     }*/
 }
+

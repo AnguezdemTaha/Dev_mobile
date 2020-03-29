@@ -1,18 +1,22 @@
 package com.example.myapplication12.Evenement;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.myapplication12.Model.Evenement;
@@ -22,6 +26,7 @@ import com.example.myapplication12.Scolarité.Addcours;
 import com.example.myapplication12.Services.Methodes_event;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.api.SystemParameterOrBuilder;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -29,6 +34,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Addevent extends AppCompatActivity {
@@ -36,11 +42,16 @@ public class Addevent extends AppCompatActivity {
     private EditText nom1,discription1,date1,per1,id1;
     private TextView text3;
     private ImageView i1,b1;
+
+    private DatePicker p1;
+    private TimePicker t1;
+
     private Uri filePath;
     FirebaseStorage storage;
     StorageReference storageReference;
 
     private final int PICK_IMAGE_REQUEST = 71;
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +61,8 @@ public class Addevent extends AppCompatActivity {
         i1=(ImageView) findViewById(R.id.imageevent2);
         b1=(ImageView) findViewById(R.id.imageajouterevn);
 
+        p1=(DatePicker) findViewById(R.id.datePicker1);
+        t1=(TimePicker) findViewById(R.id.datePicker2);
 
         nom1=(EditText) findViewById(R.id.nomeventajout);
         discription1=(EditText) findViewById(R.id.discriptionevenajout);
@@ -66,10 +79,28 @@ public class Addevent extends AppCompatActivity {
         storageReference =  FirebaseStorage.getInstance().getReference();
 
 
+
+
         text3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+
+                Calendar calendarA = Calendar.getInstance();
+                //calendarA.setTime();
+                //Calendar calendarB = Calendar.getInstance();
+                //calendarB.setTime();
+                calendarA.set(Calendar.YEAR, p1.getYear());
+                calendarA.set(Calendar.MONTH, p1.getMonth());
+                calendarA.set(Calendar.DAY_OF_MONTH, p1.getDayOfMonth());
+
+                calendarA.set(Calendar.HOUR_OF_DAY, t1.getHour());
+                calendarA.set(Calendar.MINUTE, t1.getMinute());
+                //calendarA.set(Calendar.SECOND, calendarB.get(Calendar.SECOND));
+                //calendarA.set(Calendar.MILLISECOND, calendarB.get(Calendar.MILLISECOND));
+
+                Date result = calendarA.getTime();
+                System.out.print("bonojout voila la date :"+result.getTime());
 
                 String nom = String.valueOf(nom1.getText());
                 String discription_event = String.valueOf(discription1.getText());
@@ -77,12 +108,14 @@ public class Addevent extends AppCompatActivity {
                 //String pass= String.valueOf(pass1.getText());
                 //String type="Etudiant";
                 int id_event=2;
-                Date date_event=null;
+                Date date_event=result;
                 String image =nom;
-                ArrayList<Personne> per_participes= null;
+                ArrayList<Personne> per_participes= new ArrayList<>();
+                Personne p1 = new Personne("ahmedxxx", "ahmed", "ahmed@gcom", "060666", "Prof");
+                per_participes.add(p1);
 
 
-                Evenement e=new Evenement(nom,null,discription_event,image,null);
+                Evenement e=new Evenement(nom,date_event,discription_event,image,per_participes);
                 Methodes_event.creatEvent(e);
                 uploadImage(nom);
                 Toast.makeText(getApplicationContext(), "Votre evenemenet a été ajouter avec succe", Toast.LENGTH_LONG).show();

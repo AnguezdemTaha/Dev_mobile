@@ -1,101 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Scolarité.Emploit">
-    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/grdnt">
 
-        <TableRow
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="left"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:orientation="vertical">
+        <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
+            android:gravity="left"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="20dp"
+            >
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/profile"
+                android:layout_gravity="center"/>
             <TextView
-                android:text="Time"
-                android:layout_width="wrap_content"
+                android:id="@+id/nom"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:layout_column="1" />
-
-            <TextClock
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textClockq"
-                android:layout_column="1" />
-            <TextView
-                android:text="Time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="3" />
-
-            <TextClock
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textClockqq"
-                android:layout_column="4" />
-
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-                android:text="First Name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="1" />
-
-            <EditText
-                android:width="200px"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-                android:text="Last Name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="1" />
-
-            <EditText
-                android:width="100px"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-            <RatingBar
-                android:layout_width="12dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/ratingBar"
-                android:layout_column="1" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"/>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Submit"
-                android:id="@+id/button"
-                android:layout_column="3" />
-        </TableRow>
-
-    </TableLayout>
+                android:hint="List des emploit"
+                android:textColorHint="#000000"
+                android:layout_marginLeft="15dp"
+                android:background="#00000000"
+                android:letterSpacing="0.1"
+                android:textSize="16dp"
+                android:inputType="text"
+                android:textColor="#fff" />
+            <ImageView
+                android:id="@+id/evenadd"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/add"
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="center"/>
 
 
 
 
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#4a5a71"></LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#4a5a71"></LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listdesemploits"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
 </RelativeLayout>
+
+
+

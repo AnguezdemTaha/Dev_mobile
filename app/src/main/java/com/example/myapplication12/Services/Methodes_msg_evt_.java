@@ -42,22 +42,28 @@ public class Methodes_msg_evt_ {
         p1.put("type",p.getType());
 
         Task<QuerySnapshot> r1 = getUsersCollection().whereEqualTo("per_envoye", p1).get();
-        Task<QuerySnapshot> r2 = getUsersCollection().whereEqualTo("per_envoye", p1).get();
+
 
         return r1;
 
 
 
-                   /* for (QueryDocumentSnapshot document : task.getResult()) {
-                        Message m = document.toObject(Message.class);
-                        //String nom = p.getEmail();
 
-                        //Personne p = new Personne();
-                        //p = document.toObject(Personne.class);
-                        Ms.add(m);
+    }
+    public static Task<QuerySnapshot> GetMessagesonce(Personne p) {
 
-                    }*/
 
+        Map<String, Object> p1 = new HashMap<>();
+        p1.put("nom", p.getNom());
+        p1.put("mot_de_passe", p.getMot_de_passe());
+        p1.put("email",p.getEmail());
+        p1.put("num_telephone",p.getNum_telephone());
+        p1.put("type",p.getType());
+
+        Task<QuerySnapshot> r1 = getUsersCollection().whereEqualTo("per_envoye", p1).get();
+
+
+        return r1;
 
     }
 
