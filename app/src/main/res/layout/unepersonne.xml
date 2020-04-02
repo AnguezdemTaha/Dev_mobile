@@ -12,7 +12,7 @@
         <TextView
             android:id="@+id/nompersonne"
             android:layout_width="80dp"
-            android:layout_height="40dp"
+            android:layout_height="20dp"
             android:layout_marginLeft="15dp"
             android:background="#00000000"
             android:hint="Personne nom :"
@@ -25,7 +25,7 @@
         <TextView
             android:id="@+id/infopersonne"
             android:layout_width="60dp"
-            android:layout_height="40dp"
+            android:layout_height="20dp"
             android:layout_marginLeft="15dp"
             android:background="#00000000"
             android:hint="autreinfo:"
@@ -50,7 +50,7 @@
             android:layout_gravity="center"/>
         <CheckBox
             android:id="@+id/choisirpersonne"
-            android:layout_width="20dp"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:text=""
             />

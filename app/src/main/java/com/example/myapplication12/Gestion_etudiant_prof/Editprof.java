@@ -1,39 +1,88 @@
 package com.example.myapplication12.Gestion_etudiant_prof;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication12.Evenement.Addevent;
+import com.example.myapplication12.Evenement.Listevent;
 import com.example.myapplication12.MainActivity;
 import com.example.myapplication12.Menu.Login;
 import com.example.myapplication12.Menu.Menuetudiant;
 import com.example.myapplication12.Menu.Menuprof;
+import com.example.myapplication12.Messagerie.Addmessage;
+import com.example.myapplication12.Messagerie.Listmessage;
 import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.R;
+import com.example.myapplication12.Scolarité.AddEmploit;
+import com.example.myapplication12.Scolarité.Addcours;
+import com.example.myapplication12.Scolarité.Emploit;
+import com.example.myapplication12.Scolarité.Listcours;
 import com.example.myapplication12.Services.Methodes_personne;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
 
 public class Editprof extends AppCompatActivity {
 
+    Menu menuitem;
     private EditText nom2,email2,tele2,mot_de_passe2;
     private TextView nom1;
     private ImageView save;
+    private ImageView scolarete1, messages1, evenement1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consulerprof);
-        getSupportActionBar().hide();
-        nom1=(TextView) findViewById(R.id.nom_prof);
+        final ActionBar actionBar;
+        actionBar = getSupportActionBar();
+        ColorDrawable colorDrawable
+                = new ColorDrawable(Color.parseColor("#0EF1EE"));
+        actionBar.setBackgroundDrawable(colorDrawable);
+        actionBar.setTitle("Les cours");
+
+
+        scolarete1 = (ImageView) findViewById(R.id.Scolarite14);
+        messages1 = (ImageView) findViewById(R.id.messages14);
+        evenement1 = (ImageView) findViewById(R.id.evenement14);
+        scolarete1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(Editprof.this, Listcours.class);
+                startActivity(in);
+            }
+        });
+        messages1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(Editprof.this, Listmessage.class);
+                startActivity(in);
+            }
+        });
+        evenement1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(Editprof.this, Listevent.class);
+                startActivity(in);
+            }
+        });
+        //nom1=(TextView) findViewById(R.id.nom_prof);
         nom2=(EditText) findViewById(R.id.nom_prof2);
         email2=(EditText) findViewById(R.id.gmail_prof2);
         tele2=(EditText) findViewById(R.id.telephone_prof2);
@@ -61,7 +110,8 @@ public class Editprof extends AppCompatActivity {
                         tele=p.getNum_telephone();
                         mot_de_passe=p.getMot_de_passe();
 
-                        nom1.setText(nomuser);
+                        //nom1.setText(nomuser);
+                        actionBar.setTitle(nomuser);
                         nom2.setText(nomuser);
                         email2.setText(email);
                         tele2.setText(tele);
@@ -76,7 +126,7 @@ public class Editprof extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String nom11 =nom1.getText().toString();
+                String nom11 =actionBar.getTitle().toString();
                 String nom22 =nom2.getText().toString();
                 String email22 =email2.getText().toString();
                 String tele22 =tele2.getText().toString();
@@ -108,5 +158,115 @@ public class Editprof extends AppCompatActivity {
 
 
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.exm_menu,menu);
+
+        menuitem=menu;
+        MenuItem itm1 = menuitem.findItem(R.id.item1);
+        MenuItem itm2 = menuitem.findItem(R.id.item2);
+        MenuItem itm3 = menuitem.findItem(R.id.item3);
+        MenuItem itm4 = menuitem.findItem(R.id.item4);
+        MenuItem itm5 = menuitem.findItem(R.id.item5);
+        MenuItem itm6 = menuitem.findItem(R.id.item6);
+        MenuItem itm7 = menuitem.findItem(R.id.item7);
+        MenuItem itm8 = menuitem.findItem(R.id.item8);
+        MenuItem itm9 = menuitem.findItem(R.id.item9);
+        MenuItem itm10 = menuitem.findItem(R.id.item10);
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = pref.getString("personne_c", "");
+        final Personne p1 = gson.fromJson(json, Personne.class);
+        if(p1.getType().equals("Prof")){
+            itm1.setVisible(false);
+            itm2.setVisible(false);
+            itm7.setVisible(false);
+            itm8.setVisible(false);
+
+            itm3.setVisible(false);
+            itm5.setVisible(false);
+
+
+        }
+        else{
+            if(p1.getType().equals("Etudiant")){
+                itm1.setVisible(false);
+                itm2.setVisible(false);
+                itm7.setVisible(false);
+                itm8.setVisible(false);
+
+                itm3.setVisible(false);
+                itm5.setVisible(false);
+
+                itm4.setVisible(false);
+            }
+            else{
+                if(p1.getType().equals("Delegue")){
+                    itm1.setVisible(false);
+                    itm2.setVisible(false);
+                    itm7.setVisible(false);
+                    itm8.setVisible(false);
+
+                    //itm3.setVisible(false);
+                    itm5.setVisible(false);
+
+                    itm4.setVisible(false);
+                }
+            }
+        }
+
+
+        //menuitem.getItem(3).setEnabled(true);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.item1:
+                Intent in = new Intent(Editprof.this, Listetudiant.class);
+                startActivity(in);
+                break;
+            case R.id.item2:
+                Intent in2 = new Intent(Editprof.this, Listprof.class);
+                startActivity(in2);
+                break;
+            case R.id.item3:
+                Intent in3 = new Intent(Editprof.this, Addevent.class);
+                startActivity(in3);
+                break;
+            case R.id.item4:
+                Intent in4 = new Intent(Editprof.this, Addcours.class);
+                startActivity(in4);
+                break;
+            case R.id.item5:
+                Intent in5 = new Intent(Editprof.this, AddEmploit.class);
+                startActivity(in5);
+                break;
+            case R.id.item6:
+                Intent in6 = new Intent(Editprof.this, Addmessage.class);
+                startActivity(in6);
+                break;
+            case R.id.item7:
+                Intent in7 = new Intent(Editprof.this, Addetudiant.class);
+                startActivity(in7);
+                break;
+            case R.id.item8:
+                Intent in8 = new Intent(Editprof.this, Addprof.class);
+                startActivity(in8);
+                break;
+            case R.id.item9:
+                Intent in9 = new Intent(Editprof.this, Emploit.class);
+                startActivity(in9);
+                break;
+            case R.id.item10:
+                Intent in10 = new Intent(Editprof.this, Login.class);
+                startActivity(in10);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/item1"
+        android:title="Gestion des etudiants"
+        android:icon="@drawable/ic_add_black_24dp"
+
+        />
+    <item android:id="@+id/item2"
+        android:title="Gestion des proffeseurs"
+
+        />
+    <item android:id="@+id/item3"
+        android:title="Ajouter un evenement"
+
+        />
+    <item android:id="@+id/item4"
+        android:title="Ajouter un cours"
+
+     />
+    <item android:id="@+id/item5"
+        android:title="Ajouter un emploit de temps"
+
+        />
+    <item android:id="@+id/item6"
+        android:title="Envoyer  un message"
+
+        />
+    <item android:id="@+id/item7"
+        android:title="Ajouter un etudiant"
+
+        />
+    <item android:id="@+id/item8"
+        android:title="Ajouter un proffeseur"
+
+        />
+    <item android:id="@+id/item9"
+        android:title="Les emploit de temps"
+
+        />
+    <item android:id="@+id/item10"
+        android:title="Deconnexion"
+
+        />
+</menu>

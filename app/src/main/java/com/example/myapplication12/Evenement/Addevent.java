@@ -2,15 +2,22 @@ package com.example.myapplication12.Evenement;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -19,10 +26,20 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.myapplication12.Gestion_etudiant_prof.Addetudiant;
+import com.example.myapplication12.Gestion_etudiant_prof.Addprof;
+import com.example.myapplication12.Gestion_etudiant_prof.Listetudiant;
+import com.example.myapplication12.Gestion_etudiant_prof.Listprof;
+import com.example.myapplication12.Menu.Login;
+import com.example.myapplication12.Messagerie.Addmessage;
+import com.example.myapplication12.Messagerie.Listmessage;
 import com.example.myapplication12.Model.Evenement;
 import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.R;
+import com.example.myapplication12.Scolarité.AddEmploit;
 import com.example.myapplication12.Scolarité.Addcours;
+import com.example.myapplication12.Scolarité.Emploit;
+import com.example.myapplication12.Scolarité.Listcours;
 import com.example.myapplication12.Services.Methodes_event;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,6 +48,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,9 +57,11 @@ import java.util.Date;
 
 public class Addevent extends AppCompatActivity {
 
+    Menu menuitem;
     private EditText nom1,discription1,date1,per1,id1;
     private TextView text3;
     private ImageView i1,b1;
+    private ImageView scolarete1, messages1, evenement1;
 
     private DatePicker p1;
     private TimePicker t1;
@@ -56,7 +76,38 @@ public class Addevent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addevent);
-        getSupportActionBar().hide();
+        ActionBar actionBar;
+        actionBar = getSupportActionBar();
+        ColorDrawable colorDrawable
+                = new ColorDrawable(Color.parseColor("#0EF1EE"));
+        actionBar.setBackgroundDrawable(colorDrawable);
+        actionBar.setTitle("Ajouter un evenement");
+
+
+        scolarete1 = (ImageView) findViewById(R.id.Scolarite6);
+        messages1 = (ImageView) findViewById(R.id.messages6);
+        evenement1 = (ImageView) findViewById(R.id.evenement6);
+        scolarete1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(Addevent.this, Listcours.class);
+                startActivity(in);
+            }
+        });
+        messages1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(Addevent.this, Listmessage.class);
+                startActivity(in);
+            }
+        });
+        evenement1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(Addevent.this, Listevent.class);
+                startActivity(in);
+            }
+        });
 
         i1=(ImageView) findViewById(R.id.imageevent2);
         b1=(ImageView) findViewById(R.id.imageajouterevn);
@@ -111,8 +162,12 @@ public class Addevent extends AppCompatActivity {
                 Date date_event=result;
                 String image =nom;
                 ArrayList<Personne> per_participes= new ArrayList<>();
-                Personne p1 = new Personne("ahmedxxx", "ahmed", "ahmed@gcom", "060666", "Prof");
-                per_participes.add(p1);
+                //Personne p1 = new Personne("ahmedxxx", "ahmed", "ahmed@gcom", "060666", "Prof");
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
+                Gson gson = new Gson();
+                String json = pref.getString("personne_c", "");
+                Personne p1 = gson.fromJson(json, Personne.class);
+                //per_participes.add(p1);
 
 
                 Evenement e=new Evenement(nom,date_event,discription_event,image,per_participes);
@@ -182,5 +237,120 @@ public class Addevent extends AppCompatActivity {
                         }
                     });
         }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.exm_menu,menu);
+
+        menuitem=menu;
+        MenuItem itm1 = menuitem.findItem(R.id.item1);
+        MenuItem itm2 = menuitem.findItem(R.id.item2);
+        MenuItem itm3 = menuitem.findItem(R.id.item3);
+        MenuItem itm4 = menuitem.findItem(R.id.item4);
+        MenuItem itm5 = menuitem.findItem(R.id.item5);
+        MenuItem itm6 = menuitem.findItem(R.id.item6);
+        MenuItem itm7 = menuitem.findItem(R.id.item7);
+        MenuItem itm8 = menuitem.findItem(R.id.item8);
+        MenuItem itm9 = menuitem.findItem(R.id.item9);
+        MenuItem itm10 = menuitem.findItem(R.id.item10);
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = pref.getString("personne_c", "");
+        final Personne p1 = gson.fromJson(json, Personne.class);
+        if(p1.getType().equals("Prof")){
+            itm1.setVisible(false);
+            itm2.setVisible(false);
+            itm7.setVisible(false);
+            itm8.setVisible(false);
+
+            itm3.setVisible(false);
+            itm5.setVisible(false);
+
+
+        }
+        else{
+            if(p1.getType().equals("Etudiant")){
+                itm1.setVisible(false);
+                itm2.setVisible(false);
+                itm7.setVisible(false);
+                itm8.setVisible(false);
+
+                itm3.setVisible(false);
+                itm5.setVisible(false);
+
+                itm4.setVisible(false);
+            }
+            else{
+                if(p1.getType().equals("Delegue")){
+                    itm1.setVisible(false);
+                    itm2.setVisible(false);
+                    itm7.setVisible(false);
+                    itm8.setVisible(false);
+
+                    //itm3.setVisible(false);
+                    itm5.setVisible(false);
+
+                    itm4.setVisible(false);
+                }
+            }
+        }
+
+
+
+
+
+
+
+        //menuitem.getItem(3).setEnabled(true);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.item1:
+                Intent in = new Intent(Addevent.this, Listetudiant.class);
+                startActivity(in);
+                break;
+            case R.id.item2:
+                Intent in2 = new Intent(Addevent.this, Listprof.class);
+                startActivity(in2);
+                break;
+            case R.id.item3:
+                Intent in3 = new Intent(Addevent.this, Addevent.class);
+                startActivity(in3);
+                break;
+            case R.id.item4:
+                Intent in4 = new Intent(Addevent.this, Addcours.class);
+                startActivity(in4);
+                break;
+            case R.id.item5:
+                Intent in5 = new Intent(Addevent.this, AddEmploit.class);
+                startActivity(in5);
+                break;
+            case R.id.item6:
+                Intent in6 = new Intent(Addevent.this, Addmessage.class);
+                startActivity(in6);
+                break;
+            case R.id.item7:
+                Intent in7 = new Intent(Addevent.this, Addetudiant.class);
+                startActivity(in7);
+                break;
+            case R.id.item8:
+                Intent in8 = new Intent(Addevent.this, Addprof.class);
+                startActivity(in8);
+                break;
+            case R.id.item9:
+                Intent in9 = new Intent(Addevent.this, Emploit.class);
+                startActivity(in9);
+                break;
+            case R.id.item10:
+                Intent in10 = new Intent(Addevent.this, Login.class);
+                startActivity(in10);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

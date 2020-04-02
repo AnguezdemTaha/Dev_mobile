@@ -11,10 +11,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication12.Evenement.Addevent;
 import com.example.myapplication12.Evenement.Listevent;
 import com.example.myapplication12.Messagerie.Listmessage;
 import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.R;
+import com.example.myapplication12.Scolarité.AddEmploit;
+import com.example.myapplication12.Scolarité.Addcours;
 import com.example.myapplication12.Scolarité.Listcours;
 import com.example.myapplication12.Services.Methodes_personne;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -70,7 +73,7 @@ public class Login extends AppCompatActivity {
 
                             }
                             if ("Prof".equals(Type) || "Chef".equals(Type) || "Delegue".equals(Type) || "Etudiant".equals(Type)) {
-                                Intent in = new Intent(Login.this, Menuetudiant.class);
+                                Intent in = new Intent(Login.this, Listevent.class);
                                 //in.putExtra("nom_user", nomuser);
                                 startActivity(in);
                             } else {
