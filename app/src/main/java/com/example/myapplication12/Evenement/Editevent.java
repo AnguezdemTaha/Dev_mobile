@@ -80,7 +80,7 @@ public class Editevent extends AppCompatActivity {
         final ActionBar actionBar;
         actionBar = getSupportActionBar();
         ColorDrawable colorDrawable
-                = new ColorDrawable(Color.parseColor("#0EF1EE"));
+                = new ColorDrawable(Color.parseColor("#000000"));
         actionBar.setBackgroundDrawable(colorDrawable);
 
 
@@ -117,7 +117,7 @@ public class Editevent extends AppCompatActivity {
         save = (ImageView) findViewById(R.id.save_even);
 
 
-        interese = (CheckBox) findViewById(R.id.interise);
+        interese = (CheckBox) findViewById(R.id.Jeparticipe);
 
         nombreparticipants = (TextView) findViewById(R.id.nombreparticipant);
 
@@ -189,7 +189,7 @@ public class Editevent extends AppCompatActivity {
                         //nom1.setText(nomevn);
                         actionBar.setTitle(nomevn);
                         nom2.setText("Nom :" + nomevn);
-                        description2.setText("Descriotion :" + description);
+                        description2.setText("Description :" + description);
                         date2.setText(date_evn);
                         nombreparticipants.setText("nombre de participant:" + i);
 

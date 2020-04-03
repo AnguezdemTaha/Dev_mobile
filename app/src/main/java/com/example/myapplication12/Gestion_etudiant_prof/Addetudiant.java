@@ -45,7 +45,7 @@ public class Addetudiant extends AppCompatActivity {
         ActionBar actionBar;
         actionBar = getSupportActionBar();
         ColorDrawable colorDrawable
-                = new ColorDrawable(Color.parseColor("#0EF1EE"));
+                = new ColorDrawable(Color.parseColor("#000000"));
         actionBar.setBackgroundDrawable(colorDrawable);
         actionBar.setTitle("Ajouter un etudiant");
 
