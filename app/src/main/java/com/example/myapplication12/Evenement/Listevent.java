@@ -252,6 +252,7 @@ public class Listevent extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.exm_menu,menu);
+        //inflater.inflate(R.menu.exm_menu2,menu);
 
         menuitem=menu;
         MenuItem itm1 = menuitem.findItem(R.id.item1);
@@ -264,6 +265,10 @@ public class Listevent extends AppCompatActivity {
         MenuItem itm8 = menuitem.findItem(R.id.item8);
         MenuItem itm9 = menuitem.findItem(R.id.item9);
         MenuItem itm10 = menuitem.findItem(R.id.item10);
+
+        //a ajouter p:ms
+        //aotehr one xxxddd
+        itm3.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
         Gson gson = new Gson();
