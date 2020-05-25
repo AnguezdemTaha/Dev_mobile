@@ -6,23 +6,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.myapplication12.Gestion_etudiant_prof.Addetudiant;
 import com.example.myapplication12.Gestion_etudiant_prof.Addprof;
@@ -39,19 +34,13 @@ import com.example.myapplication12.Scolarité.Addcours;
 import com.example.myapplication12.Scolarité.Emploit;
 import com.example.myapplication12.Scolarité.Listcours;
 import com.example.myapplication12.Services.Methodes_event;
-import com.example.myapplication12.Services.Methodes_personne;
-import com.example.myapplication12.Services.MyAdapter;
 import com.example.myapplication12.Services.MyAdapterEven;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.common.reflect.TypeToken;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.LinkedList;
 
 public class Listevent extends AppCompatActivity {
@@ -76,7 +65,7 @@ public class Listevent extends AppCompatActivity {
         ActionBar actionBar;
         actionBar = getSupportActionBar();
         ColorDrawable colorDrawable
-                = new ColorDrawable(Color.parseColor("#0EF1EE"));
+                = new ColorDrawable(Color.parseColor("#000545"));
         actionBar.setBackgroundDrawable(colorDrawable);
         actionBar.setTitle("Les Evenements");
 
@@ -266,48 +255,37 @@ public class Listevent extends AppCompatActivity {
         MenuItem itm9 = menuitem.findItem(R.id.item9);
         MenuItem itm10 = menuitem.findItem(R.id.item10);
 
+
+        itm1.setVisible(false);
+        itm2.setVisible(false);
+        //itm3.setVisible(false);
+        itm4.setVisible(false);
+        itm5.setVisible(false);
+        itm6.setVisible(false);
+        itm7.setVisible(false);
+        itm8.setVisible(false);
+        itm9.setVisible(false);
+
         //a ajouter p:ms
         //aotehr one xxxddd
-        itm3.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        itm3.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = pref.getString("personne_c", "");
         final Personne p1 = gson.fromJson(json, Personne.class);
         if(p1.getType().equals("Prof")){
-            itm1.setVisible(false);
-            itm2.setVisible(false);
-            itm7.setVisible(false);
-            itm8.setVisible(false);
-
             itm3.setVisible(false);
-            itm5.setVisible(false);
-
-
         }
         else{
             if(p1.getType().equals("Etudiant")){
-                itm1.setVisible(false);
-                itm2.setVisible(false);
-                itm7.setVisible(false);
-                itm8.setVisible(false);
 
                 itm3.setVisible(false);
-                itm5.setVisible(false);
 
-                itm4.setVisible(false);
             }
             else{
                 if(p1.getType().equals("Delegue")){
-                    itm1.setVisible(false);
-                    itm2.setVisible(false);
-                    itm7.setVisible(false);
-                    itm8.setVisible(false);
 
-                    //itm3.setVisible(false);
-                    itm5.setVisible(false);
-
-                    itm4.setVisible(false);
                 }
             }
         }

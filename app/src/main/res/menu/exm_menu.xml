@@ -3,40 +3,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/item1"
-        android:title="Gestion des etudiants"
+        android:title="Gestion des étudiants"
         android:icon="@drawable/ic_add_black_24dp"
 
         />
     <item android:id="@+id/item2"
-        android:title="Gestion des proffeseurs"
+        android:title="Gestion des profeseurs"
 
         />
     <item android:id="@+id/item3"
+
         android:icon="@drawable/add"
-        android:title="Ajouter un evenement" />
+        android:title="Ajouter un évenement"
+        />
 
     <item android:id="@+id/item4"
         android:title="Ajouter un cours"
         android:icon="@drawable/add"
      />
     <item android:id="@+id/item5"
-        android:title="Ajouter un emploit de temps"
+
+        android:title="Ajouter un emploi du temps"
         android:icon="@drawable/add"
         />
     <item android:id="@+id/item6"
-        android:title="Envoyer  un message"
+        android:title="Envoyer un message"
         android:icon="@drawable/add"
         />
     <item android:id="@+id/item7"
-        android:title="Ajouter un etudiant"
+        android:title="Ajouter un étudiant"
         android:icon="@drawable/add"
         />
     <item android:id="@+id/item8"
-        android:title="Ajouter un proffeseur"
+        android:title="Ajouter un profeseur"
         android:icon="@drawable/add"
+
+
         />
+
     <item android:id="@+id/item9"
-        android:title="Les emploit de temps"
+        android:title="Les emplois du temps"
 
         />
     <item android:id="@+id/item10"

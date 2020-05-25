@@ -17,51 +17,54 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listdescours"
+            android:id="@+id/listdesmessages"
             android:layout_width="match_parent"
             android:layout_height="516dp"
             android:gravity="center"
             android:orientation="vertical">
 
 
-        </androidx.recyclerview.widget.RecyclerView>
 
+
+        </androidx.recyclerview.widget.RecyclerView>
         <LinearLayout
             android:layout_width="fill_parent"
-            android:gravity="bottom"
             android:layout_height="wrap_content"
+            android:gravity="bottom"
             android:orientation="horizontal"
-            android:padding="20dp"
-            >
+            android:padding="20dp">
 
             <ImageView
-                android:id="@+id/Scolarite1"
+                android:id="@+id/Scolarite10"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/scolarite"
+                android:layout_gravity="center"
                 android:layout_marginLeft="15dp"
-                android:layout_gravity="center"/>
+                android:src="@drawable/scolarite" />
+
             <ImageView
-                android:id="@+id/messages1"
+                android:id="@+id/messages10"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/messages"
+                android:layout_gravity="center"
                 android:layout_marginLeft="100dp"
-                android:layout_gravity="center"/>
+                android:src="@drawable/messages" />
+
             <ImageView
-                android:id="@+id/evenement1"
+                android:id="@+id/evenement10"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/evens"
+                android:layout_gravity="center"
                 android:layout_marginLeft="100dp"
-                android:layout_gravity="center"/>
-
-
+                android:src="@drawable/evens" />
 
 
         </LinearLayout>
-
     </LinearLayout>
+
+
+
+
 </RelativeLayout>
 
 

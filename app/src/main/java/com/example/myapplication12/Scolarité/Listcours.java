@@ -18,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.myapplication12.Evenement.Addevent;
 import com.example.myapplication12.Evenement.Listevent;
@@ -69,7 +68,7 @@ public class Listcours extends AppCompatActivity {
         ActionBar actionBar;
         actionBar = getSupportActionBar();
         ColorDrawable colorDrawable
-                = new ColorDrawable(Color.parseColor("#0EF1EE"));
+                = new ColorDrawable(Color.parseColor("#000000"));
         actionBar.setBackgroundDrawable(colorDrawable);
         actionBar.setTitle("Les cours");
 
@@ -159,7 +158,7 @@ public class Listcours extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.exm_menu, menu);
 
-        menuitem = menu;
+        menuitem=menu;
         MenuItem itm1 = menuitem.findItem(R.id.item1);
         MenuItem itm2 = menuitem.findItem(R.id.item2);
         MenuItem itm3 = menuitem.findItem(R.id.item3);
@@ -171,45 +170,18 @@ public class Listcours extends AppCompatActivity {
         MenuItem itm9 = menuitem.findItem(R.id.item9);
         MenuItem itm10 = menuitem.findItem(R.id.item10);
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = pref.getString("personne_c", "");
-        final Personne p1 = gson.fromJson(json, Personne.class);
-        if (p1.getType().equals("Prof")) {
-            itm1.setVisible(false);
-            itm2.setVisible(false);
-            itm7.setVisible(false);
-            itm8.setVisible(false);
 
-            itm3.setVisible(false);
-            itm5.setVisible(false);
+        itm1.setVisible(false);
+        itm2.setVisible(false);
+        itm3.setVisible(false);
+        //itm4.setVisible(false);
+        itm5.setVisible(false);
+        itm6.setVisible(false);
+        itm7.setVisible(false);
+        itm8.setVisible(false);
+        //itm9.setVisible(false);
 
-
-        } else {
-            if (p1.getType().equals("Etudiant")) {
-                itm1.setVisible(false);
-                itm2.setVisible(false);
-                itm7.setVisible(false);
-                itm8.setVisible(false);
-
-                itm3.setVisible(false);
-                itm5.setVisible(false);
-
-                itm4.setVisible(false);
-            } else {
-                if (p1.getType().equals("Delegue")) {
-                    itm1.setVisible(false);
-                    itm2.setVisible(false);
-                    itm7.setVisible(false);
-                    itm8.setVisible(false);
-
-                    //itm3.setVisible(false);
-                    itm5.setVisible(false);
-
-                    itm4.setVisible(false);
-                }
-            }
-        }
+        itm4.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
 
         //menuitem.getItem(3).setEnabled(true);

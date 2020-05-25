@@ -9,8 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.myapplication12.Messagerie.Listmessage;
-import com.example.myapplication12.Model.Emploi;
 import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.R;
 import com.example.myapplication12.Scolarité.Emploit;

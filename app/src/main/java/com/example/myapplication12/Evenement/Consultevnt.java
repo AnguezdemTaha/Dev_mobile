@@ -40,9 +40,27 @@ public class Consultevnt extends AppCompatActivity {
         inflater.inflate(R.menu.exm_menu,menu);
 
         menuitem=menu;
-        MenuItem itm = menuitem.findItem(R.id.item4);
-        //itm.setVisible(false);
-        //menuitem.getItem(3).setEnabled(true);
+        MenuItem itm1 = menuitem.findItem(R.id.item1);
+        MenuItem itm2 = menuitem.findItem(R.id.item2);
+        MenuItem itm3 = menuitem.findItem(R.id.item3);
+        MenuItem itm4 = menuitem.findItem(R.id.item4);
+        MenuItem itm5 = menuitem.findItem(R.id.item5);
+        MenuItem itm6 = menuitem.findItem(R.id.item6);
+        MenuItem itm7 = menuitem.findItem(R.id.item7);
+        MenuItem itm8 = menuitem.findItem(R.id.item8);
+        MenuItem itm9 = menuitem.findItem(R.id.item9);
+        MenuItem itm10 = menuitem.findItem(R.id.item10);
+
+
+        itm1.setVisible(false);
+        itm2.setVisible(false);
+        itm3.setVisible(false);
+        itm4.setVisible(false);
+        itm5.setVisible(false);
+        itm6.setVisible(false);
+        itm7.setVisible(false);
+        itm8.setVisible(false);
+        itm9.setVisible(false);
         return true;
     }
 

@@ -15,11 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication12.Evenement.Editevent;
-import com.example.myapplication12.Evenement.Listevent;
-import com.example.myapplication12.Messagerie.Listmessage;
 import com.example.myapplication12.Model.Cours;
-import com.example.myapplication12.Model.Evenement;
 import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.R;
 import com.example.myapplication12.Scolarité.Editcours;
@@ -28,7 +24,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.common.net.InternetDomainName;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
@@ -37,7 +32,6 @@ import com.google.gson.Gson;
 
 import java.util.LinkedList;
 
-import static android.content.Context.DOWNLOAD_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
 import static android.os.Environment.DIRECTORY_PICTURES;
 

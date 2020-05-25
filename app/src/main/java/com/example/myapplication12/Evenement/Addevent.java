@@ -43,7 +43,6 @@ import com.example.myapplication12.Scolarité.Listcours;
 import com.example.myapplication12.Services.Methodes_event;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.api.SystemParameterOrBuilder;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -79,7 +78,7 @@ public class Addevent extends AppCompatActivity {
         ActionBar actionBar;
         actionBar = getSupportActionBar();
         ColorDrawable colorDrawable
-                = new ColorDrawable(Color.parseColor("#0EF1EE"));
+                = new ColorDrawable(Color.parseColor("#000000"));
         actionBar.setBackgroundDrawable(colorDrawable);
         actionBar.setTitle("Ajouter un evenement");
 
@@ -255,47 +254,18 @@ public class Addevent extends AppCompatActivity {
         MenuItem itm9 = menuitem.findItem(R.id.item9);
         MenuItem itm10 = menuitem.findItem(R.id.item10);
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = pref.getString("personne_c", "");
-        final Personne p1 = gson.fromJson(json, Personne.class);
-        if(p1.getType().equals("Prof")){
-            itm1.setVisible(false);
-            itm2.setVisible(false);
-            itm7.setVisible(false);
-            itm8.setVisible(false);
 
-            itm3.setVisible(false);
-            itm5.setVisible(false);
+        itm1.setVisible(false);
+        itm2.setVisible(false);
+        itm3.setVisible(false);
+        itm4.setVisible(false);
+        itm5.setVisible(false);
+        itm6.setVisible(false);
+        itm7.setVisible(false);
+        itm8.setVisible(false);
+        itm9.setVisible(false);
 
 
-        }
-        else{
-            if(p1.getType().equals("Etudiant")){
-                itm1.setVisible(false);
-                itm2.setVisible(false);
-                itm7.setVisible(false);
-                itm8.setVisible(false);
-
-                itm3.setVisible(false);
-                itm5.setVisible(false);
-
-                itm4.setVisible(false);
-            }
-            else{
-                if(p1.getType().equals("Delegue")){
-                    itm1.setVisible(false);
-                    itm2.setVisible(false);
-                    itm7.setVisible(false);
-                    itm8.setVisible(false);
-
-                    //itm3.setVisible(false);
-                    itm5.setVisible(false);
-
-                    itm4.setVisible(false);
-                }
-            }
-        }
 
 
 

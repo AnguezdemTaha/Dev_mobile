@@ -7,32 +7,18 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication12.Evenement.Editevent;
-import com.example.myapplication12.Evenement.Listevent;
-import com.example.myapplication12.Gestion_etudiant_prof.Listprof;
-import com.example.myapplication12.MainActivity;
 import com.example.myapplication12.Messagerie.Discussion;
-import com.example.myapplication12.Messagerie.Listmessage;
-import com.example.myapplication12.Model.Evenement;
 import com.example.myapplication12.Model.Message;
 import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 

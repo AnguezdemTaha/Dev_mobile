@@ -52,7 +52,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Listmessage extends AppCompatActivity {
+public class Listmessageprof extends AppCompatActivity {
 
     static ArrayList<Message> messages1 = new ArrayList<>();
 
@@ -85,21 +85,21 @@ public class Listmessage extends AppCompatActivity {
         scolarete1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(Listmessage.this, Listcours.class);
+                Intent in = new Intent(Listmessageprof.this, Listcours.class);
                 startActivity(in);
             }
         });
         messages11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(Listmessage.this, Listmessage.class);
+                Intent in = new Intent(Listmessageprof.this, Listmessage.class);
                 startActivity(in);
             }
         });
         evenement1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(Listmessage.this, Listevent.class);
+                Intent in = new Intent(Listmessageprof.this, Listevent.class);
                 startActivity(in);
             }
         });
@@ -169,21 +169,39 @@ public class Listmessage extends AppCompatActivity {
                     for (QuerySnapshot document : task.getResult()) {
                         for (QueryDocumentSnapshot document1 : document) {
                             Message m = document1.toObject(Message.class);
+                            if (m.getPer_envoye().getType().equals("Prof")) {
+                                if (!persmsgs1.contains(m.getPer_envoye().getNom())) {
+                                    persmsgs1.add(m.getPer_envoye().getNom());
 
-                            if (!persmsgs1.contains(m.getPer_envoye().getNom())) {
-                                persmsgs1.add(m.getPer_envoye().getNom());
-
-                                msgs.add(m);
-                            }
-
-
-                            for (int i = 0; i < m.getPer_recus().size(); i++) {
-                                if (!persmsgs1.contains(m.getPer_recus().get(i).getNom())) {
-                                    persmsgs1.add(m.getPer_recus().get(i).getNom());
                                     msgs.add(m);
                                 }
-                            }
 
+
+                                for (int i = 0; i < m.getPer_recus().size(); i++) {
+                                    if (!persmsgs1.contains(m.getPer_recus().get(i).getNom())) {
+                                        persmsgs1.add(m.getPer_recus().get(i).getNom());
+                                        msgs.add(m);
+                                    }
+                                }
+                            } else {
+                                for (int i = 0; i < m.getPer_recus().size(); i++) {
+                                    if (m.getPer_recus().get(i).getType().equals("Prof")) {
+                                        if (!persmsgs1.contains(m.getPer_envoye().getNom())) {
+                                            persmsgs1.add(m.getPer_envoye().getNom());
+
+                                            msgs.add(m);
+                                        }
+
+
+                                        for (int j = 0; j < m.getPer_recus().size(); j++) {
+                                            if (!persmsgs1.contains(m.getPer_recus().get(j).getNom())) {
+                                                persmsgs1.add(m.getPer_recus().get(j).getNom());
+                                                msgs.add(m);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
 
                         }
 
@@ -211,28 +229,6 @@ public class Listmessage extends AppCompatActivity {
 
 
                     });
-                    ////
-                    int k=0;
-                    for (int j = 0; j < msgs.size(); j++) {
-
-                        if (msgs.get(j).getPer_envoye().getType().equals("Prof")) {
-                            Message f = msgs.get(j-k);
-                            msgs.remove(msgs.get(j-k));
-                            msgs.addLast(f);
-                            k=k+1;
-                        } else {
-                            for (int i = 0; i < msgs.get(j).getPer_recus().size(); i++) {
-                                if (msgs.get(j).getPer_recus().get(i).getType().equals("Prof")) {
-                                    Message f = msgs.get(j-k);
-                                    msgs.remove(msgs.get(j-k));
-                                    msgs.addLast(f);
-                                    k=k+1;
-                                }
-                            }
-                        }
-
-                    }
-                    ////
                     System.out.println("nomre de message !!!!!!" + msgs.size());
                     r.setHasFixedSize(true);
                     LayoutManager = new LinearLayoutManager(context);
@@ -347,43 +343,43 @@ public class Listmessage extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item1:
-                Intent in = new Intent(Listmessage.this, Listetudiant.class);
+                Intent in = new Intent(Listmessageprof.this, Listetudiant.class);
                 startActivity(in);
                 break;
             case R.id.item2:
-                Intent in2 = new Intent(Listmessage.this, Listprof.class);
+                Intent in2 = new Intent(Listmessageprof.this, Listprof.class);
                 startActivity(in2);
                 break;
             case R.id.item3:
-                Intent in3 = new Intent(Listmessage.this, Addevent.class);
+                Intent in3 = new Intent(Listmessageprof.this, Addevent.class);
                 startActivity(in3);
                 break;
             case R.id.item4:
-                Intent in4 = new Intent(Listmessage.this, Addcours.class);
+                Intent in4 = new Intent(Listmessageprof.this, Addcours.class);
                 startActivity(in4);
                 break;
             case R.id.item5:
-                Intent in5 = new Intent(Listmessage.this, AddEmploit.class);
+                Intent in5 = new Intent(Listmessageprof.this, AddEmploit.class);
                 startActivity(in5);
                 break;
             case R.id.item6:
-                Intent in6 = new Intent(Listmessage.this, Addmessage.class);
+                Intent in6 = new Intent(Listmessageprof.this, Addmessage.class);
                 startActivity(in6);
                 break;
             case R.id.item7:
-                Intent in7 = new Intent(Listmessage.this, Addetudiant.class);
+                Intent in7 = new Intent(Listmessageprof.this, Addetudiant.class);
                 startActivity(in7);
                 break;
             case R.id.item8:
-                Intent in8 = new Intent(Listmessage.this, Addprof.class);
+                Intent in8 = new Intent(Listmessageprof.this, Addprof.class);
                 startActivity(in8);
                 break;
             case R.id.item9:
-                Intent in9 = new Intent(Listmessage.this, Emploit.class);
+                Intent in9 = new Intent(Listmessageprof.this, Emploit.class);
                 startActivity(in9);
                 break;
             case R.id.item10:
-                Intent in10 = new Intent(Listmessage.this, Login.class);
+                Intent in10 = new Intent(Listmessageprof.this, Login.class);
                 startActivity(in10);
                 break;
         }

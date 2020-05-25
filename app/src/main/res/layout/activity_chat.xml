@@ -19,7 +19,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listdesmessages"
             android:layout_width="match_parent"
-            android:layout_height="640dp"
+            android:layout_height="516dp"
             android:gravity="center"
             android:orientation="vertical">
 

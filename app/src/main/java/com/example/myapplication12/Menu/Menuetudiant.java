@@ -1,9 +1,12 @@
 package com.example.myapplication12.Menu;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +19,7 @@ import com.example.myapplication12.Gestion_etudiant_prof.Listprof;
 import com.example.myapplication12.Messagerie.Listmessage;
 import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.R;
+import com.example.myapplication12.Scolarité.Listcours;
 import com.google.gson.Gson;
 
 public class Menuetudiant extends AppCompatActivity {
@@ -27,7 +31,13 @@ public class Menuetudiant extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity2);
-        getSupportActionBar().hide();
+        ActionBar actionBar;
+        actionBar = getSupportActionBar();
+        ColorDrawable colorDrawable
+                = new ColorDrawable(Color.parseColor("#000545"));
+        actionBar.setBackgroundDrawable(colorDrawable);
+        actionBar.setTitle("...");
+
         button1=(Button) findViewById(R.id.Messages);
         button2=(Button) findViewById(R.id.Evenements);
         button3=(Button) findViewById(R.id.Scolarite);
@@ -37,14 +47,14 @@ public class Menuetudiant extends AppCompatActivity {
         l4=(LinearLayout) findViewById(R.id.gestionprofl);
         l5=(LinearLayout) findViewById(R.id.gestionetudl);
 
-        nomuser=(TextView) findViewById(R.id.nomcurentuser);
+        //nomuser=(TextView) findViewById(R.id.nomcurentuser);
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = pref.getString("personne_c", "");
         final Personne p1 = gson.fromJson(json, Personne.class);
 
-        nomuser.setText(p1.getNom());
+        //nomuser.setText(p1.getNom());
         if(!"Chef".equals(p1.getType())){
             l4.setVisibility(View.INVISIBLE);
             l5.setVisibility(View.INVISIBLE);
@@ -68,7 +78,7 @@ public class Menuetudiant extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in=new Intent(Menuetudiant.this, Menuscolarite.class);
+                Intent in=new Intent(Menuetudiant.this, Listcours.class);
                 startActivity(in);
             }
         });

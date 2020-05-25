@@ -12,35 +12,27 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication12.Evenement.Addevent;
-import com.example.myapplication12.Evenement.Listevent;
 import com.example.myapplication12.Gestion_etudiant_prof.Addetudiant;
 import com.example.myapplication12.Gestion_etudiant_prof.Addprof;
 import com.example.myapplication12.Gestion_etudiant_prof.Listetudiant;
 import com.example.myapplication12.Gestion_etudiant_prof.Listprof;
-import com.example.myapplication12.MainActivity;
 import com.example.myapplication12.Menu.Login;
 import com.example.myapplication12.Model.Message;
 import com.example.myapplication12.Model.Personne;
-import com.example.myapplication12.Model.Professeur;
 import com.example.myapplication12.R;
 import com.example.myapplication12.Scolarité.AddEmploit;
 import com.example.myapplication12.Scolarité.Addcours;
 import com.example.myapplication12.Scolarité.Emploit;
-import com.example.myapplication12.Scolarité.Listcours;
-import com.example.myapplication12.Services.GetAllContactsOnCompleteListener;
-import com.example.myapplication12.Services.Methodes_cours;
 import com.example.myapplication12.Services.Methodes_msg_evt_;
 import com.example.myapplication12.Services.Methodes_personne;
 import com.example.myapplication12.Services.MyAdapter;
@@ -56,9 +48,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
-import java.util.List;
-
-import static androidx.recyclerview.widget.RecyclerView.*;
 
 public class Addmessage extends AppCompatActivity implements MyAdapter.OnNoteListener {
 
@@ -80,7 +69,7 @@ public class Addmessage extends AppCompatActivity implements MyAdapter.OnNoteLis
         ActionBar actionBar;
         actionBar = getSupportActionBar();
         ColorDrawable colorDrawable
-                = new ColorDrawable(Color.parseColor("#0EF1EE"));
+                = new ColorDrawable(Color.parseColor("#000000"));
         actionBar.setBackgroundDrawable(colorDrawable);
         actionBar.setTitle("Ajouter un message");
 
@@ -271,47 +260,18 @@ public class Addmessage extends AppCompatActivity implements MyAdapter.OnNoteLis
         MenuItem itm9 = menuitem.findItem(R.id.item9);
         MenuItem itm10 = menuitem.findItem(R.id.item10);
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = pref.getString("personne_c", "");
-        final Personne p1 = gson.fromJson(json, Personne.class);
-        if(p1.getType().equals("Prof")){
-            itm1.setVisible(false);
-            itm2.setVisible(false);
-            itm7.setVisible(false);
-            itm8.setVisible(false);
 
-            itm3.setVisible(false);
-            itm5.setVisible(false);
+        itm1.setVisible(false);
+        itm2.setVisible(false);
+        itm3.setVisible(false);
+        itm4.setVisible(false);
+        itm5.setVisible(false);
+        itm6.setVisible(false);
+        itm7.setVisible(false);
+        itm8.setVisible(false);
+        itm9.setVisible(false);
 
 
-        }
-        else{
-            if(p1.getType().equals("Etudiant")){
-                itm1.setVisible(false);
-                itm2.setVisible(false);
-                itm7.setVisible(false);
-                itm8.setVisible(false);
-
-                itm3.setVisible(false);
-                itm5.setVisible(false);
-
-                itm4.setVisible(false);
-            }
-            else{
-                if(p1.getType().equals("Delegue")){
-                    itm1.setVisible(false);
-                    itm2.setVisible(false);
-                    itm7.setVisible(false);
-                    itm8.setVisible(false);
-
-                    //itm3.setVisible(false);
-                    itm5.setVisible(false);
-
-                    itm4.setVisible(false);
-                }
-            }
-        }
 
 
         //menuitem.getItem(3).setEnabled(true);

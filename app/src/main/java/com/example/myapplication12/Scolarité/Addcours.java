@@ -28,18 +28,14 @@ import com.example.myapplication12.Gestion_etudiant_prof.Addetudiant;
 import com.example.myapplication12.Gestion_etudiant_prof.Addprof;
 import com.example.myapplication12.Gestion_etudiant_prof.Listetudiant;
 import com.example.myapplication12.Gestion_etudiant_prof.Listprof;
-import com.example.myapplication12.MainActivity;
 import com.example.myapplication12.Menu.Login;
 import com.example.myapplication12.Messagerie.Addmessage;
 import com.example.myapplication12.Messagerie.Listmessage;
 import com.example.myapplication12.Model.Cours;
-import com.example.myapplication12.Model.Evenement;
 import com.example.myapplication12.Model.Matiere;
-import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.Model.Professeur;
 import com.example.myapplication12.R;
 import com.example.myapplication12.Services.Methodes_cours;
-import com.example.myapplication12.Services.Methodes_event;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -49,10 +45,8 @@ import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.UUID;
 
 public class Addcours extends AppCompatActivity {
 
@@ -74,7 +68,7 @@ public class Addcours extends AppCompatActivity {
         ActionBar actionBar;
         actionBar = getSupportActionBar();
         ColorDrawable colorDrawable
-                = new ColorDrawable(Color.parseColor("#0EF1EE"));
+                = new ColorDrawable(Color.parseColor("#000000"));
         actionBar.setBackgroundDrawable(colorDrawable);
         actionBar.setTitle("Ajouter un cours");
 
@@ -219,7 +213,7 @@ public class Addcours extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.exm_menu, menu);
 
-        menuitem = menu;
+        menuitem=menu;
         MenuItem itm1 = menuitem.findItem(R.id.item1);
         MenuItem itm2 = menuitem.findItem(R.id.item2);
         MenuItem itm3 = menuitem.findItem(R.id.item3);
@@ -231,45 +225,18 @@ public class Addcours extends AppCompatActivity {
         MenuItem itm9 = menuitem.findItem(R.id.item9);
         MenuItem itm10 = menuitem.findItem(R.id.item10);
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = pref.getString("personne_c", "");
-        final Personne p1 = gson.fromJson(json, Personne.class);
-        if (p1.getType().equals("Prof")) {
-            itm1.setVisible(false);
-            itm2.setVisible(false);
-            itm7.setVisible(false);
-            itm8.setVisible(false);
 
-            itm3.setVisible(false);
-            itm5.setVisible(false);
+        itm1.setVisible(false);
+        itm2.setVisible(false);
+        itm3.setVisible(false);
+        itm4.setVisible(false);
+        itm5.setVisible(false);
+        itm6.setVisible(false);
+        itm7.setVisible(false);
+        itm8.setVisible(false);
+        itm9.setVisible(false);
 
-
-        } else {
-            if (p1.getType().equals("Etudiant")) {
-                itm1.setVisible(false);
-                itm2.setVisible(false);
-                itm7.setVisible(false);
-                itm8.setVisible(false);
-
-                itm3.setVisible(false);
-                itm5.setVisible(false);
-
-                itm4.setVisible(false);
-            } else {
-                if (p1.getType().equals("Delegue")) {
-                    itm1.setVisible(false);
-                    itm2.setVisible(false);
-                    itm7.setVisible(false);
-                    itm8.setVisible(false);
-
-                    //itm3.setVisible(false);
-                    itm5.setVisible(false);
-
-                    itm4.setVisible(false);
-                }
-            }
-        }
+        //itm8.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
 
         //menuitem.getItem(3).setEnabled(true);

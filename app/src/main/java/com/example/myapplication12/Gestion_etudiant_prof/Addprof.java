@@ -5,7 +5,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -21,7 +20,6 @@ import android.widget.Toast;
 import com.example.myapplication12.Evenement.Addevent;
 import com.example.myapplication12.Evenement.Listevent;
 import com.example.myapplication12.Menu.Login;
-import com.example.myapplication12.Menu.signup;
 import com.example.myapplication12.Messagerie.Addmessage;
 import com.example.myapplication12.Messagerie.Listmessage;
 import com.example.myapplication12.Model.Personne;
@@ -31,7 +29,6 @@ import com.example.myapplication12.Scolarité.Addcours;
 import com.example.myapplication12.Scolarité.Emploit;
 import com.example.myapplication12.Scolarité.Listcours;
 import com.example.myapplication12.Services.Methodes_personne;
-import com.google.gson.Gson;
 
 public class Addprof extends AppCompatActivity {
 
@@ -46,7 +43,7 @@ public class Addprof extends AppCompatActivity {
         ActionBar actionBar;
         actionBar = getSupportActionBar();
         ColorDrawable colorDrawable
-                = new ColorDrawable(Color.parseColor("#0EF1EE"));
+                = new ColorDrawable(Color.parseColor("#000000"));
         actionBar.setBackgroundDrawable(colorDrawable);
         actionBar.setTitle("Ajouter un professeur");
 
@@ -126,47 +123,16 @@ public class Addprof extends AppCompatActivity {
         MenuItem itm9 = menuitem.findItem(R.id.item9);
         MenuItem itm10 = menuitem.findItem(R.id.item10);
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = pref.getString("personne_c", "");
-        final Personne p1 = gson.fromJson(json, Personne.class);
-        if(p1.getType().equals("Prof")){
-            itm1.setVisible(false);
-            itm2.setVisible(false);
-            itm7.setVisible(false);
-            itm8.setVisible(false);
 
-            itm3.setVisible(false);
-            itm5.setVisible(false);
-
-
-        }
-        else{
-            if(p1.getType().equals("Etudiant")){
-                itm1.setVisible(false);
-                itm2.setVisible(false);
-                itm7.setVisible(false);
-                itm8.setVisible(false);
-
-                itm3.setVisible(false);
-                itm5.setVisible(false);
-
-                itm4.setVisible(false);
-            }
-            else{
-                if(p1.getType().equals("Delegue")){
-                    itm1.setVisible(false);
-                    itm2.setVisible(false);
-                    itm7.setVisible(false);
-                    itm8.setVisible(false);
-
-                    //itm3.setVisible(false);
-                    itm5.setVisible(false);
-
-                    itm4.setVisible(false);
-                }
-            }
-        }
+        itm1.setVisible(false);
+        itm2.setVisible(false);
+        itm3.setVisible(false);
+        itm4.setVisible(false);
+        itm5.setVisible(false);
+        itm6.setVisible(false);
+        itm7.setVisible(false);
+        itm8.setVisible(false);
+        itm9.setVisible(false);
 
 
         //menuitem.getItem(3).setEnabled(true);

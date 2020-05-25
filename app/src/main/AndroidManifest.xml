@@ -10,11 +10,13 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:largeHeap="true">
-        <activity android:name=".Evenement.Consultevnt"></activity>
+        android:theme="@style/AppTheme">
+        <activity android:name=".Messagerie.Listmessage"></activity>
+        <activity android:name=".Messagerie.Listmessageprof" />
+        <activity android:name=".Evenement.Consultevnt" />
         <activity android:name=".Scolarité.AddEmploit" />
         <activity android:name=".Gestion_etudiant_prof.Editetudiant" />
         <activity android:name=".Scolarité.Editcours" />
@@ -33,10 +35,9 @@
         <activity android:name=".Evenement.Editevent" />
         <activity android:name=".Evenement.Listevent" />
         <activity android:name=".Menu.Menuevent" />
-        <activity android:name=".Messagerie.Listmessage" />
         <activity android:name=".Menu.Menuprof" />
         <activity android:name=".Menu.signup" />
-        <activity android:name="MainActivity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".Menu.Menuetudiant" />
         <activity android:name=".Menu.Login">
             <intent-filter>

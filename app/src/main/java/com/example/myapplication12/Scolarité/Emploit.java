@@ -28,13 +28,10 @@ import com.example.myapplication12.Gestion_etudiant_prof.Listprof;
 import com.example.myapplication12.Menu.Login;
 import com.example.myapplication12.Messagerie.Addmessage;
 import com.example.myapplication12.Messagerie.Listmessage;
-import com.example.myapplication12.Model.Cours;
 import com.example.myapplication12.Model.Emploi;
 import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.R;
-import com.example.myapplication12.Services.Methodes_cours;
 import com.example.myapplication12.Services.Methodes_eml;
-import com.example.myapplication12.Services.MyAdapterCours;
 import com.example.myapplication12.Services.MyAdapterEml;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -70,9 +67,9 @@ public class Emploit extends AppCompatActivity {
         ActionBar actionBar;
         actionBar = getSupportActionBar();
         ColorDrawable colorDrawable
-                = new ColorDrawable(Color.parseColor("#0EF1EE"));
+                = new ColorDrawable(Color.parseColor("#000000"));
         actionBar.setBackgroundDrawable(colorDrawable);
-        actionBar.setTitle("Les emploit de temps");
+        actionBar.setTitle("Les emplois de temps");
 
 
         scolarete1 = (ImageView) findViewById(R.id.Scolarite11);
@@ -167,7 +164,7 @@ public class Emploit extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.exm_menu, menu);
 
-        menuitem = menu;
+        menuitem=menu;
         MenuItem itm1 = menuitem.findItem(R.id.item1);
         MenuItem itm2 = menuitem.findItem(R.id.item2);
         MenuItem itm3 = menuitem.findItem(R.id.item3);
@@ -179,45 +176,18 @@ public class Emploit extends AppCompatActivity {
         MenuItem itm9 = menuitem.findItem(R.id.item9);
         MenuItem itm10 = menuitem.findItem(R.id.item10);
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = pref.getString("personne_c", "");
-        final Personne p1 = gson.fromJson(json, Personne.class);
-        if (p1.getType().equals("Prof")) {
-            itm1.setVisible(false);
-            itm2.setVisible(false);
-            itm7.setVisible(false);
-            itm8.setVisible(false);
 
-            itm3.setVisible(false);
-            itm5.setVisible(false);
+        itm1.setVisible(false);
+        itm2.setVisible(false);
+        itm3.setVisible(false);
+        itm4.setVisible(false);
+        //itm5.setVisible(false);
+        itm6.setVisible(false);
+        itm7.setVisible(false);
+        itm8.setVisible(false);
+        itm9.setVisible(false);
 
-
-        } else {
-            if (p1.getType().equals("Etudiant")) {
-                itm1.setVisible(false);
-                itm2.setVisible(false);
-                itm7.setVisible(false);
-                itm8.setVisible(false);
-
-                itm3.setVisible(false);
-                itm5.setVisible(false);
-
-                itm4.setVisible(false);
-            } else {
-                if (p1.getType().equals("Delegue")) {
-                    itm1.setVisible(false);
-                    itm2.setVisible(false);
-                    itm7.setVisible(false);
-                    itm8.setVisible(false);
-
-                    //itm3.setVisible(false);
-                    itm5.setVisible(false);
-
-                    itm4.setVisible(false);
-                }
-            }
-        }
+        itm5.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
 
         //menuitem.getItem(3).setEnabled(true);

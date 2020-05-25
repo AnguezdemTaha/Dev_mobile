@@ -1,13 +1,11 @@
 package com.example.myapplication12;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -19,28 +17,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.downloader.PRDownloader;
-import com.example.myapplication12.Evenement.Addevent;
-import com.example.myapplication12.Evenement.Listevent;
-import com.example.myapplication12.Gestion_etudiant_prof.Addprof;
-import com.example.myapplication12.Gestion_etudiant_prof.Listetudiant;
-import com.example.myapplication12.Gestion_etudiant_prof.Listprof;
 import com.example.myapplication12.Menu.Login;
-import com.example.myapplication12.Menu.signup;
-import com.example.myapplication12.Messagerie.Addmessage;
-import com.example.myapplication12.Messagerie.Discussion;
-import com.example.myapplication12.Messagerie.Listmessage;
-import com.example.myapplication12.Model.Emploi;
 import com.example.myapplication12.Model.Message;
 import com.example.myapplication12.Model.Personne;
-import com.example.myapplication12.Scolarité.Addcours;
-import com.example.myapplication12.Scolarité.Emploit;
-import com.example.myapplication12.Scolarité.Listcours;
-import com.example.myapplication12.Services.DownloadTask;
 import com.example.myapplication12.Services.Methodes_msg_evt_;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
-import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -58,14 +38,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.DirectoryIteratorException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
-
-import io.grpc.Context;
-
-import static android.os.Environment.DIRECTORY_PICTURES;
 
 public class MainActivity extends Activity {
 
