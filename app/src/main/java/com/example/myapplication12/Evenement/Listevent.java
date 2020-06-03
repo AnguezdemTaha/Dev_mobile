@@ -64,8 +64,8 @@ public class Listevent extends AppCompatActivity {
         setContentView(R.layout.activity_event1);
         ActionBar actionBar;
         actionBar = getSupportActionBar();
-        ColorDrawable colorDrawable
-                = new ColorDrawable(Color.parseColor("#000545"));
+        ColorDrawable colorDrawable  =
+                new ColorDrawable(Color.parseColor("#000000"));
         actionBar.setBackgroundDrawable(colorDrawable);
         actionBar.setTitle("Les Evenements");
 

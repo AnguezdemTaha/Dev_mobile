@@ -34,9 +34,9 @@ public class Menuetudiant extends AppCompatActivity {
         ActionBar actionBar;
         actionBar = getSupportActionBar();
         ColorDrawable colorDrawable
-                = new ColorDrawable(Color.parseColor("#000545"));
+                = new ColorDrawable(Color.parseColor("#000000"));
         actionBar.setBackgroundDrawable(colorDrawable);
-        actionBar.setTitle("...");
+        actionBar.setTitle("BIENVENUE");
 
         button1=(Button) findViewById(R.id.Messages);
         button2=(Button) findViewById(R.id.Evenements);
