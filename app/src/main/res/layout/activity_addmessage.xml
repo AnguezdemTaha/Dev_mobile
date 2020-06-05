@@ -16,10 +16,38 @@
         android:orientation="vertical">
 
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Professeurs"
+            android:textColor="#FE6363"
+            android:textSize="16sp"
+            android:textStyle="bold|italic" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listdespersonnesmsg"
             android:layout_width="match_parent"
-            android:layout_height="674dp"
+            android:layout_height="248dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Etudiants"
+            android:textColor="#FE6363"
+            android:textSize="16sp"
+            android:textStyle="bold|italic" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listdespersonnesmsg2"
+            android:layout_width="match_parent"
+            android:layout_height="358dp"
             android:gravity="center"
             android:orientation="vertical">
 

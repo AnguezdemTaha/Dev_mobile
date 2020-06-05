@@ -55,14 +55,14 @@ public class Addmessage extends AppCompatActivity implements MyAdapter.OnNoteLis
     Menu menuitem;
     private LinearLayout t21;
     private TextView t211, t212, msg;
-    public RecyclerView r;
+    public RecyclerView r,r2;
     private Object LayoutManager;
     private ImageView envoyer_msg;
     private ImageView scolarete1, messages1, evenement1;
 
 
     private Personne p = new Personne();
-
+    private Personne p2 = new Personne();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,8 +79,9 @@ public class Addmessage extends AppCompatActivity implements MyAdapter.OnNoteLis
         envoyer_msg = (ImageView) findViewById(R.id.envoyermsg2);
 
         r = (RecyclerView) findViewById(R.id.listdespersonnesmsg);
-
+        r2 = (RecyclerView) findViewById(R.id.listdespersonnesmsg2);
         final LinkedList<Personne> prs = new LinkedList<Personne>();
+        final LinkedList<Personne> prs2 = new LinkedList<Personne>();
         final Context context = this;
 
 
@@ -100,14 +101,16 @@ public class Addmessage extends AppCompatActivity implements MyAdapter.OnNoteLis
         r.setAdapter(myAdapter);*/
 
         final MyAdapter.OnNoteListener note = (MyAdapter.OnNoteListener) this;
-        Methodes_personne.GetAllUsers().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        Methodes_personne.GetAllProfs().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 //Personne p = new Personne();
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         p = document.toObject(Personne.class);
-                        prs.add(p);
+                      //  if(p.getType()=="Prof") {
+                            prs.add(p);
+
                         //System.out.println("le nom ="+p.getNom());
                     }
                     r.setHasFixedSize(true);
@@ -115,6 +118,36 @@ public class Addmessage extends AppCompatActivity implements MyAdapter.OnNoteLis
                     r.setLayoutManager((RecyclerView.LayoutManager) LayoutManager);
                     MyAdapter myAdapter = new MyAdapter(prs, context, note);
                     r.setAdapter(myAdapter);
+
+
+                    //del=(ImageView) findViewById(R.id.delet_personne);
+                    //del.setVisibility(View.INVISIBLE);
+
+
+                } else {
+
+                }
+            }
+
+
+        });
+
+
+        Methodes_personne.GetAllEtudiants().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                //Personne p = new Personne();
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        p2 = document.toObject(Personne.class);
+                        prs2.add(p2);
+                        //System.out.println("le nom ="+p.getNom());
+                    }
+                    r2.setHasFixedSize(true);
+                    LayoutManager = new LinearLayoutManager(context);
+                    r2.setLayoutManager((RecyclerView.LayoutManager) LayoutManager);
+                    MyAdapter myAdapter = new MyAdapter(prs2, context, note);
+                    r2.setAdapter(myAdapter);
 
 
                     //del=(ImageView) findViewById(R.id.delet_personne);

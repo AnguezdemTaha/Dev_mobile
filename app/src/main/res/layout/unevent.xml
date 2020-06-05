@@ -59,13 +59,14 @@
                 android:layout_marginLeft="10dp"
 
                 android:buttonTint="#DA5F5F"
+                android:textColor="#DA5F5F"
+                android:textColorHint="#F84242"
                 android:clickable="false"
                 android:hint="Je participe"
                 android:inputType="text"
                 android:letterSpacing="0.1"
                 android:textAllCaps="false"
-                android:textColor="#DA5F5F"
-                android:textColorHint="#F84242"
+
                 android:textSize="12dp" />
 
         </LinearLayout>
