@@ -124,9 +124,14 @@ public class MyAdapterEven extends RecyclerView.Adapter<MyAdapterEven.MyViewHold
                         for(Personne p1:e.getPer_participes()){
                             if(p1.getNom().equals(p.getNom())){
                                 holder.interiseevn.setChecked(true);
+                                holder.interiseevn.setEnabled(false);
 
                             }
-                        }
+                            else{
+
+                                holder.interiseevn.setEnabled(false);
+                            holder.interiseevn.setVisibility(View.INVISIBLE);
+                        } }
                     }}}});
 
 

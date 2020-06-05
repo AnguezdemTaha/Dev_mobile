@@ -120,6 +120,7 @@ public class Addprof extends AppCompatActivity {
         MenuItem itm6 = menuitem.findItem(R.id.item6);
         MenuItem itm7 = menuitem.findItem(R.id.item7);
         MenuItem itm8 = menuitem.findItem(R.id.item8);
+        MenuItem itm88 = menuitem.findItem(R.id.item88);
         MenuItem itm9 = menuitem.findItem(R.id.item9);
         MenuItem itm10 = menuitem.findItem(R.id.item10);
 
@@ -132,6 +133,7 @@ public class Addprof extends AppCompatActivity {
         itm6.setVisible(false);
         itm7.setVisible(false);
         itm8.setVisible(false);
+        itm88.setVisible(false);
         itm9.setVisible(false);
 
 

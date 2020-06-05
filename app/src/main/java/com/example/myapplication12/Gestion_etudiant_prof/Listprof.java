@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.example.myapplication12.Evenement.Addevent;
 import com.example.myapplication12.Evenement.Listevent;
 import com.example.myapplication12.Menu.Login;
+import com.example.myapplication12.Menu.Menuetudiant;
 import com.example.myapplication12.Messagerie.Addmessage;
 import com.example.myapplication12.Messagerie.Listmessage;
 import com.example.myapplication12.Model.Personne;
@@ -147,6 +148,7 @@ public class Listprof extends AppCompatActivity implements MyAdapter.OnNoteListe
         MenuItem itm6 = menuitem.findItem(R.id.item6);
         MenuItem itm7 = menuitem.findItem(R.id.item7);
         MenuItem itm8 = menuitem.findItem(R.id.item8);
+        MenuItem itm88 = menuitem.findItem(R.id.item88);
         MenuItem itm9 = menuitem.findItem(R.id.item9);
         MenuItem itm10 = menuitem.findItem(R.id.item10);
 
@@ -158,10 +160,11 @@ public class Listprof extends AppCompatActivity implements MyAdapter.OnNoteListe
         itm5.setVisible(false);
         itm6.setVisible(false);
         itm7.setVisible(false);
-        //itm8.setVisible(false);
-        itm9.setVisible(false);
+        itm8.setVisible(false);
+        itm88.setVisible(true);
 
-        itm8.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+
+        itm88.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
 
         //menuitem.getItem(3).setEnabled(true);
@@ -199,12 +202,12 @@ public class Listprof extends AppCompatActivity implements MyAdapter.OnNoteListe
                 Intent in7 = new Intent(Listprof.this, Addetudiant.class);
                 startActivity(in7);
                 break;
-            case R.id.item8:
+            case R.id.item88:
                 Intent in8 = new Intent(Listprof.this, Addprof.class);
                 startActivity(in8);
                 break;
             case R.id.item9:
-                Intent in9 = new Intent(Listprof.this, Emploit.class);
+                Intent in9 = new Intent(Listprof.this, Menuetudiant.class);
                 startActivity(in9);
                 break;
             case R.id.item10:
