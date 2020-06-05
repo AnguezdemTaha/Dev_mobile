@@ -37,7 +37,7 @@ public class Editcours extends AppCompatActivity {
     private TextView t1, t2, t3, t4;
     private TextView nom2, date2, description2;
     private TextView nom1;
-    private ImageView save;
+    private ImageView save,image;
     private ImageView scolarete1, messages1, evenement1;
 
     @Override
@@ -52,9 +52,9 @@ public class Editcours extends AppCompatActivity {
 
 
 
-        scolarete1 = (ImageView) findViewById(R.id.Scolarite1);
-        messages1 = (ImageView) findViewById(R.id.messages1);
-        evenement1 = (ImageView) findViewById(R.id.evenement1);
+        scolarete1 = (ImageView) findViewById(R.id.Scolarite16);
+        messages1 = (ImageView) findViewById(R.id.messages16);
+        evenement1 = (ImageView) findViewById(R.id.evenement16);
         scolarete1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,9 +78,10 @@ public class Editcours extends AppCompatActivity {
         });
 
         //nom1 = (TextView) findViewById(R.id.cours_nom1);
-        nom2 = (TextView) findViewById(R.id.cours_nom2);
+        nom2 = (TextView) findViewById(R.id.cours_nom3);
+        image =(ImageView) findViewById(R.id.cours_contenu_image);
         //date2=(EditText) findViewById(R.id.gmail_prof2);
-        description2 = (TextView) findViewById(R.id.cours_description2);
+        //description2 = (TextView) findViewById(R.id.cours_description2);
         //save=(ImageView) findViewById(R.id.save_even);
 
 
@@ -107,7 +108,7 @@ public class Editcours extends AppCompatActivity {
                         //nom1.setText(nomcours);
                         actionBar.setTitle(nomcours);
                         nom2.setText(nomcours);
-                        description2.setText(description);
+
 
 
                     }

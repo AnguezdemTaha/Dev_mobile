@@ -76,6 +76,7 @@ public class MyAdapterEven extends RecyclerView.Adapter<MyAdapterEven.MyViewHold
     public void onBindViewHolder(final MyAdapterEven.MyViewHolder holder, final int position) {
         holder.nom_e.setText(evns.get(position).getNom_event());
         holder.description.setText(evns.get(position).getDescription_event());
+
         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
         StorageReference pathReference = storageReference.child("/events/" + holder.nom_e.getText().toString());
         File localFile = null;
@@ -98,6 +99,7 @@ public class MyAdapterEven extends RecyclerView.Adapter<MyAdapterEven.MyViewHold
                 // Handle any errors
             }
         });
+
         //holder.
         //...
         // StorageReference storageReference = FirebaseStorage.getInstance().getReference(ps.get(position).getIma);

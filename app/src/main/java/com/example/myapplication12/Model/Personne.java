@@ -14,6 +14,8 @@ public class Personne implements Serializable {
     private String num_telephone;
     private String type;
 
+    private String module;
+
     //attribus
 
     //private ArrayList<Message> Msg_envoyes=new ArrayList<Message>();
