@@ -22,6 +22,7 @@ import com.example.myapplication12.Gestion_etudiant_prof.Addprof;
 import com.example.myapplication12.Gestion_etudiant_prof.Listetudiant;
 import com.example.myapplication12.Gestion_etudiant_prof.Listprof;
 import com.example.myapplication12.Menu.Login;
+import com.example.myapplication12.Menu.Menuetudiant;
 import com.example.myapplication12.Messagerie.Addmessage;
 import com.example.myapplication12.Messagerie.Listmessage;
 import com.example.myapplication12.Model.Evenement;
@@ -188,11 +189,11 @@ public class Editcours extends AppCompatActivity {
                 startActivity(in7);
                 break;
             case R.id.item8:
-                Intent in8 = new Intent(Editcours.this, Addprof.class);
+                Intent in8 = new Intent(Editcours.this, Emploit.class);
                 startActivity(in8);
                 break;
             case R.id.item9:
-                Intent in9 = new Intent(Editcours.this, Emploit.class);
+                Intent in9 = new Intent(Editcours.this, Menuetudiant.class);
                 startActivity(in9);
                 break;
             case R.id.item10:

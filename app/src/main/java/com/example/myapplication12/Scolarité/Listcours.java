@@ -26,6 +26,7 @@ import com.example.myapplication12.Gestion_etudiant_prof.Addprof;
 import com.example.myapplication12.Gestion_etudiant_prof.Listetudiant;
 import com.example.myapplication12.Gestion_etudiant_prof.Listprof;
 import com.example.myapplication12.Menu.Login;
+import com.example.myapplication12.Menu.Menuetudiant;
 import com.example.myapplication12.Messagerie.Addmessage;
 import com.example.myapplication12.Messagerie.Listmessage;
 import com.example.myapplication12.Model.Cours;
@@ -178,7 +179,7 @@ public class Listcours extends AppCompatActivity {
         itm5.setVisible(false);
         itm6.setVisible(false);
         itm7.setVisible(false);
-        itm8.setVisible(false);
+       // itm8.setVisible(false);
         //itm9.setVisible(false);
 
         itm4.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
@@ -220,13 +221,14 @@ public class Listcours extends AppCompatActivity {
                 startActivity(in7);
                 break;
             case R.id.item8:
-                Intent in8 = new Intent(Listcours.this, Addprof.class);
+                Intent in8 = new Intent(Listcours.this, Emploit.class);
                 startActivity(in8);
                 break;
             case R.id.item9:
-                Intent in9 = new Intent(Listcours.this, Emploit.class);
+                Intent in9 = new Intent(Listcours.this, Menuetudiant.class);
                 startActivity(in9);
                 break;
+
             case R.id.item10:
                 Intent in10 = new Intent(Listcours.this, Login.class);
                 startActivity(in10);

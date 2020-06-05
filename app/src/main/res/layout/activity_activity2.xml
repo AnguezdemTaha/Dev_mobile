@@ -36,11 +36,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="16dp">
+
                 <ImageView
+                    android:id="@+id/mes"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/messages"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:src="@drawable/messages" />
                 <Button
                     android:id="@+id/Messages"
                     android:layout_width="match_parent"
@@ -65,11 +67,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="16dp">
+
                 <ImageView
+                    android:id="@+id/eve"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/evens"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:src="@drawable/evens" />
                 <Button
                     android:id="@+id/Evenements"
                     android:layout_width="match_parent"
@@ -94,11 +98,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="16dp">
+
                 <ImageView
+                    android:id="@+id/sco"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/scolarite"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:src="@drawable/scolarite" />
                 <Button
                     android:id="@+id/Scolarite"
                     android:layout_width="match_parent"
@@ -133,11 +139,13 @@
                 android:orientation="horizontal"
                 android:padding="16dp"
                 android:id="@+id/gestionetudl">
+
                 <ImageView
+                    android:id="@+id/etu"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/etudiant"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:src="@drawable/etudiant" />
                 <Button
                     android:id="@+id/gestionetud"
                     android:layout_width="match_parent"
@@ -163,11 +171,13 @@
                 android:orientation="horizontal"
                 android:padding="16dp"
                 android:id="@+id/gestionprofl">
+
                 <ImageView
+                    android:id="@+id/pro"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/prof"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:src="@drawable/prof" />
                 <Button
                     android:id="@+id/gestionprof"
                     android:layout_width="match_parent"

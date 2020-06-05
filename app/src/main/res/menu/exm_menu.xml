@@ -34,19 +34,26 @@
         android:title="Ajouter un étudiant"
         android:icon="@drawable/add"
         />
-    <item android:id="@+id/item8"
-        android:title="Ajouter un profeseur"
-        android:icon="@drawable/add"
 
-
-        />
 
     <item android:id="@+id/item9"
-        android:title="Les emplois du temps"
+        android:title="Menu principal"
 
         />
+
+    <item android:id="@+id/item8"
+    android:title="Emploi du temps"
+
+        />
+
+    <item
+        android:id="@+id/item88"
+        android:icon="@drawable/add"
+        android:title="Ajouter un professeur"
+
+        android:visible="false" />
     <item android:id="@+id/item10"
-        android:title="Deconnexion"
+        android:title="Se déconnecter"
 
         />
 </menu>
