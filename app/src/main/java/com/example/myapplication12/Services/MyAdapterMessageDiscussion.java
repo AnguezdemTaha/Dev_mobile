@@ -19,6 +19,9 @@ import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.R;
 import com.google.gson.Gson;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 
 public class MyAdapterMessageDiscussion extends  RecyclerView.Adapter<MyAdapterMessageDiscussion.MyViewHolder>{
@@ -60,6 +63,13 @@ public class MyAdapterMessageDiscussion extends  RecyclerView.Adapter<MyAdapterM
         //msgfinal="test \"\n\" anothertest";
 
         holder.contenu.setText(msgs.get(position).getContenu_msg());
+
+        Date d = msgs.get(position).getDate_msg();
+        //Date date = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String strDate = dateFormat.format(d);
+
+        holder.date_e.setText(strDate);
         SharedPreferences pref1 = context.getApplicationContext().getSharedPreferences("personne_connecte", 0);
         Gson gson1 = new Gson();
         String json1 = pref1.getString("personne_c", "");
@@ -86,7 +96,7 @@ public class MyAdapterMessageDiscussion extends  RecyclerView.Adapter<MyAdapterM
     }
 
     public  static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        public  TextView nom_e,contenu;
+        public  TextView nom_e,contenu,date_e;
         public ImageView image_msg2;
 
 
@@ -100,6 +110,7 @@ public class MyAdapterMessageDiscussion extends  RecyclerView.Adapter<MyAdapterM
             super(itemLayoutView);
             this.context=context;
             nom_e=itemLayoutView.findViewById(R.id.Nomuser);
+            date_e=itemLayoutView.findViewById(R.id.Msgdate);
             contenu=itemLayoutView.findViewById(R.id.Msguser);
             image_msg2=itemLayoutView.findViewById(R.id.imagemsg2);
 

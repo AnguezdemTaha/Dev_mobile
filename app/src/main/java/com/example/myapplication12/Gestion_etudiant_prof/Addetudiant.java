@@ -12,14 +12,18 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication12.Evenement.Addevent;
 import com.example.myapplication12.Evenement.Listevent;
 import com.example.myapplication12.Menu.Login;
+import com.example.myapplication12.Menu.Menuetudiant;
 import com.example.myapplication12.Messagerie.Addmessage;
 import com.example.myapplication12.Messagerie.Listmessage;
 import com.example.myapplication12.Model.Personne;
@@ -30,16 +34,20 @@ import com.example.myapplication12.Scolarité.Emploit;
 import com.example.myapplication12.Scolarité.Listcours;
 import com.example.myapplication12.Services.Methodes_personne;
 
+import java.util.ArrayList;
+
 public class Addetudiant extends AppCompatActivity {
 
     Menu menuitem;
-    private TextView text,text2,text3,title_pe;
+    private TextView text, text2, text3, title_pe;
     private ImageView scolarete1, messages1, evenement1;
-    private EditText nom1,email1,tele1,pass1;
+    private EditText nom1, email1, tele1, pass1;
+    private Spinner spinner1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ajouter_prof);
+        setContentView(R.layout.activity_ajouteretudiant);
         ActionBar actionBar;
         actionBar = getSupportActionBar();
         ColorDrawable colorDrawable
@@ -48,9 +56,29 @@ public class Addetudiant extends AppCompatActivity {
         actionBar.setTitle("Ajouter un etudiant");
 
 
-        scolarete1 = (ImageView) findViewById(R.id.Scolarite7);
-        messages1 = (ImageView) findViewById(R.id.messages7);
-        evenement1 = (ImageView) findViewById(R.id.evenement7);
+        scolarete1 = (ImageView) findViewById(R.id.Scolarite9);
+        messages1 = (ImageView) findViewById(R.id.messages9);
+        evenement1 = (ImageView) findViewById(R.id.evenement9);
+
+
+        spinner1 = (Spinner) findViewById(R.id.spinner1);
+
+
+
+
+        ArrayList<String> list2 = new ArrayList<>();
+        list2.add("1er année");
+        list2.add("2eme année");
+        list2.add("3eme année");
+
+        System.out.println("size of list2 verif "+list2);
+
+
+        ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list2);
+        arrayAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner1.setAdapter(arrayAdapter1);
+
+
         scolarete1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,43 +103,55 @@ public class Addetudiant extends AppCompatActivity {
 
         //text=(TextView) findViewById(R.id.Login1);
         //text2=(TextView) findViewById(R.id.signup);
-        text3=(TextView) findViewById(R.id.ajouterprof);
+        text3 = (TextView) findViewById(R.id.ajouteretudiant);
 
-        nom1=(EditText) findViewById(R.id.nom_proff);
-        email1=(EditText) findViewById(R.id.email_prof);
-        tele1=(EditText) findViewById(R.id.tele_prof);
-        pass1=(EditText) findViewById(R.id.mot_de_passe11);
+        nom1 = (EditText) findViewById(R.id.nom_etud);
+        email1 = (EditText) findViewById(R.id.email_etud);
+        tele1 = (EditText) findViewById(R.id.phone_etud);
+        pass1 = (EditText) findViewById(R.id.password_etud);
         //title_pe=(TextView) findViewById(R.id.title_pe);
 
         //title_pe.setText("Add Etudiant");
-
-        text3.setOnClickListener(new View.OnClickListener() {
+        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                final String annee = parent.getItemAtPosition(position).toString();
+                text3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
 
-                String nom = String.valueOf(nom1.getText());
-                String email = String.valueOf(email1.getText());
-                String tele = String.valueOf(tele1.getText());
-                String pass= String.valueOf(pass1.getText());
+                        String nom = String.valueOf(nom1.getText());
+                        String email = String.valueOf(email1.getText());
+                        String tele = String.valueOf(tele1.getText());
+                        String pass = String.valueOf(pass1.getText());
 
-                String type="Etudiant";
+                        String type = "Etudiant";
 
-                Personne p=new Personne(nom,pass,email,tele,type);
-                Methodes_personne.createUser(p);
-                Toast.makeText(getApplicationContext(), "Vous avez ajouter un etudaint avec succe", Toast.LENGTH_LONG).show();
+                        Personne p = new Personne(nom, pass, email, tele, type);
+                        p.setAnnee(annee);
+                        Methodes_personne.createUser(p);
+                        Toast.makeText(getApplicationContext(), "Vous avez ajouter un etudaint avec succe", Toast.LENGTH_LONG).show();
 
-                Intent in=new Intent(Addetudiant.this, Listetudiant.class);
-                startActivity(in);
+                        Intent in = new Intent(Addetudiant.this, Listetudiant.class);
+                        startActivity(in);
+                    }
+                });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.exm_menu,menu);
+        inflater.inflate(R.menu.exm_menu, menu);
 
-        menuitem=menu;
+        menuitem = menu;
         MenuItem itm1 = menuitem.findItem(R.id.item1);
         MenuItem itm2 = menuitem.findItem(R.id.item2);
         MenuItem itm3 = menuitem.findItem(R.id.item3);
@@ -123,6 +163,9 @@ public class Addetudiant extends AppCompatActivity {
         MenuItem itm9 = menuitem.findItem(R.id.item9);
         MenuItem itm10 = menuitem.findItem(R.id.item10);
 
+        MenuItem itm88 = menuitem.findItem(R.id.item88);
+        MenuItem itm99 = menuitem.findItem(R.id.item99);
+        MenuItem itm98 = menuitem.findItem(R.id.item99);
 
         itm1.setVisible(false);
         itm2.setVisible(false);
@@ -140,7 +183,7 @@ public class Addetudiant extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.item1:
                 Intent in = new Intent(Addetudiant.this, Listetudiant.class);
                 startActivity(in);
@@ -180,6 +223,10 @@ public class Addetudiant extends AppCompatActivity {
             case R.id.item10:
                 Intent in10 = new Intent(Addetudiant.this, Login.class);
                 startActivity(in10);
+                break;
+            case R.id.item88:
+                Intent in11 = new Intent(Addetudiant.this, Menuetudiant.class);
+                startActivity(in11);
                 break;
         }
         return super.onOptionsItemSelected(item);

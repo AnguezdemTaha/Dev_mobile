@@ -327,6 +327,9 @@ public class Listmessage extends AppCompatActivity {
         MenuItem itm9 = menuitem.findItem(R.id.item9);
         MenuItem itm10 = menuitem.findItem(R.id.item10);
 
+        MenuItem itm88 = menuitem.findItem(R.id.item88);
+        MenuItem itm99 = menuitem.findItem(R.id.item99);
+        MenuItem itm98 = menuitem.findItem(R.id.item99);
 
         itm1.setVisible(false);
         itm2.setVisible(false);
@@ -336,7 +339,7 @@ public class Listmessage extends AppCompatActivity {
         //itm6.setVisible(false);
         itm7.setVisible(false);
         itm8.setVisible(false);
-        itm8.setVisible(false);
+        itm9.setVisible(false);
 
 
         itm6.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
@@ -381,12 +384,16 @@ public class Listmessage extends AppCompatActivity {
                 startActivity(in8);
                 break;
             case R.id.item9:
-                Intent in9 = new Intent(Listmessage.this, Menuetudiant.class);
+                Intent in9 = new Intent(Listmessage.this, Emploit.class);
                 startActivity(in9);
                 break;
             case R.id.item10:
                 Intent in10 = new Intent(Listmessage.this, Login.class);
                 startActivity(in10);
+                break;
+            case R.id.item88:
+                Intent in11 = new Intent(Listmessage.this, Menuetudiant.class);
+                startActivity(in11);
                 break;
         }
         return super.onOptionsItemSelected(item);

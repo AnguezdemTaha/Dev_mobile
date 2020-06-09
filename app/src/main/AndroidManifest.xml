@@ -14,7 +14,9 @@
         android:roundIcon="@drawable/ensias"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Messagerie.Listmessage"></activity>
+        <activity android:name=".Scolarité.Addmodule" />
+        <activity android:name=".Scolarité.Listmodules" />
+        <activity android:name=".Messagerie.Listmessage" />
         <activity android:name=".Messagerie.Listmessageprof" />
         <activity android:name=".Evenement.Consultevnt" />
         <activity android:name=".Scolarité.AddEmploit" />

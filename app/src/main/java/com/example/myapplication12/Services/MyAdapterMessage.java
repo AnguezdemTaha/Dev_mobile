@@ -73,7 +73,8 @@ public class MyAdapterMessage extends RecyclerView.Adapter<MyAdapterMessage.MyVi
         String ms = msgs.get(position).getContenu_msg();
         /*Calendar calendar = Calendar.getInstance();
         calendar.setTime(d);*/
-        holder.contenu.setText(ms.substring(0, Math.min(ms.length(), 20)) + ":" + strDate);
+        holder.contenu.setText(ms.substring(0, Math.min(ms.length(), 50)) + ":" );
+        holder.date_e.setText(strDate);
 
         //ahmed c'est le partenaire du session
 
@@ -93,7 +94,7 @@ public class MyAdapterMessage extends RecyclerView.Adapter<MyAdapterMessage.MyVi
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView nom_e, contenu, nom_e2;
+        public TextView nom_e, contenu,date_e, nom_e2;
 
 
         public Context context;
@@ -104,7 +105,7 @@ public class MyAdapterMessage extends RecyclerView.Adapter<MyAdapterMessage.MyVi
             super(itemLayoutView);
             this.context = context;
             nom_e = itemLayoutView.findViewById(R.id.Nomuser);
-            //nom_e2 = itemLayoutView.findViewById(R.id.Nomuser2);
+            date_e = itemLayoutView.findViewById(R.id.Msgdate);
             contenu = itemLayoutView.findViewById(R.id.Msguser);
 
             this.onNoteListener = onNoteListener;

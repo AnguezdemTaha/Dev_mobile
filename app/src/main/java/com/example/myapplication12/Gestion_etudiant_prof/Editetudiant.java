@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.myapplication12.Evenement.Addevent;
 import com.example.myapplication12.Evenement.Listevent;
 import com.example.myapplication12.Menu.Login;
+import com.example.myapplication12.Menu.Menuetudiant;
 import com.example.myapplication12.Messagerie.Addmessage;
 import com.example.myapplication12.Messagerie.Listmessage;
 import com.example.myapplication12.Model.Personne;
@@ -172,6 +173,9 @@ public class Editetudiant extends AppCompatActivity {
         MenuItem itm9 = menuitem.findItem(R.id.item9);
         MenuItem itm10 = menuitem.findItem(R.id.item10);
 
+        MenuItem itm88 = menuitem.findItem(R.id.item88);
+        MenuItem itm99 = menuitem.findItem(R.id.item99);
+        MenuItem itm98 = menuitem.findItem(R.id.item99);
 
         itm1.setVisible(false);
         itm2.setVisible(false);
@@ -230,6 +234,10 @@ public class Editetudiant extends AppCompatActivity {
             case R.id.item10:
                 Intent in10 = new Intent(Editetudiant.this, Login.class);
                 startActivity(in10);
+                break;
+            case R.id.item88:
+                Intent in11 = new Intent(Editetudiant.this, Menuetudiant.class);
+                startActivity(in11);
                 break;
         }
         return super.onOptionsItemSelected(item);

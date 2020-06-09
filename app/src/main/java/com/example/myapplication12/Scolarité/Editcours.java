@@ -14,22 +14,28 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myapplication12.Evenement.Addevent;
 import com.example.myapplication12.Evenement.Listevent;
 import com.example.myapplication12.Gestion_etudiant_prof.Addetudiant;
 import com.example.myapplication12.Gestion_etudiant_prof.Addprof;
+import com.example.myapplication12.Gestion_etudiant_prof.Editetudiant;
 import com.example.myapplication12.Gestion_etudiant_prof.Listetudiant;
 import com.example.myapplication12.Gestion_etudiant_prof.Listprof;
 import com.example.myapplication12.Menu.Login;
 import com.example.myapplication12.Menu.Menuetudiant;
 import com.example.myapplication12.Messagerie.Addmessage;
 import com.example.myapplication12.Messagerie.Listmessage;
+import com.example.myapplication12.Model.Cours;
 import com.example.myapplication12.Model.Evenement;
+import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.R;
-import com.example.myapplication12.Services.Methodes_cours;
+import com.example.myapplication12.Scolarité.Methodes_cours;
+import com.example.myapplication12.Services.Methodes_personne;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -53,9 +59,9 @@ public class Editcours extends AppCompatActivity {
 
 
 
-        scolarete1 = (ImageView) findViewById(R.id.Scolarite1);
-        messages1 = (ImageView) findViewById(R.id.messages1);
-        evenement1 = (ImageView) findViewById(R.id.evenement1);
+        scolarete1 = (ImageView) findViewById(R.id.Scolarite16);
+        messages1 = (ImageView) findViewById(R.id.messages16);
+        evenement1 = (ImageView) findViewById(R.id.evenement16);
         scolarete1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,12 +87,12 @@ public class Editcours extends AppCompatActivity {
         //nom1 = (TextView) findViewById(R.id.cours_nom1);
         nom2 = (TextView) findViewById(R.id.cours_nom2);
         //date2=(EditText) findViewById(R.id.gmail_prof2);
-        description2 = (TextView) findViewById(R.id.cours_description2);
-        //save=(ImageView) findViewById(R.id.save_even);
+        //description2 = (TextView) findViewById(R.id.cours_description2);
+        save=(ImageView) findViewById(R.id.save_cours);
 
 
         Bundle extras = getIntent().getExtras();
-        String nom = extras.getString("nom_cours");
+        final String nom = extras.getString("nom_cours");
         //String nom="test22";
         Methodes_cours.Getcoursbynom(nom).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 
@@ -99,16 +105,16 @@ public class Editcours extends AppCompatActivity {
                     String description = null;
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         System.out.println("bonjour succe");
-                        Evenement e = document.toObject(Evenement.class);
+                        Cours e = document.toObject(Cours.class);
                         //Type = p.getType();
-                        nomcours = e.getNom_event();
+                        nomcours = e.getNom_cours();
                         //dateevn=e.getDate_event();
-                        description = e.getDescription_event();
+                        //description = e.get();
 
                         //nom1.setText(nomcours);
                         actionBar.setTitle(nomcours);
                         nom2.setText(nomcours);
-                        description2.setText(description);
+                        //description2.setText(description);
 
 
                     }
@@ -118,6 +124,41 @@ public class Editcours extends AppCompatActivity {
 
         });
 
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final String nom11 = actionBar.getTitle().toString();
+                final String nom22 = nom2.getText().toString();
+                /*String email22 = email2.getText().toString();
+                String tele22 = tele2.getText().toString();
+                String mot_de_passe22 = mot_de_passe2.getText().toString();*/
+
+
+                //Methodes_personne.updateUser(nom11,p);
+                Methodes_cours.Getcoursbynom(nom11).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        //Personne p = new Personne();
+                        if (task.isSuccessful()) {
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String idd = document.getId();
+                                FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+                                db.collection("Cours").document(idd).update("nom_cours",nom22);
+                                Intent in = new Intent(Editcours.this, Listcours.class);
+                                startActivity(in);
+                                Toast.makeText(getApplicationContext(), "Votre modification a été enregistré avec succe :", Toast.LENGTH_SHORT).show();
+                                //p = document.toObject(Personne.class);
+                                //ps.add(p);
+                                //System.out.println("le nom ="+p.getNom());
+                            }
+                        }
+                    }
+                });
+            }
+        });
 
     }
 
@@ -138,6 +179,9 @@ public class Editcours extends AppCompatActivity {
         MenuItem itm9 = menuitem.findItem(R.id.item9);
         MenuItem itm10 = menuitem.findItem(R.id.item10);
 
+        MenuItem itm88 = menuitem.findItem(R.id.item88);
+        MenuItem itm99 = menuitem.findItem(R.id.item99);
+        MenuItem itm98 = menuitem.findItem(R.id.item99);
 
         itm1.setVisible(false);
         itm2.setVisible(false);
@@ -192,12 +236,16 @@ public class Editcours extends AppCompatActivity {
                 startActivity(in8);
                 break;
             case R.id.item9:
-                Intent in9 = new Intent(Editcours.this, Menuetudiant.class);
+                Intent in9 = new Intent(Editcours.this, Emploit.class);
                 startActivity(in9);
                 break;
             case R.id.item10:
                 Intent in10 = new Intent(Editcours.this, Login.class);
                 startActivity(in10);
+                break;
+            case R.id.item88:
+                Intent in11 = new Intent(Editcours.this, Menuetudiant.class);
+                startActivity(in11);
                 break;
         }
         return super.onOptionsItemSelected(item);

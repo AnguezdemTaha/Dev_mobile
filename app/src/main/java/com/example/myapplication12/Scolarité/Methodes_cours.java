@@ -1,4 +1,4 @@
-package com.example.myapplication12.Services;
+package com.example.myapplication12.Scolarité;
 
 import com.example.myapplication12.Model.Cours;
 import com.example.myapplication12.Model.Evenement;
@@ -65,6 +65,13 @@ public class Methodes_cours {
 
 
         return getUsersCollection().whereEqualTo("nom_cours",nom).get();
+
+    }
+
+    public static Task<QuerySnapshot> GetModulebynom(String nom) {
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        return  db.collection("Module").whereEqualTo("nom",nom).get();
 
     }
 }

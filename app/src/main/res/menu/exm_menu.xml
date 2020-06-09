@@ -36,22 +36,36 @@
         />
 
 
-    <item android:id="@+id/item9"
+    <item android:id="@+id/item88"
         android:title="Menu principal"
+
 
         />
 
-    <item android:id="@+id/item8"
+    <item android:id="@+id/item9"
     android:title="Emploi du temps"
+
+        />
+    <item android:id="@+id/item98"
+        android:title="List des modules"
+        android:visible="false"
 
         />
 
     <item
-        android:id="@+id/item88"
+        android:id="@+id/item8"
         android:icon="@drawable/add"
         android:title="Ajouter un professeur"
 
+        />
+
+    <item
+        android:id="@+id/item99"
+        android:icon="@drawable/add"
+        android:title="Ajouter un Module"
+
         android:visible="false" />
+
     <item android:id="@+id/item10"
         android:title="Se déconnecter"
 
