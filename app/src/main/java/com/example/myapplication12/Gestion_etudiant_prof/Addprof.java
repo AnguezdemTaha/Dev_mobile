@@ -47,7 +47,7 @@ public class Addprof extends AppCompatActivity {
     private TextView text, text2, text3, title_pe;
     private ImageView scolarete1, messages1, evenement1;
     private EditText nom1, email1, tele1, pass1;
-    private Spinner spinner,spinner2;
+    private Spinner spinner, spinner2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +65,8 @@ public class Addprof extends AppCompatActivity {
         messages1 = (ImageView) findViewById(R.id.messages7);
         evenement1 = (ImageView) findViewById(R.id.evenement7);
 
-        spinner =(Spinner) findViewById(R.id.spinner);
-        spinner2 = (Spinner) findViewById(R.id.spinner2);
+        spinner = (Spinner) findViewById(R.id.spinner);
+        //spinner2 = (Spinner) findViewById(R.id.spinner2);
 
         scolarete1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,9 +105,14 @@ public class Addprof extends AppCompatActivity {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("listmodules", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = pref.getString("modules", null);
-        Type type = new TypeToken<ArrayList<String>>() {
+        Type type = new TypeToken<ArrayList<Module>>() {
         }.getType();
-        ArrayList<String> list1 = gson.fromJson(json, type);
+        final ArrayList<Module> list11 = gson.fromJson(json, type);
+        ArrayList<String> list1=new ArrayList<>();
+        list1.add("choisir votre module");
+        for(Module m : list11){
+            list1.add(m.getNom());
+        }
         System.out.println("test pour size initial :" + list1.size());
         //list1.add("notthis");
 
@@ -120,25 +125,27 @@ public class Addprof extends AppCompatActivity {
         list3.add("5");
 
 
-        System.out.println("size list1 ="+list1.size());
+        System.out.println("size list1 =" + list1.size());
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list1);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
 
-        ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list3);
-        arrayAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner2.setAdapter(arrayAdapter2);
+
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 final String module_nom = parent.getItemAtPosition(position).toString();
-                spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        final String semestre = parent.getItemAtPosition(position).toString();
+
                 final Module module = new Module();
                 module.setNom(module_nom);
+                String semestre=null;
+                for(Module m :list11){
+                    if(m.getNom().equals(module_nom)){
+                        semestre=m.getSemestre();
+                    }
+                }
+                final String finalSemestre = semestre;
                 text3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -153,17 +160,12 @@ public class Addprof extends AppCompatActivity {
 
                         Personne p = new Personne(nom, pass, email, tele, type);
                         p.setModule(module);
+                        p.setSemestre(finalSemestre);
                         Methodes_personne.createUser(p);
                         Toast.makeText(getApplicationContext(), "Vous avez ajouter un prof avec succe", Toast.LENGTH_LONG).show();
 
                         Intent in = new Intent(Addprof.this, Listprof.class);
                         startActivity(in);
-                    }
-                });}
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
                     }
                 });
             }
@@ -173,6 +175,9 @@ public class Addprof extends AppCompatActivity {
 
             }
         });
+
+
+
 
 
     }
