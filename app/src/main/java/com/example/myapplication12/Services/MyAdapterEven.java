@@ -38,6 +38,7 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -104,12 +105,34 @@ public class MyAdapterEven extends RecyclerView.Adapter<MyAdapterEven.MyViewHold
         SharedPreferences pref = context.getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = pref.getString("personne_c", "");
-        Personne p = gson.fromJson(json, Personne.class);
+        final Personne p = gson.fromJson(json, Personne.class);
 
         if(p.getType().equals("Etudiant") || p.getType().equals("Prof")){
             holder.edit.setVisibility(View.INVISIBLE);
             holder.delete.setVisibility(View.INVISIBLE);
         }
+
+        Methodes_event.Geteventbynom(evns.get(position).getNom_event()).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+
+                        final Evenement e = document.toObject(Evenement.class);
+                        for(Personne p1:e.getPer_participes()){
+                            if(p1.getNom().equals(p.getNom())){
+                                holder.interiseevn.setChecked(true);
+                                holder.interiseevn.setEnabled(false);
+
+                            }
+                            else{
+
+                                holder.interiseevn.setEnabled(false);
+                            holder.interiseevn.setVisibility(View.INVISIBLE);
+                        } }
+                    }}}});
 
 
         //need to delet evens taht havent participant
@@ -119,9 +142,6 @@ public class MyAdapterEven extends RecyclerView.Adapter<MyAdapterEven.MyViewHold
 
             }
         }*/
-
-
-
 
 
     }
@@ -151,7 +171,7 @@ public class MyAdapterEven extends RecyclerView.Adapter<MyAdapterEven.MyViewHold
             i1 = itemLayoutView.findViewById(R.id.imageevent1);
             delete = itemLayoutView.findViewById(R.id.delet_even);
             edit = itemLayoutView.findViewById(R.id.edit_even);
-            interiseevn =itemLayoutView.findViewById(R.id.interiseevn);
+            interiseevn = itemLayoutView.findViewById(R.id.interiseevn);
             this.onNoteListener = onNoteListener;
             itemView.setOnClickListener(this);
 
@@ -184,10 +204,19 @@ public class MyAdapterEven extends RecyclerView.Adapter<MyAdapterEven.MyViewHold
 
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     String idd = document.getId();
+                                    Evenement e = document.toObject(Evenement.class);
                                     Methodes_event.getUsersCollection().document(idd).delete();
+
+                                    StorageReference storageReference;
+                                    storageReference =  FirebaseStorage.getInstance().getReference();
+                                    //StorageReference storageRef = storage.getReference();
+                                    StorageReference ref = storageReference.child("events/"+e.getImage_event());
+                                    //StorageReference desertRef = ref.child("images/desert.jpg");
+                                    ref.delete();
 
                                     Intent in = new Intent(v.getContext(), Listevent.class);
                                     v.getContext().startActivity(in);
+
 
                                     Toast.makeText(v.getContext().getApplicationContext(), "Votre modification a été enregistré avec succe :", Toast.LENGTH_SHORT).show();
                                     //p = document.toObject(Personne.class);

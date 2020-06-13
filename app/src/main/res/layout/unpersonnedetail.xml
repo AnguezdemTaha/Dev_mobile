@@ -24,30 +24,32 @@
 
         <TextView
             android:id="@+id/infopersonne"
-            android:layout_width="100dp"
+            android:layout_width="141dp"
             android:layout_height="40dp"
             android:layout_marginLeft="15dp"
             android:background="#00000000"
-            android:hint="infopersonne:"
+            android:hint=""
             android:inputType="text"
             android:letterSpacing="0.1"
             android:textColor="#000000"
             android:textColorHint="#000000"
             android:textSize="16dp" />
+
         <ImageView
             android:id="@+id/evenvoir"
-            android:layout_width="40dp"
+            android:layout_width="30dp"
             android:layout_height="40dp"
-            android:src="@drawable/cherch"
+            android:layout_gravity="center"
             android:layout_marginLeft="15dp"
-            android:layout_gravity="center"/>
+            android:src="@drawable/cherch" />
+
         <ImageView
             android:id="@+id/evenmodifier"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/supprimer"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
             android:layout_marginLeft="15dp"
-            android:layout_gravity="center"/>
+            android:src="@drawable/supprimer" />
 
 
 

@@ -16,73 +16,67 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication12.Model.Cours;
-import com.example.myapplication12.Model.Emploi;
+import com.example.myapplication12.Model.Module;
 import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.R;
 import com.example.myapplication12.Scolarité.Editcours;
 import com.example.myapplication12.Scolarité.Listcours;
+import com.example.myapplication12.Scolarité.Listmodules;
+import com.example.myapplication12.Scolarité.Methodes_cours;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.gson.Gson;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.LinkedList;
 
 import static android.content.Context.MODE_PRIVATE;
 import static android.os.Environment.DIRECTORY_PICTURES;
 
-public class MyAdapterEml extends RecyclerView.Adapter<MyAdapterEml.MyViewHolder> {
-    private LinkedList<Emploi> cours;
+public class MyAddapterModule extends RecyclerView.Adapter<MyAddapterModule.MyViewHolder>{
+    private LinkedList<Module> modules;
     private Context context;
     private TextView nom;
     StorageReference storageReference;
     //private ArrayList<ContactsContract.CommonDataKinds.Note> mNotes =new ArrayList<>();
     //private MyAdapterEven.OnNoteListener mOnNoteListener ;
 
-    public MyAdapterEml(LinkedList<Emploi> cours , Context context ){
-        this.cours=new LinkedList<Emploi>();
+    public MyAddapterModule(LinkedList<Module> modules , Context context ){
+        this.modules=new LinkedList<Module>();
 
         //????
-        this.cours.addAll(cours);
+        this.modules.addAll(modules);
         this.context=context;
         //this.mOnNoteListener=onNoteListener;
     }
     @Override
-    public MyAdapterEml.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        View itemLayoutView= LayoutInflater.from(parent.getContext()).inflate(R.layout.unemploit , parent,false);
-        MyAdapterEml.MyViewHolder vh = new MyAdapterEml.MyViewHolder(itemLayoutView);
+    public MyAddapterModule.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+        View itemLayoutView= LayoutInflater.from(parent.getContext()).inflate(R.layout.unmodule , parent,false);
+        MyAddapterModule.MyViewHolder vh = new MyAddapterModule.MyViewHolder(itemLayoutView);
         return  vh;
     }
 
     @Override
-    public void onBindViewHolder(MyAdapterEml.MyViewHolder holder, int position){
-        Date d=cours.get(position).getDate_semaine();
+    public void onBindViewHolder(MyAddapterModule.MyViewHolder holder, int position){
+        holder.nom_e.setText(modules.get(position).getNom());
+        //holder.matiere.setText(modules.get(position).getPrf().getNom());
 
-
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String date = dateFormat.format(d);
-
-        holder.nom_e.setText(date);
-        holder.matiere.setText(cours.get(position).getAnnee());
-
-        SharedPreferences pref = context.getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
+        /*SharedPreferences pref = context.getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = pref.getString("personne_c", "");
-        Personne p = gson.fromJson(json, Personne.class);
+        Personne p = gson.fromJson(json, Personne.class);*/
 
-        if(p.getType().equals("Etudiant") || p.getType().equals("Delegue") || p.getType().equals("Prof")){
-            //holder.edit.setVisibility(View.INVISIBLE);
+        /*if(p.getType().equals("Etudiant") || p.getType().equals("Delegue") || (!cours.get(position).getPrf().getNom().equals(p.getNom()))){
+            holder.edit.setVisibility(View.INVISIBLE);
             holder.delete.setVisibility(View.INVISIBLE);
 
-        }
+        }*/
 
 
         //holder.
@@ -93,7 +87,7 @@ public class MyAdapterEml extends RecyclerView.Adapter<MyAdapterEml.MyViewHolder
 
     @Override
     public int getItemCount(){
-        return cours.size();
+        return modules.size();
     }
 
     public  static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -110,11 +104,11 @@ public class MyAdapterEml extends RecyclerView.Adapter<MyAdapterEml.MyViewHolder
         public MyViewHolder(View itemLayoutView){
             super(itemLayoutView);
             this.context=context;
-            nom_e=itemLayoutView.findViewById(R.id.cours_nom);
-            matiere=itemLayoutView.findViewById(R.id.cours_matiere);
-            delete=itemLayoutView.findViewById(R.id.delet_cours);
+            nom_e=itemLayoutView.findViewById(R.id.module_nom);
+            //matiere=itemLayoutView.findViewById(R.id.cours_matiere);
+            delete=itemLayoutView.findViewById(R.id.delet_module);
             //edit=itemLayoutView.findViewById(R.id.edit_cours);
-            telecharger=itemLayoutView.findViewById(R.id.download_cours);
+            //telecharger=itemLayoutView.findViewById(R.id.download_cours);
             this.onNoteListener = onNoteListener;
             itemView.setOnClickListener(this);
 
@@ -137,7 +131,7 @@ public class MyAdapterEml extends RecyclerView.Adapter<MyAdapterEml.MyViewHolder
                 @Override
                 public void onClick(final View v) {
                     String nom11=nom_e.getText().toString();
-                    Methodes_cours.deleteCours(nom11).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    Methodes_cours.deleteModule(nom11).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             //Personne p = new Personne();
@@ -145,24 +139,11 @@ public class MyAdapterEml extends RecyclerView.Adapter<MyAdapterEml.MyViewHolder
 
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     String idd= document.getId();
-                                    Methodes_cours.getUsersCollection().document(idd).delete();
+                                    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-                                    StorageReference storageReference;
-                                    storageReference =  FirebaseStorage.getInstance().getReference();
-                                    StorageReference pathReference = storageReference.child("cours/"+nom_e.getText().toString());
-                                    pathReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            // File deleted successfully
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception exception) {
-                                            // Uh-oh, an error occurred!
-                                        }
-                                    });
+                                    db.collection("Module").document(idd).delete();
 
-                                    Intent in=new Intent(v.getContext(), Listcours.class);
+                                    Intent in=new Intent(v.getContext(), Listmodules.class);
                                     v.getContext().startActivity(in);
 
 
@@ -175,7 +156,7 @@ public class MyAdapterEml extends RecyclerView.Adapter<MyAdapterEml.MyViewHolder
                         }
                     });
                 }});
-            telecharger.setOnClickListener(new View.OnClickListener() {
+            /*telecharger.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
 
@@ -194,19 +175,19 @@ public class MyAdapterEml extends RecyclerView.Adapter<MyAdapterEml.MyViewHolder
 
                         }
                     });
-                }});
+                }});*/
             /*int itemPosition = RecyclerView.getChildLayoutPosition(v);
             String item = (String) List.get(itemPosition);
             Toast.makeText(context, item, Toast.LENGTH_LONG).show();*/
 
         }
     }
-    public static void downloadfile(Context context,String filename, String fileextension, String destinationderectory, String url){
+    /*public static void downloadfile(Context context,String filename, String fileextension, String destinationderectory, String url){
         DownloadManager downloadManager =(DownloadManager) context.getSystemService(context.DOWNLOAD_SERVICE);
         Uri uri =Uri.parse(url);
         DownloadManager.Request request = new DownloadManager.Request(uri);
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_ONLY_COMPLETION);
         request.setDestinationInExternalFilesDir(context,destinationderectory,filename+fileextension);
         downloadManager.enqueue(request);
-    }
+    }*/
 }

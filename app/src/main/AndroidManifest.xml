@@ -8,14 +8,21 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/ensias"
+        android:label="IWIM HUB"
+        android:largeHeap="true"
+        android:roundIcon="@drawable/ensias"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:largeHeap="true">
-        <activity android:name=".Evenement.Consultevnt"></activity>
+        android:theme="@style/AppTheme">
+        <activity android:name=".Scolarité.Addmodule" />
+        <activity android:name=".Scolarité.Listmodules" />
+        <activity android:name=".Messagerie.Listmessage" />
+        <activity android:name=".Messagerie.Listmessageprof" />
+        <activity android:name=".Evenement.Consultevnt" />
         <activity android:name=".Scolarité.AddEmploit" />
+        <activity android:name=".Scolarité.AddEmploit1" />
+        <activity android:name=".Scolarité.AddEmploit2" />
+        <activity android:name=".Scolarité.AddEmploit3" />
         <activity android:name=".Gestion_etudiant_prof.Editetudiant" />
         <activity android:name=".Scolarité.Editcours" />
         <activity android:name=".Gestion_etudiant_prof.Addprof" />
@@ -23,6 +30,10 @@
         <activity android:name=".Gestion_etudiant_prof.Listetudiant" />
         <activity android:name=".Scolarité.Listcours" />
         <activity android:name=".Scolarité.Emploit" />
+        <activity android:name=".Scolarité.Emploit1" />
+        <activity android:name=".Scolarité.Emploit2" />
+        <activity android:name=".Scolarité.Emploit3" />
+        <activity android:name=".Scolarité.em" />
         <activity android:name=".Menu.Menuscolarite" />
         <activity android:name=".Gestion_etudiant_prof.Listprof" />
         <activity android:name=".Scolarité.Addcours" />
@@ -33,10 +44,9 @@
         <activity android:name=".Evenement.Editevent" />
         <activity android:name=".Evenement.Listevent" />
         <activity android:name=".Menu.Menuevent" />
-        <activity android:name=".Messagerie.Listmessage" />
         <activity android:name=".Menu.Menuprof" />
         <activity android:name=".Menu.signup" />
-        <activity android:name="MainActivity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".Menu.Menuetudiant" />
         <activity android:name=".Menu.Login">
             <intent-filter>

@@ -1,6 +1,7 @@
 package com.example.myapplication12.Messagerie;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,7 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,11 +22,23 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication12.Evenement.Addevent;
+import com.example.myapplication12.Evenement.Listevent;
+import com.example.myapplication12.Gestion_etudiant_prof.Addetudiant;
+import com.example.myapplication12.Gestion_etudiant_prof.Addprof;
+import com.example.myapplication12.Gestion_etudiant_prof.Listetudiant;
+import com.example.myapplication12.Gestion_etudiant_prof.Listprof;
 import com.example.myapplication12.MainActivity;
+import com.example.myapplication12.Menu.Login;
+import com.example.myapplication12.Menu.Menuetudiant;
 import com.example.myapplication12.Model.Message;
 import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.Model.Professeur;
 import com.example.myapplication12.R;
+import com.example.myapplication12.Scolarité.AddEmploit;
+import com.example.myapplication12.Scolarité.Addcours;
+import com.example.myapplication12.Scolarité.Emploit;
+import com.example.myapplication12.Scolarité.Listcours;
 import com.example.myapplication12.Services.Methodes_msg_evt_;
 import com.example.myapplication12.Services.Methodes_personne;
 import com.example.myapplication12.Services.MyAdapterMessage;
@@ -46,9 +64,11 @@ public class Discussion extends AppCompatActivity {
 
     static ArrayList<Message> messages1 = new ArrayList<>();
 
+    Menu menuitem;
     private LinearLayout l1, l2, t21;
+    private ImageView scolarete1, messages11, evenement1;
     private ImageView imageadd;
-    private TextView t1, nom_recu,mytext7, t211, t212;
+    private TextView t1, nom_recu, mytext7, t211, t212;
     private ListView t2, t3;
     public RecyclerView r;
     final ArrayList<Message> messages = new ArrayList<>();
@@ -59,7 +79,38 @@ public class Discussion extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
-        getSupportActionBar().hide();
+
+        ActionBar actionBar;
+        actionBar = getSupportActionBar();
+        ColorDrawable colorDrawable
+                = new ColorDrawable(Color.parseColor("#000000"));
+        actionBar.setBackgroundDrawable(colorDrawable);
+
+
+        /*scolarete1 = (ImageView) findViewById(R.id.Scolarite1);
+        messages11 = (ImageView) findViewById(R.id.messages1);
+        evenement1 = (ImageView) findViewById(R.id.evenement1);
+        scolarete1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(Discussion.this, Listcours.class);
+                startActivity(in);
+            }
+        });
+        messages11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(Discussion.this, Listmessage1.class);
+                startActivity(in);
+            }
+        });
+        evenement1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(Discussion.this, Listevent.class);
+                startActivity(in);
+            }
+        });*/
 
         imageadd = (ImageView) findViewById(R.id.envoyermsg);
         t1 = (TextView) findViewById(R.id.messageaenvoye);
@@ -74,16 +125,13 @@ public class Discussion extends AppCompatActivity {
         String json3 = pref3.getString("personne_c", null);
         Personne pc = gson3.fromJson(json3, Personne.class);
 
-        /*SharedPreferences pref4 = getApplicationContext().getSharedPreferences("personne_recu", MODE_PRIVATE);
-        Gson gson4 = new Gson();
-        String json4 = pref3.getString("personne_re", null);
-        Personne p4 = gson3.fromJson(json3, Personne.class);*/
 
         String nomuser = null;
 
 
         Bundle extras = getIntent().getExtras();
-        String nomuser1 = extras.getString("nom_per_envoye");
+        nomuser = extras.getString("nom_per_non_connecte");
+        /*String nomuser1 = extras.getString("nom_per_envoye");
         String nomuser2 = extras.getString("nom_per_recu");
 
         if (nomuser1.equals(pc.getNom())) {
@@ -91,15 +139,16 @@ public class Discussion extends AppCompatActivity {
         } else {
             nomuser = nomuser1;
             System.out.println("wtfffff :");
-        }
+        }*/
         /* else {
              nomuser =p4.getNom();
         }*/
 
         //}
         //System.out.println("..............this......." + nomuser);
-        nom_recu=(TextView) findViewById(R.id.nom_recu);
-        nom_recu.setText(nomuser);
+        //nom_recu=(TextView) findViewById(R.id.nom_recu);
+        //nom_recu.setText(nomuser);
+        actionBar.setTitle(nomuser);
 
 
         Methodes_personne.Getuserbynom(nomuser).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -201,13 +250,102 @@ public class Discussion extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Votre message a été ajouter avec succe", Toast.LENGTH_LONG).show();
                 Intent in = new Intent(Discussion.this, Discussion.class);
                 String m1 = p1.getNom();
-                String m2 =p2.getNom();
-                in.putExtra("nom_per_envoye", m1);
-                in.putExtra("nom_per_recu", m2);
+                String m2 = p2.getNom();
+                //in.putExtra("nom_per_envoye", m1);
+                in.putExtra("nom_per_non_connecte", m2);
                 startActivity(in);
             }
         });
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.exm_menu, menu);
+
+        menuitem=menu;
+        MenuItem itm1 = menuitem.findItem(R.id.item1);
+        MenuItem itm2 = menuitem.findItem(R.id.item2);
+        MenuItem itm3 = menuitem.findItem(R.id.item3);
+        MenuItem itm4 = menuitem.findItem(R.id.item4);
+        MenuItem itm5 = menuitem.findItem(R.id.item5);
+        MenuItem itm6 = menuitem.findItem(R.id.item6);
+        MenuItem itm7 = menuitem.findItem(R.id.item7);
+        MenuItem itm8 = menuitem.findItem(R.id.item8);
+        MenuItem itm9 = menuitem.findItem(R.id.item9);
+        MenuItem itm10 = menuitem.findItem(R.id.item10);
+
+        MenuItem itm88 = menuitem.findItem(R.id.item88);
+        MenuItem itm99 = menuitem.findItem(R.id.item99);
+        MenuItem itm98 = menuitem.findItem(R.id.item99);
+
+        itm1.setVisible(false);
+        itm2.setVisible(false);
+        itm3.setVisible(false);
+        itm4.setVisible(false);
+        itm5.setVisible(false);
+        itm6.setVisible(false);
+        itm7.setVisible(false);
+        itm8.setVisible(false);
+        itm9.setVisible(false);
+
+
+
+
+        //menuitem.getItem(3).setEnabled(true);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item1:
+                Intent in = new Intent(Discussion.this, Listetudiant.class);
+                startActivity(in);
+                break;
+            case R.id.item2:
+                Intent in2 = new Intent(Discussion.this, Listprof.class);
+                startActivity(in2);
+                break;
+            case R.id.item3:
+                Intent in3 = new Intent(Discussion.this, Addevent.class);
+                startActivity(in3);
+                break;
+            case R.id.item4:
+                Intent in4 = new Intent(Discussion.this, Addcours.class);
+                startActivity(in4);
+                break;
+            case R.id.item5:
+                Intent in5 = new Intent(Discussion.this, AddEmploit.class);
+                startActivity(in5);
+                break;
+            case R.id.item6:
+                Intent in6 = new Intent(Discussion.this, Addmessage.class);
+                startActivity(in6);
+                break;
+            case R.id.item7:
+                Intent in7 = new Intent(Discussion.this, Addetudiant.class);
+                startActivity(in7);
+                break;
+            case R.id.item8:
+                Intent in8 = new Intent(Discussion.this, Addprof.class);
+                startActivity(in8);
+                break;
+            case R.id.item9:
+                Intent in9 = new Intent(Discussion.this, Emploit.class);
+                startActivity(in9);
+                break;
+            case R.id.item10:
+                Intent in10 = new Intent(Discussion.this, Login.class);
+                startActivity(in10);
+                break;
+            case R.id.item88:
+                Intent in11 = new Intent(Discussion.this, Menuetudiant.class);
+                startActivity(in11);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
