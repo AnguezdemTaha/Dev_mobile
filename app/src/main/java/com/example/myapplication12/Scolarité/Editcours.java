@@ -149,7 +149,9 @@ public class Editcours extends AppCompatActivity {
                                 db.collection("Cours").document(idd).update("nom_cours",nom22);
                                 Intent in = new Intent(Editcours.this, Listcours.class);
                                 startActivity(in);
-                                Toast.makeText(getApplicationContext(), "Votre modification a été enregistré avec succe :", Toast.LENGTH_SHORT).show();
+
+                                Toast.makeText(getApplicationContext(), "Votre modification a été enregistré avec succès :", Toast.LENGTH_SHORT).show();
+
                                 //p = document.toObject(Personne.class);
                                 //ps.add(p);
                                 //System.out.println("le nom ="+p.getNom());

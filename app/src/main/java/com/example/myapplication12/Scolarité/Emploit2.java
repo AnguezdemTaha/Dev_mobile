@@ -1,9 +1,5 @@
 package com.example.myapplication12.Scolarité;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -15,31 +11,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 
-import com.example.myapplication12.Evenement.Addevent;
-import com.example.myapplication12.Evenement.Listevent;
-import com.example.myapplication12.Gestion_etudiant_prof.Addetudiant;
-import com.example.myapplication12.Gestion_etudiant_prof.Addprof;
-import com.example.myapplication12.Gestion_etudiant_prof.Listetudiant;
-import com.example.myapplication12.Gestion_etudiant_prof.Listprof;
-import com.example.myapplication12.Menu.Login;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication12.Messagerie.Addmessage;
+import com.example.myapplication12.Evenement.Listevent;
+import com.example.myapplication12.Menu.Login;
+import com.example.myapplication12.Menu.Menuetudiant;
 import com.example.myapplication12.Messagerie.Listmessage;
-import com.example.myapplication12.Model.Module;
 import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.R;
-
 import com.google.gson.Gson;
 
 
-public class Emploit extends AppCompatActivity {
+public class Emploit2 extends AppCompatActivity {
     private ImageView scolarete1, messages1, evenement1;
     Menu menuitem;
     WebView myWebView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +39,6 @@ public class Emploit extends AppCompatActivity {
         ColorDrawable colorDrawable
                 = new ColorDrawable(Color.parseColor("#000000"));
         actionBar.setBackgroundDrawable(colorDrawable);
-
         actionBar.setTitle("Emploi du temps des étudiants");
         scolarete1 = (ImageView) findViewById(R.id.Scolarite1);
         messages1 = (ImageView) findViewById(R.id.messages1);
@@ -57,21 +46,21 @@ public class Emploit extends AppCompatActivity {
         scolarete1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(Emploit.this, Listcours.class);
+                Intent in = new Intent(Emploit2.this, Listcours.class);
                 startActivity(in);
             }
         });
         messages1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(Emploit.this, Listmessage.class);
+                Intent in = new Intent(Emploit2.this, Listmessage.class);
                 startActivity(in);
             }
         });
         evenement1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(Emploit.this, Listevent.class);
+                Intent in = new Intent(Emploit2.this, Listevent.class);
                 startActivity(in);
             }
         });
@@ -79,7 +68,6 @@ public class Emploit extends AppCompatActivity {
         String myurl;
         myWebView = (WebView) findViewById(R.id.web);
         WebSettings mWebSettings = myWebView.getSettings();
-
 
         mWebSettings.setJavaScriptEnabled(true); // Done above
         mWebSettings.setDomStorageEnabled(true); // Try
@@ -90,63 +78,9 @@ public class Emploit extends AppCompatActivity {
         mWebSettings.setJavaScriptEnabled(true);
 
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = pref.getString("personne_c", "");
-        final Personne p1 = gson.fromJson(json, Personne.class);
-
-
-        if (p1.getType().equals("Prof")) {
-            Module mod =p1.getModule();
-            final String liste = mod.getNom();
-            final String snum= mod.getSemestre();
-            final int num= Integer.parseInt(snum);
-            actionBar.setTitle("Emploi du temps du professeur " + liste);
-           if (num <3)
-           {
-               myurl = "file:///android_asset/prof.html";
-           }
-            else if (num <5)
-            {
-                myurl = "file:///android_asset/prof2.html";
-            }
-            else
-            {
-                myurl = "file:///android_asset/prof3.html";
-            }
-
-                myWebView.setWebViewClient(new WebViewClient() {
-                @Override
-                public void onPageFinished(WebView view, String list) {
-
-                        view.evaluateJavascript("myVar('" + liste + "')", null);
-
-
-                        view.loadUrl("javascript:myVar('X')");
-                    }
-
-            });
-        }
-        else
-        {
-            myurl = "file:///android_asset/emp.html";
-            if (p1.getType().equals("Etudiant")) {
-                if (p1.getAnnee().equals("1ere année"))
-                    myurl = "file:///android_asset/emp.html";
-                else if (p1.getAnnee().equals("2eme année"))
-                    myurl = "file:///android_asset/emp2.html";
-                else if (p1.getAnnee().equals("3eme année"))
-                    myurl = "file:///android_asset/emp3.html";
-            }
-            else if (p1.getType().equals("Chef")) {
-                Intent in5 = new Intent(Emploit.this, em.class);
-                startActivity(in5);
-            }
-
-        }
+        myurl = "file:///android_asset/emp2.html";
         myWebView.loadUrl(myurl);
     }
-
 
 
     @Override
@@ -164,6 +98,7 @@ public class Emploit extends AppCompatActivity {
         MenuItem itm7 = menuitem.findItem(R.id.item7);
         MenuItem itm8 = menuitem.findItem(R.id.item8);
         MenuItem itm9 = menuitem.findItem(R.id.item9);
+        MenuItem itm88 = menuitem.findItem(R.id.item88);
         MenuItem itm10 = menuitem.findItem(R.id.item10);
 
 
@@ -176,7 +111,6 @@ public class Emploit extends AppCompatActivity {
         itm7.setVisible(false);
         itm8.setVisible(false);
         itm9.setVisible(false);
-
 
 
 
@@ -198,25 +132,24 @@ public class Emploit extends AppCompatActivity {
     }
 
     @Override
-
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
 
             case R.id.item5:
-                Intent in5 = new Intent(Emploit.this, AddEmploit.class);
+                Intent in5 = new Intent(Emploit2.this, AddEmploit2.class);
                 startActivity(in5);
                 break;
-
-
+            case R.id.item88:
+                Intent in11 = new Intent(Emploit2.this, Menuetudiant.class);
+                startActivity(in11);
+                break;
             case R.id.item10:
-                Intent in10 = new Intent(Emploit.this, Login.class);
+                Intent in10 = new Intent(Emploit2.this, Login.class);
                 startActivity(in10);
                 break;
-
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 }
 

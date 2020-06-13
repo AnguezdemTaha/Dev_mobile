@@ -20,6 +20,9 @@
         <activity android:name=".Messagerie.Listmessageprof" />
         <activity android:name=".Evenement.Consultevnt" />
         <activity android:name=".Scolarité.AddEmploit" />
+        <activity android:name=".Scolarité.AddEmploit1" />
+        <activity android:name=".Scolarité.AddEmploit2" />
+        <activity android:name=".Scolarité.AddEmploit3" />
         <activity android:name=".Gestion_etudiant_prof.Editetudiant" />
         <activity android:name=".Scolarité.Editcours" />
         <activity android:name=".Gestion_etudiant_prof.Addprof" />
@@ -27,6 +30,10 @@
         <activity android:name=".Gestion_etudiant_prof.Listetudiant" />
         <activity android:name=".Scolarité.Listcours" />
         <activity android:name=".Scolarité.Emploit" />
+        <activity android:name=".Scolarité.Emploit1" />
+        <activity android:name=".Scolarité.Emploit2" />
+        <activity android:name=".Scolarité.Emploit3" />
+        <activity android:name=".Scolarité.em" />
         <activity android:name=".Menu.Menuscolarite" />
         <activity android:name=".Gestion_etudiant_prof.Listprof" />
         <activity android:name=".Scolarité.Addcours" />

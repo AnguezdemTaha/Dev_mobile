@@ -211,6 +211,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#4a5a71"></LinearLayout>
+            <LinearLayout
+                android:id="@+id/layoutprof2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:visibility="invisible">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/usrusr"
+                    android:layout_gravity="center"/>
+                <Spinner
+                    android:id = "@+id/spinner2"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:prompt = "@string/app_name"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#4a5a71"></LinearLayout>
 
         </LinearLayout>
     </LinearLayout>

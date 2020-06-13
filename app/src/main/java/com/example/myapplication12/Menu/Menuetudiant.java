@@ -60,7 +60,10 @@ public class Menuetudiant extends AppCompatActivity {
         String json = pref.getString("personne_c", "");
         final Personne p1 = gson.fromJson(json, Personne.class);
         name  =p1.getNom();
-        if (p1.getType() == "Etudiant")
+
+
+        if (p1.getType().equals("Etudiant"))
+
             actionBar.setTitle("Bienvenue "+name);
         else
         actionBar.setTitle("Bienvenue Professeur "+name);

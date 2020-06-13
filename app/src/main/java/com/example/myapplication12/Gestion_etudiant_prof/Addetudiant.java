@@ -56,6 +56,7 @@ public class Addetudiant extends AppCompatActivity {
         actionBar.setTitle("Ajouter un etudiant");
 
 
+
         scolarete1 = (ImageView) findViewById(R.id.Scolarite9);
         messages1 = (ImageView) findViewById(R.id.messages9);
         evenement1 = (ImageView) findViewById(R.id.evenement9);
@@ -67,9 +68,11 @@ public class Addetudiant extends AppCompatActivity {
 
 
         ArrayList<String> list2 = new ArrayList<>();
-        list2.add("1er année");
+        list2.add("1ere année");
         list2.add("2eme année");
         list2.add("3eme année");
+
+
 
         System.out.println("size of list2 verif "+list2);
 
@@ -89,6 +92,7 @@ public class Addetudiant extends AppCompatActivity {
         messages1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent in = new Intent(Addetudiant.this, Listmessage.class);
                 startActivity(in);
             }
@@ -100,6 +104,9 @@ public class Addetudiant extends AppCompatActivity {
                 startActivity(in);
             }
         });
+
+
+
 
         //text=(TextView) findViewById(R.id.Login1);
         //text2=(TextView) findViewById(R.id.signup);
@@ -131,9 +138,9 @@ public class Addetudiant extends AppCompatActivity {
                         Personne p = new Personne(nom, pass, email, tele, type);
                         p.setAnnee(annee);
                         Methodes_personne.createUser(p);
-                        Toast.makeText(getApplicationContext(), "Vous avez ajouter un etudaint avec succe", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Vous avez ajouter un étudiant avec succès", Toast.LENGTH_LONG).show();
 
-                        Intent in = new Intent(Addetudiant.this, Listetudiant.class);
+                        Intent in = new Intent(Addetudiant.this, Addetudiant.class);
                         startActivity(in);
                     }
                 });
@@ -141,6 +148,7 @@ public class Addetudiant extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
 
             }
         });
@@ -167,7 +175,7 @@ public class Addetudiant extends AppCompatActivity {
         MenuItem itm99 = menuitem.findItem(R.id.item99);
         MenuItem itm98 = menuitem.findItem(R.id.item99);
 
-        itm1.setVisible(false);
+
         itm2.setVisible(false);
         itm3.setVisible(false);
         itm4.setVisible(false);

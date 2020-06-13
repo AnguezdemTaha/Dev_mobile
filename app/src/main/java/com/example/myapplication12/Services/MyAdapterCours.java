@@ -156,7 +156,7 @@ public class MyAdapterCours extends RecyclerView.Adapter<MyAdapterCours.MyViewHo
                                     v.getContext().startActivity(in);
 
 
-                                    Toast.makeText(v.getContext().getApplicationContext(),"Votre modification a été enregistré avec succe :",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(v.getContext().getApplicationContext(),"Votre modification a été enregistré avec succès :",Toast.LENGTH_SHORT).show();
                                     //p = document.toObject(Personne.class);
                                     //ps.add(p);
                                     //System.out.println("le nom ="+p.getNom());

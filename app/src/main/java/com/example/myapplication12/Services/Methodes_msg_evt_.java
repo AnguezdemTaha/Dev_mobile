@@ -34,12 +34,23 @@ public class Methodes_msg_evt_ {
     public static Task<QuerySnapshot> GetMessages(Personne p) {
 
 
+        Map<String, Object> m = new HashMap<>();
+        /*m.put("nom",p.getModule().getNom());
+        m.put("cours",null);
+        m.put("date",null);
+        m.put("periode",null);
+        m.put("profs",null);
+        m.put("semestre",null);*/
+
         Map<String, Object> p1 = new HashMap<>();
         p1.put("nom", p.getNom());
         p1.put("mot_de_passe", p.getMot_de_passe());
         p1.put("email",p.getEmail());
         p1.put("num_telephone",p.getNum_telephone());
         p1.put("type",p.getType());
+        p1.put("module",null);
+        p1.put("semestre",p.getSemestre());
+        p1.put("annee",p.getAnnee());
 
         Task<QuerySnapshot> r1 = getUsersCollection().whereEqualTo("per_envoye", p1).get();
 
@@ -51,6 +62,7 @@ public class Methodes_msg_evt_ {
 
     }
     public static Task<QuerySnapshot> GetMessagesonce(Personne p) {
+
 
 
         Map<String, Object> p1 = new HashMap<>();
@@ -69,6 +81,13 @@ public class Methodes_msg_evt_ {
 
     public static Task<QuerySnapshot> GetMessagesrecu(Personne p) {
 
+       /* Map<String, Object> m = new HashMap<>();
+        m.put("nom",p.getModule().getNom());
+        m.put("cours",null);
+        m.put("date",null);
+        m.put("periode",null);
+        m.put("profs",null);
+        m.put("semestre",null);*/
 
         Map<String, Object> p1 = new HashMap<>();
         p1.put("nom", p.getNom());
@@ -76,6 +95,9 @@ public class Methodes_msg_evt_ {
         p1.put("email", p.getEmail());
         p1.put("num_telephone", p.getNum_telephone());
         p1.put("type", p.getType());
+        p1.put("module",null);
+        p1.put("semestre",p.getSemestre());
+        p1.put("annee",p.getAnnee());
 
         Task<QuerySnapshot> r1 = getUsersCollection().whereEqualTo("per_envoye", p1).get();
         Task<QuerySnapshot> r2 = getUsersCollection().whereArrayContains("per_recus", p1).get();

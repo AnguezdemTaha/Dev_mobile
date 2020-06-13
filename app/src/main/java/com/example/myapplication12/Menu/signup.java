@@ -39,8 +39,8 @@ public class signup extends AppCompatActivity {
     private EditText nom1, email1, tele1, pass1;
     private RadioGroup radioGroup;
     private RadioButton etudiant, prof;
-    private Spinner spinner, spinner1;
-    private LinearLayout layoutetudiant, layoutprof;
+    private Spinner spinner, spinner1, spinner2;
+    private LinearLayout layoutetudiant, layoutprof, layoutprof2;
 
     private Module c = new Module();
 
@@ -63,9 +63,11 @@ public class signup extends AppCompatActivity {
 
         spinner = (Spinner) findViewById(R.id.spinner);
         spinner1 = (Spinner) findViewById(R.id.spinner1);
+        spinner2 = (Spinner) findViewById(R.id.spinner2);
 
         layoutetudiant = (LinearLayout) findViewById(R.id.layoutetudiant);
         layoutprof = (LinearLayout) findViewById(R.id.layoutprof);
+        layoutprof2 = (LinearLayout) findViewById(R.id.layoutprof2);
         //ArrayList<String> arrayList = new ArrayList<>();
 
 
@@ -87,6 +89,11 @@ public class signup extends AppCompatActivity {
         list2.add("2eme année");
         list2.add("3eme année");
 
+        ArrayList<String> list3 = new ArrayList<>();
+        list3.add("3");
+        list3.add("4");
+        list3.add("5");
+
 
         /*arrayList.add("JAVA");
         arrayList.add("ANDROID");
@@ -104,61 +111,87 @@ public class signup extends AppCompatActivity {
         arrayAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(arrayAdapter1);
 
+        ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list3);
+        arrayAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner2.setAdapter(arrayAdapter2);
+
+        /*radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.etudiantx) {
+                    layoutetudiant.setVisibility(View.VISIBLE);
+                    layoutprof.setVisibility(View.INVISIBLE);
+                    layoutprof2.setVisibility(View.INVISIBLE);
+                } else {
+                    if (checkedId == R.id.profx) {
+                        layoutprof.setVisibility(View.VISIBLE);
+                        layoutprof2.setVisibility(View.VISIBLE);
+                        layoutetudiant.setVisibility(View.INVISIBLE);
+                    }
+                }
+            }
+        });*/
+
+
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.etudiantx) {
                     layoutetudiant.setVisibility(View.VISIBLE);
                     layoutprof.setVisibility(View.INVISIBLE);
-                } else {
-                    if (checkedId == R.id.profx) {
-                        layoutprof.setVisibility(View.VISIBLE);
-                        layoutetudiant.setVisibility(View.INVISIBLE);
-                    }
-                }
-            }
-        });
+                    layoutprof2.setVisibility(View.INVISIBLE);
+                    System.out.println("etudiantetudaint");
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String module_nom = parent.getItemAtPosition(position).toString();
-                final Module module = new Module();
-                module.setNom(module_nom);
-                spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        final String annee = parent.getItemAtPosition(position).toString();
-
-                        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                            @Override
-                            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                                if (checkedId == R.id.etudiantx) {
+                    spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            final String annee = parent.getItemAtPosition(position).toString();
+                            text3.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
 
 
-                                    text3.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
+                                    String nom = String.valueOf(nom1.getText());
+                                    String email = String.valueOf(email1.getText());
+                                    String tele = String.valueOf(tele1.getText());
+                                    String pass = String.valueOf(pass1.getText());
+                                    String type = "Etudiant";
 
 
-                                            String nom = String.valueOf(nom1.getText());
-                                            String email = String.valueOf(email1.getText());
-                                            String tele = String.valueOf(tele1.getText());
-                                            String pass = String.valueOf(pass1.getText());
-                                            String type = "Etudiant";
+                                    Personne p = new Personne(nom, pass, email, tele, type);
+                                    p.setAnnee(annee);
+                                    //p.setSemestre(semestre);
 
-                                            Personne p = new Personne(nom, pass, email, tele, type);
-                                            p.setAnnee(annee);
+                                    Methodes_personne.createUser(p);
+                                    Toast.makeText(getApplicationContext(), "Votre inscription a été accpeter avec succe", Toast.LENGTH_LONG).show();
 
-                                            Methodes_personne.createUser(p);
-                                            Toast.makeText(getApplicationContext(), "Votre inscription a été accpeter avec succe", Toast.LENGTH_LONG).show();
-
-                                            Intent in = new Intent(signup.this, Login.class);
-                                            startActivity(in);
-                                        }
-                                    });
+                                    Intent in = new Intent(signup.this, Login.class);
+                                    startActivity(in);
                                 }
-                                if (checkedId == R.id.profx) {
+                            });
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+                }
+                if (checkedId == R.id.profx) {
+
+                    layoutprof.setVisibility(View.VISIBLE);
+                    layoutprof2.setVisibility(View.VISIBLE);
+                    layoutetudiant.setVisibility(View.INVISIBLE);
+                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            String module_nom = parent.getItemAtPosition(position).toString();
+                            final Module module = new Module();
+                            module.setNom(module_nom);
+                            spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                    final String semestre = parent.getItemAtPosition(position).toString();
 
                                     text3.setOnClickListener(new View.OnClickListener() {
                                         @Override
@@ -173,6 +206,7 @@ public class signup extends AppCompatActivity {
 
                                             Personne p = new Personne(nom, pass, email, tele, type);
                                             p.setModule(module);
+                                            p.setSemestre(semestre);
 
                                             Methodes_personne.createUser(p);
                                             Toast.makeText(getApplicationContext(), "Votre inscription a été accpeter avec succe", Toast.LENGTH_LONG).show();
@@ -182,24 +216,32 @@ public class signup extends AppCompatActivity {
                                         }
                                     });
                                 }
-                            }
-                        });
-                    }
 
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
+                                @Override
+                                public void onNothingSelected(AdapterView<?> parent) {
 
-                    }
-                });
+                                }
+                            });
+                        }
 
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+                        }
+                    });
+                }
             }
         });
+
+
+    }
+
+
+
+
+
+
+
 
         /*radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -272,5 +314,4 @@ public class signup extends AppCompatActivity {
         });*/
 
 
-    }
 }

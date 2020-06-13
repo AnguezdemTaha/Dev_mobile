@@ -175,6 +175,7 @@ public class Listmessage extends AppCompatActivity {
                                 persmsgs1.add(m.getPer_envoye().getNom());
 
                                 msgs.add(m);
+                                System.out.println("les message :"+m.getContenu_msg());
                             }
 
 

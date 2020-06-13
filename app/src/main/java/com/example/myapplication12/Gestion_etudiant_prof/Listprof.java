@@ -229,13 +229,12 @@ public class Listprof extends AppCompatActivity implements MyAdapter.OnNoteListe
                 startActivity(in7);
                 break;
             case R.id.item8:
-                Intent in8 = new Intent(Listprof.this, Emploit.class);
+
+                Intent in8 = new Intent(Listprof.this, Addprof.class);
                 startActivity(in8);
                 break;
-            case R.id.item9:
-                Intent in9 = new Intent(Listprof.this, Addprof.class);
-                startActivity(in9);
-                break;
+
+
             case R.id.item10:
                 Intent in10 = new Intent(Listprof.this, Login.class);
                 startActivity(in10);

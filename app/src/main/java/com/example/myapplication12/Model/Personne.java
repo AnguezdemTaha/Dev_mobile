@@ -18,6 +18,8 @@ public class Personne implements Serializable {
 
     private Module module;
 
+    private String semestre;
+
     //attribus
 
     //private ArrayList<Message> Msg_envoyes=new ArrayList<Message>();
@@ -89,5 +91,13 @@ public class Personne implements Serializable {
 
     public void setAnnee(String annee) {
         this.annee = annee;
+    }
+
+    public String getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(String semestre) {
+        this.semestre = semestre;
     }
 }

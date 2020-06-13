@@ -225,7 +225,7 @@ public class Addmessage extends AppCompatActivity implements MyAdapter.OnNoteLis
                     Methodes_msg_evt_.creatMessage(m);
                 }
 
-                Toast.makeText(getApplicationContext(), "Votre message a été ajouter avec succe", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Votre message a été ajouter avec succès", Toast.LENGTH_LONG).show();
                 Intent in = new Intent(Addmessage.this, Listmessage.class);
                 startActivity(in);
 

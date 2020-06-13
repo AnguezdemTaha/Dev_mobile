@@ -184,7 +184,9 @@ public class Listcours extends AppCompatActivity {
         itm7.setVisible(false);
         itm8.setVisible(false);
         //itm9.setVisible(false);
-        itm98.setVisible(true);
+
+        itm98.setVisible(false);
+
 
         itm4.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
@@ -197,6 +199,12 @@ public class Listcours extends AppCompatActivity {
             itm4.setVisible(false);
 
         }
+
+        if (p.getType().equals("Chef")) {
+            itm98.setVisible(true);
+
+        }
+
 
         //menuitem.getItem(3).setEnabled(true);
         return true;

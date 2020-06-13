@@ -12,9 +12,11 @@
 
         <TextView
             android:id="@+id/nompersonne"
-            android:layout_width="114dp"
+
+            android:layout_width="94dp"
             android:layout_height="29dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="5dp"
+
             android:background="#00000000"
             android:hint="Personne nom :"
             android:inputType="text"
@@ -25,8 +27,10 @@
 
         <TextView
             android:id="@+id/infopersonne"
-            android:layout_width="92dp"
-            android:layout_height="20dp"
+
+            android:layout_width="133dp"
+            android:layout_height="wrap_content"
+
             android:layout_marginLeft="15dp"
             android:background="#00000000"
             android:hint=""

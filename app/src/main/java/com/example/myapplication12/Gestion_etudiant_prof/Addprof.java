@@ -47,7 +47,7 @@ public class Addprof extends AppCompatActivity {
     private TextView text, text2, text3, title_pe;
     private ImageView scolarete1, messages1, evenement1;
     private EditText nom1, email1, tele1, pass1;
-    private Spinner spinner;
+    private Spinner spinner,spinner2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +66,7 @@ public class Addprof extends AppCompatActivity {
         evenement1 = (ImageView) findViewById(R.id.evenement7);
 
         spinner =(Spinner) findViewById(R.id.spinner);
+        spinner2 = (Spinner) findViewById(R.id.spinner2);
 
         scolarete1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,7 +114,10 @@ public class Addprof extends AppCompatActivity {
         ArrayList<String> list = new ArrayList<>();
         list.add("testnothis");
 
-
+        ArrayList<String> list3 = new ArrayList<>();
+        list3.add("3");
+        list3.add("4");
+        list3.add("5");
 
 
         System.out.println("size list1 ="+list1.size());
@@ -121,11 +125,18 @@ public class Addprof extends AppCompatActivity {
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
 
+        ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list3);
+        arrayAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner2.setAdapter(arrayAdapter2);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String module_nom = parent.getItemAtPosition(position).toString();
+                final String module_nom = parent.getItemAtPosition(position).toString();
+                spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        final String semestre = parent.getItemAtPosition(position).toString();
                 final Module module = new Module();
                 module.setNom(module_nom);
                 text3.setOnClickListener(new View.OnClickListener() {
@@ -147,6 +158,12 @@ public class Addprof extends AppCompatActivity {
 
                         Intent in = new Intent(Addprof.this, Listprof.class);
                         startActivity(in);
+                    }
+                });}
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
                     }
                 });
             }

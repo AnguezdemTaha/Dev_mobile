@@ -6,42 +6,72 @@ import java.util.Date;
 public class Emploi {
     //.
 
-    private String annee;
-    private String contenu;
-    private Date date_semaine;
+    private String salle, semaine, dur, hd,jour, Mod;
+
     //private ArrayList<Crenau> Crn=new ArrayList<Crenau>();
 
 
     public Emploi() {
     }
 
-    public Emploi(String annee, String contenu, Date date_semaine) {
-        this.annee = annee;
-        this.contenu = contenu;
-        this.date_semaine = date_semaine;
+    public Emploi(String salle, String semaine, String dur,String deb,String jour, String mod) {
+        this.salle = salle;
+        this.semaine = semaine;
+        this.hd = deb;
+        this.dur = dur;
+        this.jour = jour;
+        this.Mod = mod;
     }
 
-    public String getAnnee() {
-        return annee;
+    public String getDur() {
+        return dur;
     }
 
-    public void setAnnee(String annee) {
-        this.annee = annee;
+    public void setDur(String dur) {
+        this.dur = dur;
     }
 
-    public String getContenu() {
-        return contenu;
+    public String getSalle() {
+        return salle;
     }
 
-    public void setContenu(String contenu) {
-        this.contenu = contenu;
+    public void setSalle(String salle) {
+        this.salle = salle;
     }
 
-    public Date getDate_semaine() {
-        return date_semaine;
+    public String getSemaine() {
+        return semaine;
     }
 
-    public void setDate_semaine(Date date_semaine) {
-        this.date_semaine = date_semaine;
+    public void setSemaine(String semaine) {
+        this.semaine = semaine;
     }
+
+    public String getHd() {
+        return hd;
+    }
+    public String getMod() {
+        return Mod;
+    }
+
+    public void setMod(String mod) {
+        this.Mod = mod;
+    }
+
+
+    public void setHd(String hd) {
+        this.hd = hd;
+    }
+
+    public String getJour() {
+        return jour;
+    }
+
+    public void setJour(String jour) {
+        this.jour = jour;
+    }
+
+
+
 }
+
