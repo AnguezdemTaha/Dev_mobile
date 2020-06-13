@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="120dp">
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -21,7 +22,7 @@
             android:layout_gravity="center" />
 
         <LinearLayout
-   android:layout_width="248dp"
+            android:layout_width="248dp"
 
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -55,6 +56,7 @@
                 android:textColorHint="#000000"
                 android:textSize="14dp" />
 
+
             <CheckBox
                 android:id="@+id/interiseevn"
                 android:layout_width="280dp"
@@ -64,17 +66,18 @@
                 android:buttonTint="#DA5F5F"
 
 
-                android:clickable="false"
-                android:hint="Je participe"
-                android:inputType="text"
-                android:letterSpacing="0.1"
-                android:textAllCaps="false"
+            android:clickable="false"
+            android:hint="Je participe"
+            android:inputType="text"
+            android:letterSpacing="0.1"
+            android:textAllCaps="false"
 
-                android:textColor="#DA5F5F"
-                android:textColorHint="#F84242"
+            android:textColor="#DA5F5F"
+            android:textColorHint="#F84242"
 
 
-                android:textSize="12dp" />
+            android:textSize="12dp"
+                />
 
         </LinearLayout>
 
@@ -109,6 +112,7 @@
 
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"

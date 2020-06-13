@@ -130,7 +130,7 @@ public class MyAdapterEven extends RecyclerView.Adapter<MyAdapterEven.MyViewHold
                             else{
 
                                 holder.interiseevn.setEnabled(false);
-                            holder.interiseevn.setVisibility(View.INVISIBLE);
+                            //holder.interiseevn.setVisibility(View.INVISIBLE);
                         } }
                     }}}});
 

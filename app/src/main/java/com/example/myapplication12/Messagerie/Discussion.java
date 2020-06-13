@@ -179,12 +179,13 @@ public class Discussion extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<List<QuerySnapshot>> task) {
                                 if (task.isSuccessful()) {
+
                                     for (QuerySnapshot document : task.getResult()) {
                                         for (QueryDocumentSnapshot document1 : document) {
                                             Message m = document1.toObject(Message.class);
 
                                             msgs.add(m);
-
+                                            System.out.println("les message here :::"+m.getContenu_msg());
                                         }
 
 
