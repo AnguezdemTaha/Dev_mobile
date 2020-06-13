@@ -99,7 +99,7 @@ public class Emploit extends AppCompatActivity {
         if (p1.getType().equals("Prof")) {
             Module mod =p1.getModule();
             final String liste = mod.getNom();
-            final String snum= mod.getSemestre();
+            final String snum= p1.getSemestre();
             final int num= Integer.parseInt(snum);
             actionBar.setTitle("Emploi du temps du professeur " + liste);
            if (num <3)
