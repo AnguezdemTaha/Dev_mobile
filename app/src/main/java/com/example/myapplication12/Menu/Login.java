@@ -82,7 +82,7 @@ public class Login extends AppCompatActivity {
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("listmodules", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
                     Gson gson = new Gson();
-                    String json = gson.toJson(arrayList);
+                    String json = gson.toJson(modules);
                     editor.putString("modules", json);
                     editor.commit();
 

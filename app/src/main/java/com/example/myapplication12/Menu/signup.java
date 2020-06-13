@@ -63,20 +63,25 @@ public class signup extends AppCompatActivity {
 
         spinner = (Spinner) findViewById(R.id.spinner);
         spinner1 = (Spinner) findViewById(R.id.spinner1);
-        spinner2 = (Spinner) findViewById(R.id.spinner2);
+        //spinner2 = (Spinner) findViewById(R.id.spinner2);
 
         layoutetudiant = (LinearLayout) findViewById(R.id.layoutetudiant);
         layoutprof = (LinearLayout) findViewById(R.id.layoutprof);
-        layoutprof2 = (LinearLayout) findViewById(R.id.layoutprof2);
+        //layoutprof2 = (LinearLayout) findViewById(R.id.layoutprof2);
         //ArrayList<String> arrayList = new ArrayList<>();
 
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("listmodules", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = pref.getString("modules", null);
-        Type type = new TypeToken<ArrayList<String>>() {
+        Type type = new TypeToken<ArrayList<Module>>() {
         }.getType();
-        ArrayList<String> list1 = gson.fromJson(json, type);
+        final ArrayList<Module> list11= gson.fromJson(json, type);
+        ArrayList<String> list1=new ArrayList<>();
+        list1.add("choisir votre module");
+        for(Module m : list11){
+            list1.add(m.getNom());
+        }
         System.out.println("test pour size initial :" + list1.size());
         //list1.add("notthis");
 
@@ -85,6 +90,7 @@ public class signup extends AppCompatActivity {
 
 
         ArrayList<String> list2 = new ArrayList<>();
+        list1.add("choisir votre année");
         list2.add("1er année");
         list2.add("2eme année");
         list2.add("3eme année");
@@ -111,9 +117,7 @@ public class signup extends AppCompatActivity {
         arrayAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(arrayAdapter1);
 
-        ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list3);
-        arrayAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner2.setAdapter(arrayAdapter2);
+
 
         /*radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -139,7 +143,7 @@ public class signup extends AppCompatActivity {
                 if (checkedId == R.id.etudiantx) {
                     layoutetudiant.setVisibility(View.VISIBLE);
                     layoutprof.setVisibility(View.INVISIBLE);
-                    layoutprof2.setVisibility(View.INVISIBLE);
+                    //layoutprof2.setVisibility(View.INVISIBLE);
                     System.out.println("etudiantetudaint");
 
                     spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -180,7 +184,7 @@ public class signup extends AppCompatActivity {
                 if (checkedId == R.id.profx) {
 
                     layoutprof.setVisibility(View.VISIBLE);
-                    layoutprof2.setVisibility(View.VISIBLE);
+                    //layoutprof2.setVisibility(View.VISIBLE);
                     layoutetudiant.setVisibility(View.INVISIBLE);
                     spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
@@ -188,12 +192,17 @@ public class signup extends AppCompatActivity {
                             String module_nom = parent.getItemAtPosition(position).toString();
                             final Module module = new Module();
                             module.setNom(module_nom);
-                            spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                @Override
-                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                    final String semestre = parent.getItemAtPosition(position).toString();
+                            String semestre=null;
+                            for(Module m :list11){
+                                if(m.getNom().equals(module_nom)){
+                                    semestre=m.getSemestre();
+                                }
+                            }
 
-                                    text3.setOnClickListener(new View.OnClickListener() {
+
+
+                            final String finalSemestre1 = semestre;
+                            text3.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
 
@@ -206,7 +215,7 @@ public class signup extends AppCompatActivity {
 
                                             Personne p = new Personne(nom, pass, email, tele, type);
                                             p.setModule(module);
-                                            p.setSemestre(semestre);
+                                            p.setSemestre(finalSemestre1);
 
                                             Methodes_personne.createUser(p);
                                             Toast.makeText(getApplicationContext(), "Votre inscription a été accpeter avec succe", Toast.LENGTH_LONG).show();
@@ -222,13 +231,7 @@ public class signup extends AppCompatActivity {
 
                                 }
                             });
-                        }
 
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent) {
-
-                        }
-                    });
                 }
             }
         });

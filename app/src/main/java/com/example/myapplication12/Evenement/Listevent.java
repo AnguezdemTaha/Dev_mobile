@@ -282,18 +282,7 @@ public class Listevent extends AppCompatActivity {
         if(p1.getType().equals("Prof") ){
             itm3.setVisible(false);
         }
-        else{
-            if(p1.getType().equals("Etudiant")){
 
-                itm3.setVisible(false);
-
-            }
-            else{
-                if(p1.getType().equals("Delegue")){
-
-                }
-            }
-        }
 
 
         //menuitem.getItem(3).setEnabled(true);
