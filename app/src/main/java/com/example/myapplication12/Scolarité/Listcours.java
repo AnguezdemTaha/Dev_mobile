@@ -105,6 +105,13 @@ public class Listcours extends AppCompatActivity {
         final LinkedList<Cours> cours = new LinkedList<Cours>();
         final Context context = this;
         //final MyAdapter.OnNoteListener note = this;
+        SharedPreferences pref = context.getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = pref.getString("personne_c", "");
+        final Personne p = gson.fromJson(json, Personne.class);
+
+
+
         Methodes_cours.GetAllcours().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -112,8 +119,27 @@ public class Listcours extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         //String idd= document.getId();
-
                         c = document.toObject(Cours.class);
+                        int sem = 0;
+
+                        if (p.getType().equals("Etudiant")) {
+                            int semestre = Integer.parseInt(c.getPrf().getSemestre());
+                            if (p.getAnnee().equals("1ere année"))
+                                sem = 2;
+                            else if (p.getAnnee().equals("2eme année"))
+                                sem = 4;
+                            else if (p.getAnnee().equals("3eme année"))
+                                sem = 5;
+                            if(semestre <= sem)
+                                cours.add(c);
+                        }
+                        else if (p.getType().equals("Prof")) {
+                            int semestre = Integer.parseInt(c.getPrf().getSemestre());
+                            sem = Integer.parseInt(p.getSemestre());
+                            if(semestre == sem)
+                                cours.add(c);
+                        }
+                        else
                         cours.add(c);
                         //System.out.println("le nom ="+p.getNom());
                     }
@@ -141,15 +167,6 @@ public class Listcours extends AppCompatActivity {
         });
 
 
-        SharedPreferences pref = context.getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = pref.getString("personne_c", "");
-        Personne p = gson.fromJson(json, Personne.class);
-
-        if (p.getType().equals("Etudiant") || p.getType().equals("Delegue")) {
-            //text3.setVisibility(View.INVISIBLE);
-
-        }
 
 
     }

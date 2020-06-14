@@ -62,7 +62,7 @@ public class Listetudiant extends AppCompatActivity implements MyAdapterE.OnNote
         ColorDrawable colorDrawable
                 = new ColorDrawable(Color.parseColor("#000000"));
         actionBar.setBackgroundDrawable(colorDrawable);
-        actionBar.setTitle("Les etudiants");
+        actionBar.setTitle("Les étudiants");
 
         scolarete1 = (ImageView) findViewById(R.id.Scolarite3);
         messages1 = (ImageView) findViewById(R.id.messages3);

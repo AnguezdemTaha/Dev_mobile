@@ -73,6 +73,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         if(ps.get(position).getModule()!=null){
             s=ps.get(position).getModule().getNom();
         }
+
         holder.info_e.setText(s);
         String type = ps.get(position).getType();
         if (context instanceof Addmessage) {

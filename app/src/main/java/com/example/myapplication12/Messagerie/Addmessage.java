@@ -102,6 +102,38 @@ public class Addmessage extends AppCompatActivity implements MyAdapter.OnNoteLis
         r.setAdapter(myAdapter);*/
 
         final MyAdapter.OnNoteListener note = (MyAdapter.OnNoteListener) this;
+
+        Methodes_personne.GetChef().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                //Personne p = new Personne();
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        p = document.toObject(Personne.class);
+                        //  if(p.getType()=="Prof") {
+                        prs.add(p);
+
+                        //System.out.println("le nom ="+p.getNom());
+                    }
+                    r.setHasFixedSize(true);
+                    LayoutManager = new LinearLayoutManager(context);
+                    r.setLayoutManager((RecyclerView.LayoutManager) LayoutManager);
+                    MyAdapter myAdapter = new MyAdapter(prs, context, note);
+                    r.setAdapter(myAdapter);
+
+
+                    //del=(ImageView) findViewById(R.id.delet_personne);
+                    //del.setVisibility(View.INVISIBLE);
+
+
+                } else {
+
+                }
+            }
+
+
+        });
+
         Methodes_personne.GetAllProfs().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -225,7 +257,9 @@ public class Addmessage extends AppCompatActivity implements MyAdapter.OnNoteLis
                     Methodes_msg_evt_.creatMessage(m);
                 }
 
-                Toast.makeText(getApplicationContext(), "Votre message a été ajouter avec succès", Toast.LENGTH_LONG).show();
+
+                Toast.makeText(getApplicationContext(), "Votre message a été ajouté avec succès", Toast.LENGTH_LONG).show();
+
                 Intent in = new Intent(Addmessage.this, Listmessage.class);
                 startActivity(in);
 

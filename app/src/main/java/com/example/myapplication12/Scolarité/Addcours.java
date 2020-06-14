@@ -144,7 +144,7 @@ public class Addcours extends AppCompatActivity {
                 Cours c = new Cours(nom, contenu, currentTime, m1, p1);
                 Methodes_cours.creatcours(c);
                 uploadImage(contenu);
-                Toast.makeText(getApplicationContext(), "Votre cours a été ajouter avec succe", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Votre cours a été ajouter avec succès", Toast.LENGTH_LONG).show();
 
                 Intent in = new Intent(Addcours.this, Listcours.class);
                 startActivity(in);

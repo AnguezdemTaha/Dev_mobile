@@ -244,7 +244,7 @@ public class AddEmploit1 extends AppCompatActivity {
         itm6.setVisible(false);
         itm7.setVisible(false);
         itm8.setVisible(false);
-        itm9.setVisible(false);
+
 
 
         //itm8.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
@@ -292,6 +292,12 @@ public class AddEmploit1 extends AppCompatActivity {
             case R.id.item88:
                 Intent in88 = new Intent(AddEmploit1.this, Menuetudiant.class);
                 startActivity(in88);
+                break;
+
+
+            case R.id.item9:
+                Intent in9 = new Intent(AddEmploit1.this, Emploit1.class);
+                startActivity(in9);
                 break;
 
             case R.id.item10:

@@ -244,7 +244,9 @@ public class AddEmploit2 extends AppCompatActivity {
         itm6.setVisible(false);
         itm7.setVisible(false);
         itm8.setVisible(false);
-        itm9.setVisible(false);
+
+
+
 
 
         //itm8.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
@@ -267,6 +269,13 @@ public class AddEmploit2 extends AppCompatActivity {
                 Intent in10 = new Intent(AddEmploit2.this, Login.class);
                 startActivity(in10);
                 break;
+
+
+            case R.id.item9:
+                Intent in9 = new Intent(AddEmploit2.this, Emploit2.class);
+                startActivity(in9);
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }

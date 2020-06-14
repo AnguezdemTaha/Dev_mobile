@@ -138,7 +138,9 @@ public class Addetudiant extends AppCompatActivity {
                         Personne p = new Personne(nom, pass, email, tele, type);
                         p.setAnnee(annee);
                         Methodes_personne.createUser(p);
-                        Toast.makeText(getApplicationContext(), "Vous avez ajouter un étudiant avec succès", Toast.LENGTH_LONG).show();
+
+                        Toast.makeText(getApplicationContext(), "L'étudiant vient d'être ajouté avec succès", Toast.LENGTH_LONG).show();
+
 
                         Intent in = new Intent(Addetudiant.this, Addetudiant.class);
                         startActivity(in);

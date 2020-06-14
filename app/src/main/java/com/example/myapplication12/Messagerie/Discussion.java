@@ -248,7 +248,7 @@ public class Discussion extends AppCompatActivity {
                 Date date_msg = null;
                 Message m = new Message(currentTime, t1.getText().toString(), p1, ps);
                 Methodes_msg_evt_.creatMessage(m);
-                Toast.makeText(getApplicationContext(), "Votre message a été ajouter avec succe", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Votre message a été ajouter avec succès", Toast.LENGTH_LONG).show();
                 Intent in = new Intent(Discussion.this, Discussion.class);
                 String m1 = p1.getNom();
                 String m2 = p2.getNom();

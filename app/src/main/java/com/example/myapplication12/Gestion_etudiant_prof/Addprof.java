@@ -162,7 +162,9 @@ public class Addprof extends AppCompatActivity {
                         p.setModule(module);
                         p.setSemestre(finalSemestre);
                         Methodes_personne.createUser(p);
-                        Toast.makeText(getApplicationContext(), "Vous avez ajouter un prof avec succe", Toast.LENGTH_LONG).show();
+
+                        Toast.makeText(getApplicationContext(), "Vous avez ajouté un prof avec succès", Toast.LENGTH_LONG).show();
+
 
                         Intent in = new Intent(Addprof.this, Listprof.class);
                         startActivity(in);

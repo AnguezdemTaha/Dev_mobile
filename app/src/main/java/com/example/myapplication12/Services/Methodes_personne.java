@@ -76,6 +76,13 @@ public class Methodes_personne {
 
     }
 
+    public static Task<QuerySnapshot> GetChef() {
+
+
+        return getUsersCollection().whereEqualTo("type","Chef").get();
+
+    }
+
     public static Task<QuerySnapshot> Getuserbynom(String nom) {
 
 

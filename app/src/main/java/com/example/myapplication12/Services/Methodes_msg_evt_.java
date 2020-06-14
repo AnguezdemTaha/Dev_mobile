@@ -34,7 +34,7 @@ public class Methodes_msg_evt_ {
 
 
         Map<String, Object> m = new HashMap<>();
-        if (p.getType().equals("Prof")) {
+        if (p.getType().equals("Prof") || p.getType().equals("Chef")) {
             m.put("nom", p.getModule().getNom());
 
             m.put("cours", null);
@@ -45,6 +45,7 @@ public class Methodes_msg_evt_ {
         } else {
             m = null;
         }
+
 
         Map<String, Object> p1 = new HashMap<>();
         p1.put("nom", p.getNom());
@@ -84,7 +85,7 @@ public class Methodes_msg_evt_ {
     public static Task<QuerySnapshot> GetMessagesrecu(Personne p) {
 
         Map<String, Object> m = new HashMap<>();
-        if (p.getType().equals("Prof")) {
+        if (p.getType().equals("Prof") || p.getType().equals("Chef")) {
             m.put("nom", p.getModule().getNom());
 
             m.put("cours", null);
@@ -115,7 +116,7 @@ public class Methodes_msg_evt_ {
     public static Task<QuerySnapshot> GetMessages1(Personne p, Personne p2) {
 
         Map<String, Object> m = new HashMap<>();
-        if (p.getType().equals("Prof")) {
+        if (p.getType().equals("Prof") || p.getType().equals("Chef")) {
             m.put("nom", p.getModule().getNom());
 
             m.put("cours", null);

@@ -290,7 +290,7 @@ public class Editevent extends AppCompatActivity {
                                                     Methodes_event.getUsersCollection().document(idd).update("per_participes", ps);
 
 
-                                                    Toast.makeText(getApplicationContext(), "Vous etes interisse :", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(getApplicationContext(), "Vous participez à cet évenement :", Toast.LENGTH_SHORT).show();
                                                     //p = document.toObject(Personne.class);
                                                     //ps.add(p);
                                                     //System.out.println("le nom ="+p.getNom());
@@ -350,7 +350,7 @@ public class Editevent extends AppCompatActivity {
                                                     String idd = document.getId();
                                                     Methodes_event.getUsersCollection().document(idd).update("per_participes", ps);
 
-                                                    Toast.makeText(getApplicationContext(), "Vous etes non interesse :", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(getApplicationContext(), "Vous ne participez plus:", Toast.LENGTH_SHORT).show();
                                                     //p = document.toObject(Personne.class);
                                                     //ps.add(p);
                                                     //System.out.println("le nom ="+p.getNom());

@@ -120,7 +120,7 @@ public class MyAdapterCours extends RecyclerView.Adapter<MyAdapterCours.MyViewHo
                     String m=nom_e.getText().toString();
                     in.putExtra("nom_cours", m);
 
-                    Toast.makeText(v.getContext().getApplicationContext(),"Le cous :"+m,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext().getApplicationContext(),"Le cours :"+m,Toast.LENGTH_SHORT).show();
                     v.getContext().startActivity(in);
                 }});
             delete.setOnClickListener(new View.OnClickListener() {

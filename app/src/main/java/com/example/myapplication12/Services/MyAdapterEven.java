@@ -188,7 +188,7 @@ public class MyAdapterEven extends RecyclerView.Adapter<MyAdapterEven.MyViewHold
                     String m = nom_e.getText().toString();
                     in.putExtra("nom_even", m);
 
-                    Toast.makeText(v.getContext().getApplicationContext(), "L'even :" + m, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext().getApplicationContext(), "L'évenement :" + m, Toast.LENGTH_SHORT).show();
                     v.getContext().startActivity(in);
                 }
             });
@@ -218,7 +218,7 @@ public class MyAdapterEven extends RecyclerView.Adapter<MyAdapterEven.MyViewHold
                                     v.getContext().startActivity(in);
 
 
-                                    Toast.makeText(v.getContext().getApplicationContext(), "Votre modification a été enregistré avec succe :", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(v.getContext().getApplicationContext(), "Votre modification a été enregistré avec succès :", Toast.LENGTH_SHORT).show();
                                     //p = document.toObject(Personne.class);
                                     //ps.add(p);
                                     //System.out.println("le nom ="+p.getNom());
@@ -235,7 +235,7 @@ public class MyAdapterEven extends RecyclerView.Adapter<MyAdapterEven.MyViewHold
                     String m = nom_e.getText().toString();
                     in.putExtra("nom_even", m);
 
-                    Toast.makeText(v.getContext().getApplicationContext(), "L'even :" + m, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext().getApplicationContext(), "L'évenement :" + m, Toast.LENGTH_SHORT).show();
                     v.getContext().startActivity(in);
                 }
             });

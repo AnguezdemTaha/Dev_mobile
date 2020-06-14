@@ -143,7 +143,7 @@ public class Editetudiant extends AppCompatActivity {
                                 Methodes_personne.getUsersCollection().document(idd).update("nom", p.getNom(),"mot_de_passe",p.getMot_de_passe(), "email", p.getEmail(), "num_telephone", p.getNum_telephone());
                                 Intent in = new Intent(Editetudiant.this, Listetudiant.class);
                                 startActivity(in);
-                                Toast.makeText(getApplicationContext(), "Votre modification a été enregistré avec succe :", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Votre modification a été enregistré avec succès", Toast.LENGTH_SHORT).show();
                                 //p = document.toObject(Personne.class);
                                 //ps.add(p);
                                 //System.out.println("le nom ="+p.getNom());
