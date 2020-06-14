@@ -279,9 +279,9 @@ public class Listevent extends AppCompatActivity {
         Gson gson = new Gson();
         String json = pref.getString("personne_c", "");
         final Personne p1 = gson.fromJson(json, Personne.class);
-        if(p1.getType().equals("Prof") ){
+        /*if(p1.getType().equals("Prof") ){
             itm3.setVisible(false);
-        }
+        }*/
 
 
 

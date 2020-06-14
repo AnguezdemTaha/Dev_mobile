@@ -246,7 +246,7 @@ public class Editevent extends AppCompatActivity {
                                                     pers_par.add(p1);
 
 
-                                                    ArrayList<Personne> pers_pa = new ArrayList<>();
+                                                    /*ArrayList<Personne> pers_pa = new ArrayList<>();
                                                     pers_pa.add(pers_par.get(0));
                                                     for (Personne p5 : pers_par) {
                                                         for (Personne p6 : pers_pa) {
@@ -254,21 +254,38 @@ public class Editevent extends AppCompatActivity {
                                                                 pers_pa.add(p5);
                                                             }
                                                         }
-                                                    }
-                                                    System.out.println(pers_par.size());
-                                                    System.out.println(pers_pa.size());
+                                                    }*/
+
+                                                    System.out.println("la list des particaipant size="+pers_par.size());
+                                                    //System.out.println("verification="+pers_pa.size());
                                                     String idd = document.getId();
                                                     ArrayList<Map<String, Object>> ps = new ArrayList<Map<String, Object>>();
-                                                    for (Personne p : pers_pa) {
-                                                        Map<String, Object> p1 = new HashMap<>();
-                                                        p1.put("nom", p.getNom());
-                                                        p1.put("mot_de_passe", p.getMot_de_passe());
-                                                        p1.put("email", p.getEmail());
-                                                        p1.put("num_telephone", p.getNum_telephone());
-                                                        p1.put("type", p.getType());
+                                                    for (Personne p : pers_par) {
+                                                        Map<String, Object> m = new HashMap<>();
+                                                        if (p.getType().equals("Prof")) {
+                                                            m.put("nom", p.getModule().getNom());
 
-                                                        ps.add(p1);
+                                                            m.put("cours", null);
+                                                            m.put("date", null);
+                                                            m.put("periode", null);
+                                                            m.put("profs", null);
+                                                            m.put("semestre", null);
+                                                        } else {
+                                                            m = null;
+                                                        }
+                                                        Map<String, Object> p11 = new HashMap<>();
+                                                        p11.put("nom", p.getNom());
+                                                        p11.put("mot_de_passe", p.getMot_de_passe());
+                                                        p11.put("email", p.getEmail());
+                                                        p11.put("num_telephone", p.getNum_telephone());
+                                                        p11.put("type", p.getType());
+                                                        p11.put("module", m);
+                                                        p11.put("semestre", p.getSemestre());
+                                                        p11.put("annee", p.getAnnee());
+
+                                                        ps.add(p11);
                                                     }
+
 
                                                     Methodes_event.getUsersCollection().document(idd).update("per_participes", ps);
 
@@ -291,17 +308,32 @@ public class Editevent extends AppCompatActivity {
                                             //Personne p = new Personne();
                                             if (task.isSuccessful()) {
                                                 ArrayList<Personne> pers_par = e.getPer_participes();
-                                                ArrayList<Personne> pers_pa = new ArrayList<>();
-                                                for (Personne p5 : pers_par) {
-                                                    if (!p5.getNom().equals(p1.getNom())) {
-                                                        pers_pa.add(p5);
+                                                //ArrayList<Personne> pers_pa = new ArrayList<>();
+                                                for (int i = 0; i <pers_par.size() ; i++) {
+
+
+                                                    if (pers_par.get(i).getNom().equals(p1.getNom())) {
+                                                        pers_par.remove(pers_par.get(i));
                                                     }
                                                 }
 
-                                                System.out.println(pers_pa.size());
+
+                                                //System.out.println(pers_pa.size());
 
                                                 ArrayList<Map<String, Object>> ps = new ArrayList<Map<String, Object>>();
-                                                for (Personne p : pers_pa) {
+                                                for (Personne p : pers_par) {
+                                                    Map<String, Object> m = new HashMap<>();
+                                                    if (p.getType().equals("Prof")) {
+                                                        m.put("nom", p.getModule().getNom());
+
+                                                        m.put("cours", null);
+                                                        m.put("date", null);
+                                                        m.put("periode", null);
+                                                        m.put("profs", null);
+                                                        m.put("semestre", null);
+                                                    } else {
+                                                        m = null;
+                                                    }
                                                     Map<String, Object> p1 = new HashMap<>();
                                                     p1.put("nom", p.getNom());
                                                     p1.put("mot_de_passe", p.getMot_de_passe());
@@ -309,6 +341,9 @@ public class Editevent extends AppCompatActivity {
                                                     p1.put("num_telephone", p.getNum_telephone());
                                                     p1.put("type", p.getType());
 
+                                                    p1.put("module", m);
+                                                    p1.put("semestre", p.getSemestre());
+                                                    p1.put("annee", p.getAnnee());
                                                     ps.add(p1);
                                                 }
                                                 for (QueryDocumentSnapshot document : task.getResult()) {
