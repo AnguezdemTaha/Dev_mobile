@@ -16,39 +16,46 @@
         android:orientation="vertical">
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listdesemploits"
+
+        <WebView
+            android:id="@+id/web"
             android:layout_width="match_parent"
-            android:layout_height="516dp"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="525dp" />
 
-
-
-
-        </androidx.recyclerview.widget.RecyclerView>
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
             android:gravity="bottom"
+
+            android:layout_height="wrap_content"
+
             android:orientation="horizontal"
-            android:padding="20dp">
+
+            android:padding="20dp"
+            >
 
             <ImageView
-                android:id="@+id/Scolarite11"
+                android:id="@+id/Scolarite1"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_gravity="center"
+                android:src="@drawable/scolarite"
                 android:layout_marginLeft="15dp"
-                android:src="@drawable/scolarite" />
-
+                android:layout_gravity="center"/>
             <ImageView
-                android:id="@+id/messages11"
+                android:id="@+id/messages1"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_gravity="center"
+                android:src="@drawable/messages"
                 android:layout_marginLeft="100dp"
-                android:src="@drawable/messages" />
+                android:layout_gravity="center"/>
+            <ImageView
+                android:id="@+id/evenement1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/evens"
+                android:layout_marginLeft="100dp"
+                android:layout_gravity="center"/>
+
+
 
             <ImageView
                 android:id="@+id/evenement11"

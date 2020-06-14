@@ -11,7 +11,7 @@
         android:background="#26CDBFBF"
         android:gravity="left"
         android:orientation="horizontal"
-        android:padding="20dp">
+        android:padding="10dp">
 
         <LinearLayout
             android:id="@+id/User11s"
@@ -59,20 +59,40 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/Msguser"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/ddd"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:background="#00000000"
-                android:hint="msg"
-                android:inputType="text"
-                android:letterSpacing="0.1"
-                android:textColor="#3c3b3b"
-                android:textColorHint="#3c3b3b"
-                android:textSize="12dp" />
+                android:gravity="left"
+                android:orientation="vertical"
+                android:padding="0dp">
 
+                <TextView
+                    android:id="@+id/Msguser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="#00000000"
+                    android:hint="msg"
+                    android:inputType="text"
+                    android:letterSpacing="0.1"
+                    android:textColor="#3c3b3b"
+                    android:textColorHint="#3c3b3b"
+                    android:textSize="12dp" />
+                <TextView
+                    android:id="@+id/Msgdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="#00000000"
+                    android:hint="msg"
+                    android:inputType="text"
+                    android:letterSpacing="0.1"
+                    android:textColor="#3c3b3b"
+                    android:textColorHint="#3c3b3b"
+                    android:textSize="12dp" />
 
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

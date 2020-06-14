@@ -28,6 +28,7 @@ import com.example.myapplication12.Gestion_etudiant_prof.Listetudiant;
 import com.example.myapplication12.Gestion_etudiant_prof.Listprof;
 import com.example.myapplication12.Menu.Login;
 import com.example.myapplication12.Menu.Menuetudiant;
+import com.example.myapplication12.Model.Emploi;
 import com.example.myapplication12.Model.Message;
 import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.R;
@@ -101,6 +102,38 @@ public class Addmessage extends AppCompatActivity implements MyAdapter.OnNoteLis
         r.setAdapter(myAdapter);*/
 
         final MyAdapter.OnNoteListener note = (MyAdapter.OnNoteListener) this;
+
+        Methodes_personne.GetChef().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                //Personne p = new Personne();
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        p = document.toObject(Personne.class);
+                        //  if(p.getType()=="Prof") {
+                        prs.add(p);
+
+                        //System.out.println("le nom ="+p.getNom());
+                    }
+                    r.setHasFixedSize(true);
+                    LayoutManager = new LinearLayoutManager(context);
+                    r.setLayoutManager((RecyclerView.LayoutManager) LayoutManager);
+                    MyAdapter myAdapter = new MyAdapter(prs, context, note);
+                    r.setAdapter(myAdapter);
+
+
+                    //del=(ImageView) findViewById(R.id.delet_personne);
+                    //del.setVisibility(View.INVISIBLE);
+
+
+                } else {
+
+                }
+            }
+
+
+        });
+
         Methodes_personne.GetAllProfs().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -224,7 +257,7 @@ public class Addmessage extends AppCompatActivity implements MyAdapter.OnNoteLis
                     Methodes_msg_evt_.creatMessage(m);
                 }
 
-                Toast.makeText(getApplicationContext(), "Votre message a été ajouter avec succe", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Votre message a été ajouté avec succès", Toast.LENGTH_LONG).show();
                 Intent in = new Intent(Addmessage.this, Listmessage.class);
                 startActivity(in);
 
@@ -294,6 +327,9 @@ public class Addmessage extends AppCompatActivity implements MyAdapter.OnNoteLis
         MenuItem itm9 = menuitem.findItem(R.id.item9);
         MenuItem itm10 = menuitem.findItem(R.id.item10);
 
+        MenuItem itm88 = menuitem.findItem(R.id.item88);
+        MenuItem itm99 = menuitem.findItem(R.id.item99);
+        MenuItem itm98 = menuitem.findItem(R.id.item99);
 
         itm1.setVisible(false);
         itm2.setVisible(false);
@@ -348,12 +384,16 @@ public class Addmessage extends AppCompatActivity implements MyAdapter.OnNoteLis
                 startActivity(in8);
                 break;
             case R.id.item9:
-                Intent in9 = new Intent(Addmessage.this, Menuetudiant.class);
+                Intent in9 = new Intent(Addmessage.this, Emploit.class);
                 startActivity(in9);
                 break;
             case R.id.item10:
                 Intent in10 = new Intent(Addmessage.this, Login.class);
                 startActivity(in10);
+                break;
+            case R.id.item88:
+                Intent in11 = new Intent(Addmessage.this, Menuetudiant.class);
+                startActivity(in11);
                 break;
         }
         return super.onOptionsItemSelected(item);

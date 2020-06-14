@@ -32,7 +32,7 @@ import com.example.myapplication12.Messagerie.Listmessage;
 import com.example.myapplication12.Model.Cours;
 import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.R;
-import com.example.myapplication12.Services.Methodes_cours;
+import com.example.myapplication12.Scolarité.Methodes_cours;
 import com.example.myapplication12.Services.MyAdapterCours;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -105,6 +105,13 @@ public class Listcours extends AppCompatActivity {
         final LinkedList<Cours> cours = new LinkedList<Cours>();
         final Context context = this;
         //final MyAdapter.OnNoteListener note = this;
+        SharedPreferences pref = context.getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = pref.getString("personne_c", "");
+        final Personne p = gson.fromJson(json, Personne.class);
+
+
+
         Methodes_cours.GetAllcours().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -112,8 +119,27 @@ public class Listcours extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         //String idd= document.getId();
-
                         c = document.toObject(Cours.class);
+                        int sem = 0;
+
+                        if (p.getType().equals("Etudiant")) {
+                            int semestre = Integer.parseInt(c.getPrf().getSemestre());
+                            if (p.getAnnee().equals("1ere année"))
+                                sem = 2;
+                            else if (p.getAnnee().equals("2eme année"))
+                                sem = 4;
+                            else if (p.getAnnee().equals("3eme année"))
+                                sem = 5;
+                            if(semestre <= sem)
+                                cours.add(c);
+                        }
+                        else if (p.getType().equals("Prof")) {
+                            int semestre = Integer.parseInt(c.getPrf().getSemestre());
+                            sem = Integer.parseInt(p.getSemestre());
+                            if(semestre == sem)
+                                cours.add(c);
+                        }
+                        else
                         cours.add(c);
                         //System.out.println("le nom ="+p.getNom());
                     }
@@ -141,15 +167,6 @@ public class Listcours extends AppCompatActivity {
         });
 
 
-        SharedPreferences pref = context.getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = pref.getString("personne_c", "");
-        Personne p = gson.fromJson(json, Personne.class);
-
-        if (p.getType().equals("Etudiant") || p.getType().equals("Delegue")) {
-            //text3.setVisibility(View.INVISIBLE);
-
-        }
 
 
     }
@@ -171,6 +188,9 @@ public class Listcours extends AppCompatActivity {
         MenuItem itm9 = menuitem.findItem(R.id.item9);
         MenuItem itm10 = menuitem.findItem(R.id.item10);
 
+        MenuItem itm88 = menuitem.findItem(R.id.item88);
+        MenuItem itm99 = menuitem.findItem(R.id.item99);
+        MenuItem itm98 = menuitem.findItem(R.id.item98);
 
         itm1.setVisible(false);
         itm2.setVisible(false);
@@ -179,10 +199,28 @@ public class Listcours extends AppCompatActivity {
         itm5.setVisible(false);
         itm6.setVisible(false);
         itm7.setVisible(false);
-       // itm8.setVisible(false);
+        itm8.setVisible(false);
         //itm9.setVisible(false);
 
+        itm98.setVisible(false);
+
+
         itm4.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = pref.getString("personne_c", "");
+        Personne p = gson.fromJson(json, Personne.class);
+
+        if (p.getType().equals("Etudiant") || p.getType().equals("Delegue")) {
+            itm4.setVisible(false);
+
+        }
+
+        if (p.getType().equals("Chef")) {
+            itm98.setVisible(true);
+
+        }
 
 
         //menuitem.getItem(3).setEnabled(true);
@@ -221,11 +259,11 @@ public class Listcours extends AppCompatActivity {
                 startActivity(in7);
                 break;
             case R.id.item8:
-                Intent in8 = new Intent(Listcours.this, Emploit.class);
+                Intent in8 = new Intent(Listcours.this, Addprof.class);
                 startActivity(in8);
                 break;
             case R.id.item9:
-                Intent in9 = new Intent(Listcours.this, Menuetudiant.class);
+                Intent in9 = new Intent(Listcours.this, Emploit.class);
                 startActivity(in9);
                 break;
 
@@ -233,7 +271,15 @@ public class Listcours extends AppCompatActivity {
                 Intent in10 = new Intent(Listcours.this, Login.class);
                 startActivity(in10);
                 break;
-        }
+
+            case R.id.item98:
+                Intent in98 = new Intent(Listcours.this, Listmodules.class);
+                startActivity(in98);
+                break;
+            case R.id.item88:
+                Intent in11 = new Intent(Listcours.this, Menuetudiant.class);
+                startActivity(in11);
+                break;}
         return super.onOptionsItemSelected(item);
     }
 

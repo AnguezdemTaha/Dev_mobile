@@ -69,7 +69,7 @@
                     android:layout_marginLeft="15dp"
                     android:background="#00000000"
                     android:hint="Description"
-                    android:inputType="textPassword"
+                    android:inputType="text"
                     android:letterSpacing="0.1"
                     android:textColor="#000000"
                     android:textColorHint="#000000"
@@ -107,7 +107,7 @@
                     android:id="@+id/imageajouterevn"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/add2"
+                    android:src="@drawable/ic_add_black_24dp"
                     android:layout_gravity="center"/>
             </LinearLayout>
             <LinearLayout

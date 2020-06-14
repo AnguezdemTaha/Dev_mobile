@@ -14,7 +14,11 @@ public class Personne implements Serializable {
     private String num_telephone;
     private String type;
 
-    private String module;
+    private String annee;
+
+    private Module module;
+
+    private String semestre;
 
     //attribus
 
@@ -31,6 +35,14 @@ public class Personne implements Serializable {
         email = Email;
         num_telephone = Num_telephone;
         this.type = Type;
+    }
+
+    public Module getModule() {
+        return module;
+    }
+
+    public void setModule(Module module) {
+        this.module = module;
     }
 
     public String getType() {
@@ -71,5 +83,21 @@ public class Personne implements Serializable {
 
     public void setNum_telephone(String Num_telephone) {
         num_telephone = Num_telephone;
+    }
+
+    public String getAnnee() {
+        return annee;
+    }
+
+    public void setAnnee(String annee) {
+        this.annee = annee;
+    }
+
+    public String getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(String semestre) {
+        this.semestre = semestre;
     }
 }

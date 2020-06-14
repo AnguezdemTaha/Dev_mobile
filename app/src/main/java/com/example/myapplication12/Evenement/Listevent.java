@@ -256,6 +256,9 @@ public class Listevent extends AppCompatActivity {
         MenuItem itm9 = menuitem.findItem(R.id.item9);
         MenuItem itm10 = menuitem.findItem(R.id.item10);
 
+        MenuItem itm88 = menuitem.findItem(R.id.item88);
+        MenuItem itm99 = menuitem.findItem(R.id.item99);
+        MenuItem itm98 = menuitem.findItem(R.id.item99);
 
         itm1.setVisible(false);
         itm2.setVisible(false);
@@ -265,6 +268,7 @@ public class Listevent extends AppCompatActivity {
         itm6.setVisible(false);
         itm7.setVisible(false);
         itm8.setVisible(false);
+        itm9.setVisible(false);
 
 
         //a ajouter p:ms
@@ -275,21 +279,10 @@ public class Listevent extends AppCompatActivity {
         Gson gson = new Gson();
         String json = pref.getString("personne_c", "");
         final Personne p1 = gson.fromJson(json, Personne.class);
-        if(p1.getType().equals("Prof")){
+        /*if(p1.getType().equals("Prof") ){
             itm3.setVisible(false);
-        }
-        else{
-            if(p1.getType().equals("Etudiant")){
+        }*/
 
-                itm3.setVisible(false);
-
-            }
-            else{
-                if(p1.getType().equals("Delegue")){
-
-                }
-            }
-        }
 
 
         //menuitem.getItem(3).setEnabled(true);
@@ -332,12 +325,16 @@ public class Listevent extends AppCompatActivity {
                 startActivity(in8);
                 break;
             case R.id.item9:
-                Intent in9 = new Intent(Listevent.this, Menuetudiant.class);
+                Intent in9 = new Intent(Listevent.this, Emploit.class);
                 startActivity(in9);
                 break;
             case R.id.item10:
                 Intent in10 = new Intent(Listevent.this, Login.class);
                 startActivity(in10);
+                break;
+            case R.id.item88:
+                Intent in11 = new Intent(Listevent.this, Menuetudiant.class);
+                startActivity(in11);
                 break;
         }
         return super.onOptionsItemSelected(item);

@@ -69,6 +69,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.nom_e.setText(ps.get(position).getNom());
+        String s="";
+        if(ps.get(position).getModule()!=null){
+            s=ps.get(position).getModule().getNom();
+        }
+
+        holder.info_e.setText(s);
         String type = ps.get(position).getType();
         if (context instanceof Addmessage) {
             holder.delete.setVisibility(View.INVISIBLE);
@@ -130,7 +136,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView nom_e;
+        public TextView nom_e,info_e;
         public ImageView delete;
         public ImageView edit;
         public CheckBox choisir_personne;
@@ -143,6 +149,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             super(itemLayoutView);
             this.context = context;
             nom_e = itemLayoutView.findViewById(R.id.nompersonne);
+            info_e = itemLayoutView.findViewById(R.id.infopersonne);
             delete = itemLayoutView.findViewById(R.id.delet_personne);
             edit = itemLayoutView.findViewById(R.id.edit_personne);
             choisir_personne = itemLayoutView.findViewById(R.id.choisirpersonne);

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="120dp">
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -13,13 +14,16 @@
 
         <ImageView
             android:id="@+id/imageevent1"
-            android:layout_width="98dp"
-            android:layout_height="97dp"
+
+            android:layout_width="71dp"
+            android:layout_height="73dp"
+
 
             android:layout_gravity="center" />
 
         <LinearLayout
-            android:layout_width="195dp"
+            android:layout_width="248dp"
+
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="left"
@@ -28,7 +32,7 @@
 
             <TextView
                 android:id="@+id/even_nom"
-                android:layout_width="100dp"
+                android:layout_width="234dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:background="#00000000"
@@ -41,7 +45,7 @@
 
             <TextView
                 android:id="@+id/even_description"
-                android:layout_width="100dp"
+                android:layout_width="236dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:background="#00000000"
@@ -52,6 +56,7 @@
                 android:textColorHint="#000000"
                 android:textSize="14dp" />
 
+
             <CheckBox
                 android:id="@+id/interiseevn"
                 android:layout_width="280dp"
@@ -59,20 +64,27 @@
                 android:layout_marginLeft="10dp"
 
                 android:buttonTint="#DA5F5F"
-                android:textColor="#DA5F5F"
-                android:textColorHint="#F84242"
-                android:clickable="false"
-                android:hint="Je participe"
-                android:inputType="text"
-                android:letterSpacing="0.1"
-                android:textAllCaps="false"
 
-                android:textSize="12dp" />
+
+            android:clickable="false"
+            android:hint="Je participe"
+            android:inputType="text"
+            android:letterSpacing="0.1"
+            android:textAllCaps="false"
+
+            android:textColor="#DA5F5F"
+            android:textColorHint="#F84242"
+
+
+            android:textSize="12dp"
+                />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="114dp"
+
+            android:layout_width="122dp"
+
             android:layout_height="41dp"
             android:layout_gravity="center"
             android:gravity="left"
@@ -84,7 +96,9 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="right|center_vertical"
-                android:layout_marginLeft="15dp"
+
+                android:layout_marginLeft="5dp"
+
                 android:src="@drawable/cherch" />
 
             <ImageView
@@ -98,6 +112,7 @@
 
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"

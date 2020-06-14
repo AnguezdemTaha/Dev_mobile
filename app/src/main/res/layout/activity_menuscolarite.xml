@@ -10,35 +10,8 @@
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
         android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:gravity="left"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="20dp"
-            >
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/profile"
-                android:layout_gravity="center"/>
-            <TextView
-                android:id="@+id/nomcurentuser"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:hint="Votre nom"
-                android:textColorHint="#000000"
-                android:layout_marginLeft="15dp"
-                android:background="#00000000"
-                android:letterSpacing="0.1"
-                android:textSize="16dp"
-                android:inputType="text"
-                android:textColor="#000000" />
 
 
-
-
-        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -47,6 +20,12 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#4a5a71"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="400dp"
+            android:gravity="center" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -58,69 +37,79 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#4a5a71"></LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp">
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/messages"
-                    android:layout_gravity="center"/>
-                <Button
-                    android:id="@+id/Cours_menu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Les cours"
-                    android:textColorHint="#000000"
-                    android:layout_marginLeft="15dp"
-                    android:background="#00000000"
-                    android:letterSpacing="0.1"
-                    android:textSize="16dp"
-                    android:inputType="text"
-                    android:textColor="#fff"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#4a5a71"></LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp">
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/evens"
-                    android:layout_gravity="center"/>
-                <Button
-                    android:id="@+id/Emploittemp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="L'emploit de temps"
-                    android:textColorHint="#000000"
-                    android:layout_marginLeft="15dp"
-                    android:background="#00000000"
-                    android:letterSpacing="0.1"
-                    android:textSize="16dp"
-                    android:inputType="text"
-                    android:textColor="#fff"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#4a5a71"></LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+
+                <Button
+                    android:id="@+id/pr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="#000000"
+                    android:hint="1ère année"
+                    android:inputType="text"
+                    android:letterSpacing="0.1"
+
+                    android:textColor="#ffffff"
+                    android:textColorHint="#FFFCFC"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+
+                <Button
+                    android:id="@+id/dm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="#000000"
+                    android:hint="2ème année"
+                    android:inputType="text"
+                    android:letterSpacing="0.1"
+
+                    android:textColor="#ffffff"
+                    android:textColorHint="#FFFCFC"
+                    android:textSize="16dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#4a5a71"></LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+
+                <Button
+                    android:id="@+id/tr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="#000000"
+                    android:hint="3ème année"
+                    android:inputType="text"
+                    android:letterSpacing="0.1"
+
+                    android:textColor="#ffffff"
+                    android:textColorHint="#FFFCFC"
+                    android:textSize="16dp" />
+            </LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -129,9 +118,5 @@
         android:orientation="vertical"
         android:gravity="bottom"
         android:layout_marginBottom="20dp"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:layout_marginBottom="400dp"/>
+
 </RelativeLayout>

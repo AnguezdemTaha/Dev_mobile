@@ -30,6 +30,7 @@ import com.example.myapplication12.Gestion_etudiant_prof.Listetudiant;
 import com.example.myapplication12.Gestion_etudiant_prof.Listprof;
 import com.example.myapplication12.MainActivity;
 import com.example.myapplication12.Menu.Login;
+import com.example.myapplication12.Menu.Menuetudiant;
 import com.example.myapplication12.Model.Message;
 import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.Model.Professeur;
@@ -178,12 +179,13 @@ public class Discussion extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<List<QuerySnapshot>> task) {
                                 if (task.isSuccessful()) {
+
                                     for (QuerySnapshot document : task.getResult()) {
                                         for (QueryDocumentSnapshot document1 : document) {
                                             Message m = document1.toObject(Message.class);
 
                                             msgs.add(m);
-
+                                            System.out.println("les message here :::"+m.getContenu_msg());
                                         }
 
 
@@ -246,7 +248,7 @@ public class Discussion extends AppCompatActivity {
                 Date date_msg = null;
                 Message m = new Message(currentTime, t1.getText().toString(), p1, ps);
                 Methodes_msg_evt_.creatMessage(m);
-                Toast.makeText(getApplicationContext(), "Votre message a été ajouter avec succe", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Votre message a été ajouter avec succès", Toast.LENGTH_LONG).show();
                 Intent in = new Intent(Discussion.this, Discussion.class);
                 String m1 = p1.getNom();
                 String m2 = p2.getNom();
@@ -276,6 +278,9 @@ public class Discussion extends AppCompatActivity {
         MenuItem itm9 = menuitem.findItem(R.id.item9);
         MenuItem itm10 = menuitem.findItem(R.id.item10);
 
+        MenuItem itm88 = menuitem.findItem(R.id.item88);
+        MenuItem itm99 = menuitem.findItem(R.id.item99);
+        MenuItem itm98 = menuitem.findItem(R.id.item99);
 
         itm1.setVisible(false);
         itm2.setVisible(false);
@@ -336,6 +341,10 @@ public class Discussion extends AppCompatActivity {
             case R.id.item10:
                 Intent in10 = new Intent(Discussion.this, Login.class);
                 startActivity(in10);
+                break;
+            case R.id.item88:
+                Intent in11 = new Intent(Discussion.this, Menuetudiant.class);
+                startActivity(in11);
                 break;
         }
         return super.onOptionsItemSelected(item);

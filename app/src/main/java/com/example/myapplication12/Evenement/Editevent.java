@@ -27,6 +27,7 @@ import com.example.myapplication12.Gestion_etudiant_prof.Addprof;
 import com.example.myapplication12.Gestion_etudiant_prof.Listetudiant;
 import com.example.myapplication12.Gestion_etudiant_prof.Listprof;
 import com.example.myapplication12.Menu.Login;
+import com.example.myapplication12.Menu.Menuetudiant;
 import com.example.myapplication12.Messagerie.Addmessage;
 import com.example.myapplication12.Messagerie.Listmessage;
 import com.example.myapplication12.Model.Evenement;
@@ -245,7 +246,7 @@ public class Editevent extends AppCompatActivity {
                                                     pers_par.add(p1);
 
 
-                                                    ArrayList<Personne> pers_pa = new ArrayList<>();
+                                                    /*ArrayList<Personne> pers_pa = new ArrayList<>();
                                                     pers_pa.add(pers_par.get(0));
                                                     for (Personne p5 : pers_par) {
                                                         for (Personne p6 : pers_pa) {
@@ -253,26 +254,43 @@ public class Editevent extends AppCompatActivity {
                                                                 pers_pa.add(p5);
                                                             }
                                                         }
-                                                    }
-                                                    System.out.println(pers_par.size());
-                                                    System.out.println(pers_pa.size());
+                                                    }*/
+
+                                                    System.out.println("la list des particaipant size="+pers_par.size());
+                                                    //System.out.println("verification="+pers_pa.size());
                                                     String idd = document.getId();
                                                     ArrayList<Map<String, Object>> ps = new ArrayList<Map<String, Object>>();
-                                                    for (Personne p : pers_pa) {
-                                                        Map<String, Object> p1 = new HashMap<>();
-                                                        p1.put("nom", p.getNom());
-                                                        p1.put("mot_de_passe", p.getMot_de_passe());
-                                                        p1.put("email", p.getEmail());
-                                                        p1.put("num_telephone", p.getNum_telephone());
-                                                        p1.put("type", p.getType());
+                                                    for (Personne p : pers_par) {
+                                                        Map<String, Object> m = new HashMap<>();
+                                                        if (p.getType().equals("Prof")) {
+                                                            m.put("nom", p.getModule().getNom());
 
-                                                        ps.add(p1);
+                                                            m.put("cours", null);
+                                                            m.put("date", null);
+                                                            m.put("periode", null);
+                                                            m.put("profs", null);
+                                                            m.put("semestre", null);
+                                                        } else {
+                                                            m = null;
+                                                        }
+                                                        Map<String, Object> p11 = new HashMap<>();
+                                                        p11.put("nom", p.getNom());
+                                                        p11.put("mot_de_passe", p.getMot_de_passe());
+                                                        p11.put("email", p.getEmail());
+                                                        p11.put("num_telephone", p.getNum_telephone());
+                                                        p11.put("type", p.getType());
+                                                        p11.put("module", m);
+                                                        p11.put("semestre", p.getSemestre());
+                                                        p11.put("annee", p.getAnnee());
+
+                                                        ps.add(p11);
                                                     }
+
 
                                                     Methodes_event.getUsersCollection().document(idd).update("per_participes", ps);
 
 
-                                                    Toast.makeText(getApplicationContext(), "Vous etes interisse :", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(getApplicationContext(), "Vous participez à cet évenement :", Toast.LENGTH_SHORT).show();
                                                     //p = document.toObject(Personne.class);
                                                     //ps.add(p);
                                                     //System.out.println("le nom ="+p.getNom());
@@ -290,17 +308,32 @@ public class Editevent extends AppCompatActivity {
                                             //Personne p = new Personne();
                                             if (task.isSuccessful()) {
                                                 ArrayList<Personne> pers_par = e.getPer_participes();
-                                                ArrayList<Personne> pers_pa = new ArrayList<>();
-                                                for (Personne p5 : pers_par) {
-                                                    if (!p5.getNom().equals(p1.getNom())) {
-                                                        pers_pa.add(p5);
+                                                //ArrayList<Personne> pers_pa = new ArrayList<>();
+                                                for (int i = 0; i <pers_par.size() ; i++) {
+
+
+                                                    if (pers_par.get(i).getNom().equals(p1.getNom())) {
+                                                        pers_par.remove(pers_par.get(i));
                                                     }
                                                 }
 
-                                                System.out.println(pers_pa.size());
+
+                                                //System.out.println(pers_pa.size());
 
                                                 ArrayList<Map<String, Object>> ps = new ArrayList<Map<String, Object>>();
-                                                for (Personne p : pers_pa) {
+                                                for (Personne p : pers_par) {
+                                                    Map<String, Object> m = new HashMap<>();
+                                                    if (p.getType().equals("Prof")) {
+                                                        m.put("nom", p.getModule().getNom());
+
+                                                        m.put("cours", null);
+                                                        m.put("date", null);
+                                                        m.put("periode", null);
+                                                        m.put("profs", null);
+                                                        m.put("semestre", null);
+                                                    } else {
+                                                        m = null;
+                                                    }
                                                     Map<String, Object> p1 = new HashMap<>();
                                                     p1.put("nom", p.getNom());
                                                     p1.put("mot_de_passe", p.getMot_de_passe());
@@ -308,13 +341,16 @@ public class Editevent extends AppCompatActivity {
                                                     p1.put("num_telephone", p.getNum_telephone());
                                                     p1.put("type", p.getType());
 
+                                                    p1.put("module", m);
+                                                    p1.put("semestre", p.getSemestre());
+                                                    p1.put("annee", p.getAnnee());
                                                     ps.add(p1);
                                                 }
                                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                                     String idd = document.getId();
                                                     Methodes_event.getUsersCollection().document(idd).update("per_participes", ps);
 
-                                                    Toast.makeText(getApplicationContext(), "Vous etes non interesse :", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(getApplicationContext(), "Vous ne participez plus:", Toast.LENGTH_SHORT).show();
                                                     //p = document.toObject(Personne.class);
                                                     //ps.add(p);
                                                     //System.out.println("le nom ="+p.getNom());
@@ -357,6 +393,9 @@ public class Editevent extends AppCompatActivity {
         MenuItem itm9 = menuitem.findItem(R.id.item9);
         MenuItem itm10 = menuitem.findItem(R.id.item10);
 
+        MenuItem itm88 = menuitem.findItem(R.id.item88);
+        MenuItem itm99 = menuitem.findItem(R.id.item99);
+        MenuItem itm98 = menuitem.findItem(R.id.item99);
 
         itm1.setVisible(false);
         itm2.setVisible(false);
@@ -415,6 +454,10 @@ public class Editevent extends AppCompatActivity {
             case R.id.item10:
                 Intent in10 = new Intent(Editevent.this, Login.class);
                 startActivity(in10);
+                break;
+            case R.id.item88:
+                Intent in11 = new Intent(Editevent.this, Menuetudiant.class);
+                startActivity(in11);
                 break;
         }
         return super.onOptionsItemSelected(item);
