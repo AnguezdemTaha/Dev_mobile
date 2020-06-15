@@ -129,8 +129,8 @@ public class Listcours extends AppCompatActivity {
                             else if (p.getAnnee().equals("2eme année"))
                                 sem = 4;
                             else if (p.getAnnee().equals("3eme année"))
-                                sem = 5;
-                            if(semestre <= sem)
+                                sem = 6;
+                            if(semestre == sem || semestre == sem-1)
                                 cours.add(c);
                         }
                         else if (p.getType().equals("Prof")) {

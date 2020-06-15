@@ -172,7 +172,7 @@ public class MyAdapterE extends RecyclerView.Adapter<MyAdapterE.MyViewHolder> {
                     String m = nom_e.getText().toString();
                     in.putExtra("nom_prof_etudiant", m);
 
-                    Toast.makeText(v.getContext().getApplicationContext(), "L'etudiant :" + m, Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(v.getContext().getApplicationContext(), "L'etudiant :" + m, Toast.LENGTH_SHORT).show();
                     v.getContext().startActivity(in);
 
                 }

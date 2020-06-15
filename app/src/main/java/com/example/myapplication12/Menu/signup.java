@@ -167,7 +167,7 @@ public class signup extends AppCompatActivity {
                                     //p.setSemestre(semestre);
 
                                     Methodes_personne.createUser(p);
-                                    Toast.makeText(getApplicationContext(), "Votre inscription a été accpeter avec succe", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "Votre compte a été créé avec succès !", Toast.LENGTH_LONG).show();
 
                                     Intent in = new Intent(signup.this, Login.class);
                                     startActivity(in);

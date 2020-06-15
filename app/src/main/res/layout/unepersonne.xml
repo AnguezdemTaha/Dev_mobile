@@ -52,7 +52,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="5dp"
             android:src="@drawable/supprimer" />
         <CheckBox
             android:id="@+id/choisirpersonne"

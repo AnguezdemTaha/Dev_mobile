@@ -51,7 +51,7 @@ public class Editprof extends AppCompatActivity {
         ColorDrawable colorDrawable
                 = new ColorDrawable(Color.parseColor("#000000"));
         actionBar.setBackgroundDrawable(colorDrawable);
-        actionBar.setTitle("Les cours");
+
 
 
         scolarete1 = (ImageView) findViewById(R.id.Scolarite14);
@@ -107,7 +107,7 @@ public class Editprof extends AppCompatActivity {
                         mot_de_passe=p.getMot_de_passe();
 
                         //nom1.setText(nomuser);
-                        actionBar.setTitle(nomuser);
+                        actionBar.setTitle("Professeur "+nomuser);
                         nom2.setText(nomuser);
                         email2.setText(email);
                         tele2.setText(tele);

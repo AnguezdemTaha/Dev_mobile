@@ -78,7 +78,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:background="#00000000"
-                        android:hint="nom de prof"
+                        android:hint="Nom"
                         android:inputType="text"
                         android:letterSpacing="0.1"
                         android:textColor="#000000"
@@ -96,7 +96,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:background="#00000000"
-                        android:hint="Email de prof/etud"
+                        android:hint="Email"
                         android:inputType="text"
                         android:letterSpacing="0.1"
                         android:textColor="#000000"
@@ -114,7 +114,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:background="#00000000"
-                        android:hint="Tele prof/etud"
+                        android:hint="Telephone"
                         android:inputType="text"
                         android:letterSpacing="0.1"
                         android:textColor="#000000"
@@ -132,7 +132,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:background="#00000000"
-                        android:hint="Mot_de_passe"
+                        android:hint="Mot de passe"
                         android:inputType="text"
                         android:letterSpacing="0.1"
                         android:textColor="#000000"
@@ -150,6 +150,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:layout_marginLeft="15dp"
+                        android:layout_marginTop="50dp"
                         android:src="@drawable/enreg" />
 
 

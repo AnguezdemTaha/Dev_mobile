@@ -31,15 +31,13 @@ android:background="@drawable/grdnt">
         android:orientation="vertical">
 
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listdesmessagesd"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="546dp"
+            android:layout_marginTop="1dp"
             android:gravity="center"
             android:orientation="vertical">
-
-
 
 
         </androidx.recyclerview.widget.RecyclerView>
@@ -57,10 +55,12 @@ android:background="@drawable/grdnt">
     android:paddingLeft="4dp"
     android:paddingRight="4dp"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="fill_parent"
-        android:gravity="left"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="left"
         android:orientation="horizontal"
         android:padding="20dp">
 
@@ -84,13 +84,15 @@ android:background="@drawable/grdnt">
             android:layout_gravity="center"
             android:paddingLeft="5dp"
             android:src="@drawable/image" />
+
         <ImageView
             android:id="@+id/envoyerfile"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:paddingLeft="5dp"
-            android:src="@drawable/add" />
+            android:src="@drawable/ic_add_black_24dp" />
+
         <ImageView
             android:id="@+id/envoyermsg"
             android:layout_width="40dp"

@@ -129,7 +129,7 @@ public class Login extends AppCompatActivity {
                                 //in.putExtra("nom_user", nomuser);
                                 startActivity(in);
                             } else {
-                                Toast.makeText(getApplicationContext(), "Votre informations sont incorectes", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Vos informations sont incorectes", Toast.LENGTH_LONG).show();
                             }
 
                         } else {

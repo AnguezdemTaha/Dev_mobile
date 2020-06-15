@@ -99,7 +99,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:paddingLeft="5dp"
-                android:src="@drawable/add" />
+                android:src="@drawable/ic_add_black_24dp" />
 
             <ImageView
                 android:id="@+id/envoyermsg2"

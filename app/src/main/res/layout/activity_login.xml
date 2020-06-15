@@ -9,20 +9,35 @@
         android:gravity="center"
         android:paddingLeft="60dp"
         android:paddingRight="60dp">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="191dp"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="306dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="30dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="IWIM HUB "
+                android:textColor="#EE2C2C"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="16dp">
+
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/usrusr"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:src="@drawable/usrusr" />
 
                 <EditText
                     android:id="@+id/nom"
@@ -37,20 +52,23 @@
                     android:textColor="#000000"
                     android:textSize="16dp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#4a5a71"></LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="16dp">
+
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/pswrd"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:src="@drawable/pswrd" />
 
                 <EditText
                     android:id="@+id/mot_de_passe"
@@ -65,6 +83,7 @@
                     android:textColor="#000000"
                     android:textSize="16dp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
