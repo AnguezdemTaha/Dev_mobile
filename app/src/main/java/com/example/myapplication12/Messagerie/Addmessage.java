@@ -6,12 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -39,13 +43,22 @@ import com.example.myapplication12.Services.Methodes_msg_evt_;
 import com.example.myapplication12.Services.Methodes_personne;
 import com.example.myapplication12.Services.MyAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.common.reflect.TypeToken;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -58,9 +71,13 @@ public class Addmessage extends AppCompatActivity implements MyAdapter.OnNoteLis
     private TextView t211, t212, msg;
     public RecyclerView r,r2;
     private Object LayoutManager;
-    private ImageView envoyer_msg;
+    private ImageView envoyer_msg,i1,b1;
     private ImageView scolarete1, messages1, evenement1;
 
+    StorageReference storageReference;
+
+    private Uri filePath;
+    private final int PICK_IMAGE_REQUEST = 71;
 
     private Personne p = new Personne();
     private Personne p2 = new Personne();
@@ -75,9 +92,14 @@ public class Addmessage extends AppCompatActivity implements MyAdapter.OnNoteLis
         actionBar.setBackgroundDrawable(colorDrawable);
         actionBar.setTitle("Ajouter un message");
 
+        storageReference = FirebaseStorage.getInstance().getReference();
 
         msg = (TextView) findViewById(R.id.msg);
         envoyer_msg = (ImageView) findViewById(R.id.envoyermsg2);
+
+        b1 = (ImageView) findViewById(R.id.envoyerfile);
+
+        i1=(ImageView) findViewById(R.id.i1);
 
         r = (RecyclerView) findViewById(R.id.listdespersonnesmsg);
         r2 = (RecyclerView) findViewById(R.id.listdespersonnesmsg2);
@@ -101,6 +123,12 @@ public class Addmessage extends AppCompatActivity implements MyAdapter.OnNoteLis
         MyAdapter myAdapter =new MyAdapter(prs,this);
         r.setAdapter(myAdapter);*/
 
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseImage();
+            }
+        });
         final MyAdapter.OnNoteListener note = (MyAdapter.OnNoteListener) this;
 
         Methodes_personne.GetChef().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -250,11 +278,14 @@ public class Addmessage extends AppCompatActivity implements MyAdapter.OnNoteLis
                 }
 
                 Date date_msg = null;
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                String strDate = dateFormat.format(currentTime);
                 for (Personne p3 : ps) {
                     ArrayList<Personne> p4 = new ArrayList<>();
                     p4.add(p3);
                     Message m = new Message(currentTime, contenu, p1, p4);
                     Methodes_msg_evt_.creatMessage(m);
+                    uploadImage(strDate,p3);
                 }
 
 
@@ -403,5 +434,86 @@ public class Addmessage extends AppCompatActivity implements MyAdapter.OnNoteLis
 
     public void OnNoteClick(int position) {
 
+    }
+    private void chooseImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        //intent.setType("application/pdf");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null )
+        {
+            filePath = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                i1.setImageBitmap(bitmap);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+    private void uploadImage(String contenu,Personne p_recu) {
+
+        if(filePath != null)
+        {
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
+
+
+
+
+            SharedPreferences pref1 = getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
+            Gson gson1 = new Gson();
+            String json1 = pref1.getString("personne_c", "");
+            final Personne p1 = gson1.fromJson(json1, Personne.class);
+            //Professeur p1 = new Professeur("tarik", "rachid", "tarik@gcom", "0606466", "Prof");
+
+            //String tele = String.valueOf(tele1.getText());
+            //String pass= String.valueOf(pass1.getText());
+            //String type="Etudiant";
+            Date currentTime = Calendar.getInstance().getTime();
+
+            ArrayList<Personne> ps = new ArrayList<>();
+            ps.add(p_recu);
+
+
+            Date date_msg = null;
+            Message m = new Message(currentTime, "", p1, ps);
+            m.setType("File");
+            Methodes_msg_evt_.creatMessage(m);
+
+            StorageReference ref = storageReference.child("messages/"+ contenu);
+            ref.putFile(filePath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            progressDialog.dismiss();
+                            Toast.makeText(Addmessage.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(Addmessage.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                                    .getTotalByteCount());
+                            progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                        }
+                    });
+        }
     }
 }

@@ -6,6 +6,7 @@ import java.util.Date;
 public class Message {
     private String Contenu_msg;
     private Date Date_msg;
+    private String Type;
     //.
     private Personne Per_envoye;
 
@@ -55,5 +56,13 @@ public class Message {
 
     public String toString() {
         return this.Per_envoye.getNom() +" ("+ this.Contenu_msg+")";
+    }
+
+    public String getType() {
+        return Type;
+    }
+
+    public void setType(String type) {
+        Type = type;
     }
 }

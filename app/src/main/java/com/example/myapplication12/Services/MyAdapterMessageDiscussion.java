@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,18 +12,26 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication12.Messagerie.Discussion;
 import com.example.myapplication12.Model.Message;
 import com.example.myapplication12.Model.Personne;
 import com.example.myapplication12.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.google.gson.Gson;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
+
+import static android.os.Environment.DIRECTORY_PICTURES;
+import static com.example.myapplication12.Services.MyAdapterCours.downloadfile;
 
 public class MyAdapterMessageDiscussion extends  RecyclerView.Adapter<MyAdapterMessageDiscussion.MyViewHolder>{
     private LinkedList<Message> msgs;
@@ -83,6 +92,14 @@ public class MyAdapterMessageDiscussion extends  RecyclerView.Adapter<MyAdapterM
             holder.contenu.setGravity(Gravity.RIGHT);
         }
 
+        String type_msg="";
+        if(msgs.get(position).getType()!=null){
+            type_msg=msgs.get(position).getType();
+        }
+        if(type_msg.equals("File")){
+            holder.downloadfichier.setVisibility(View.VISIBLE);
+        }
+
 
         //holder.
         //...
@@ -97,7 +114,7 @@ public class MyAdapterMessageDiscussion extends  RecyclerView.Adapter<MyAdapterM
 
     public  static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public  TextView nom_e,contenu,date_e;
-        public ImageView image_msg2;
+        public ImageView image_msg2,downloadfichier;
 
 
 
@@ -113,6 +130,7 @@ public class MyAdapterMessageDiscussion extends  RecyclerView.Adapter<MyAdapterM
             date_e=itemLayoutView.findViewById(R.id.Msgdate);
             contenu=itemLayoutView.findViewById(R.id.Msguser);
             image_msg2=itemLayoutView.findViewById(R.id.imagemsg2);
+            downloadfichier=itemLayoutView.findViewById(R.id.download_fichier);
 
             this.onNoteListener = onNoteListener;
             itemView.setOnClickListener(this);
@@ -130,6 +148,28 @@ public class MyAdapterMessageDiscussion extends  RecyclerView.Adapter<MyAdapterM
                     in.putExtra("nom_per_envoye", m);*/
 
 
+                }});
+
+            downloadfichier.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View v) {
+
+                    StorageReference storageReference;
+                    storageReference =  FirebaseStorage.getInstance().getReference();
+                    StorageReference pathReference = storageReference.child("messages/"+date_e.getText().toString());
+                    pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+
+                            downloadfile(v.getContext(),date_e.getText().toString(), ".pdf", DIRECTORY_PICTURES, uri.toString());
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+
+                        }
+                    });
                 }});
 
             /*int itemPosition = RecyclerView.getChildLayoutPosition(v);

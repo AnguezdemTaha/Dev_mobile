@@ -69,7 +69,7 @@ public class Addevent extends AppCompatActivity {
     private Uri filePath;
     FirebaseStorage storage;
     StorageReference storageReference;
-
+    //private Uri filePath;
     private final int PICK_IMAGE_REQUEST = 71;
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override

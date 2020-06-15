@@ -6,12 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -44,14 +48,23 @@ import com.example.myapplication12.Services.Methodes_personne;
 import com.example.myapplication12.Services.MyAdapterMessage;
 import com.example.myapplication12.Services.MyAdapterMessageDiscussion;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.common.reflect.TypeToken;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -66,7 +79,7 @@ public class Discussion extends AppCompatActivity {
 
     Menu menuitem;
     private LinearLayout l1, l2, t21;
-    private ImageView scolarete1, messages11, evenement1;
+    private ImageView scolarete1, messages11, evenement1,b1,i1;
     private ImageView imageadd;
     private TextView t1, nom_recu, mytext7, t211, t212;
     private ListView t2, t3;
@@ -74,6 +87,12 @@ public class Discussion extends AppCompatActivity {
     final ArrayList<Message> messages = new ArrayList<>();
     private Object LayoutManager;
     SharedPreferences pref;
+
+    FirebaseStorage storage;
+    StorageReference storageReference;
+
+    private Uri filePath;
+    private final int PICK_IMAGE_REQUEST = 71;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +133,9 @@ public class Discussion extends AppCompatActivity {
 
         imageadd = (ImageView) findViewById(R.id.envoyermsg);
         t1 = (TextView) findViewById(R.id.messageaenvoye);
+        b1 = (ImageView) findViewById(R.id.envoyerfile);
 
+        i1=(ImageView) findViewById(R.id.i1);
 
         r = (RecyclerView) findViewById(R.id.listdesmessagesd);
         final LinkedList<Message> msgs = new LinkedList<Message>();
@@ -218,6 +239,14 @@ public class Discussion extends AppCompatActivity {
 
             }
         });
+        storageReference = FirebaseStorage.getInstance().getReference();
+
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseImage();
+            }
+        });
 
         imageadd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -246,8 +275,15 @@ public class Discussion extends AppCompatActivity {
 
 
                 Date date_msg = null;
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                String strDate = dateFormat.format(currentTime);
+
                 Message m = new Message(currentTime, t1.getText().toString(), p1, ps);
+                m.setType("Messaage");
                 Methodes_msg_evt_.creatMessage(m);
+
+                uploadImage(strDate);
+
                 Toast.makeText(getApplicationContext(), "Votre message a été ajouter avec succès", Toast.LENGTH_LONG).show();
                 Intent in = new Intent(Discussion.this, Discussion.class);
                 String m1 = p1.getNom();
@@ -348,5 +384,90 @@ public class Discussion extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void chooseImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        //intent.setType("application/pdf");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null )
+        {
+            filePath = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                i1.setImageBitmap(bitmap);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+    private void uploadImage(String contenu) {
+
+        if(filePath != null)
+        {
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
+
+            SharedPreferences pref3 = getApplicationContext().getSharedPreferences("personne_recu", MODE_PRIVATE);
+            Gson gson3 = new Gson();
+            String json3 = pref3.getString("personne_re", "");
+            Personne p2 = gson3.fromJson(json3, Personne.class);
+
+
+            SharedPreferences pref1 = getApplicationContext().getSharedPreferences("personne_connecte", MODE_PRIVATE);
+            Gson gson1 = new Gson();
+            String json1 = pref1.getString("personne_c", "");
+            final Personne p1 = gson1.fromJson(json1, Personne.class);
+            //Professeur p1 = new Professeur("tarik", "rachid", "tarik@gcom", "0606466", "Prof");
+
+            //String tele = String.valueOf(tele1.getText());
+            //String pass= String.valueOf(pass1.getText());
+            //String type="Etudiant";
+            Date currentTime = Calendar.getInstance().getTime();
+
+            ArrayList<Personne> ps = new ArrayList<>();
+            ps.add(p2);
+
+
+            Date date_msg = null;
+            Message m = new Message(currentTime, "", p1, ps);
+            m.setType("File");
+            Methodes_msg_evt_.creatMessage(m);
+
+            StorageReference ref = storageReference.child("messages/"+ contenu);
+            ref.putFile(filePath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            progressDialog.dismiss();
+                            Toast.makeText(Discussion.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(Discussion.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                                    .getTotalByteCount());
+                            progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                        }
+                    });
+        }
     }
 }
