@@ -15,7 +15,7 @@
 
             android:layout_width="94dp"
             android:layout_height="29dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="1dp"
 
             android:background="#00000000"
             android:hint="Personne nom :"
@@ -28,7 +28,7 @@
         <TextView
             android:id="@+id/infopersonne"
 
-            android:layout_width="133dp"
+            android:layout_width="142dp"
             android:layout_height="wrap_content"
 
             android:layout_marginLeft="15dp"

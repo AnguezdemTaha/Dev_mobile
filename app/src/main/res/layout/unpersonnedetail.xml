@@ -14,7 +14,7 @@
             android:id="@+id/nompersonne"
             android:layout_width="100dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="5dp"
             android:background="#00000000"
             android:hint="Personne nom :"
             android:inputType="text"
