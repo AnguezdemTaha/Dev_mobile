@@ -284,7 +284,8 @@ public class Addmessage extends AppCompatActivity implements MyAdapter.OnNoteLis
                     ArrayList<Personne> p4 = new ArrayList<>();
                     p4.add(p3);
                     Message m = new Message(currentTime, contenu, p1, p4);
-                    Methodes_msg_evt_.creatMessage(m);
+                    if(!m.getContenu_msg().equals("")){
+                    Methodes_msg_evt_.creatMessage(m);}
                     uploadImage(strDate,p3);
                 }
 

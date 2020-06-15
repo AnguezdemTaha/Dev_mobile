@@ -98,6 +98,7 @@ public class MyAdapterMessageDiscussion extends  RecyclerView.Adapter<MyAdapterM
         }
         if(type_msg.equals("File")){
             holder.downloadfichier.setVisibility(View.VISIBLE);
+            holder.contenu.setText("Fichier...");
         }
 
 

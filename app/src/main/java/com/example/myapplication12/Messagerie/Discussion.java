@@ -280,7 +280,8 @@ public class Discussion extends AppCompatActivity {
 
                 Message m = new Message(currentTime, t1.getText().toString(), p1, ps);
                 m.setType("Messaage");
-                Methodes_msg_evt_.creatMessage(m);
+                if(!m.getContenu_msg().equals("")){
+                Methodes_msg_evt_.creatMessage(m);}
 
                 uploadImage(strDate);
 
@@ -388,7 +389,7 @@ public class Discussion extends AppCompatActivity {
 
     private void chooseImage() {
         Intent intent = new Intent();
-        intent.setType("image/*");
+        intent.setType("*/*");
         //intent.setType("*/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
