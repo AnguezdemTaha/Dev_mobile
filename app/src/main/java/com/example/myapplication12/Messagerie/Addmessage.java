@@ -437,8 +437,8 @@ public class Addmessage extends AppCompatActivity implements MyAdapter.OnNoteLis
     }
     private void chooseImage() {
         Intent intent = new Intent();
-        intent.setType("image/*");
-        //intent.setType("application/pdf");
+        //intent.setType("image/*");
+        intent.setType("*/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }

@@ -156,12 +156,13 @@ public class MyAdapterMessageDiscussion extends  RecyclerView.Adapter<MyAdapterM
 
                     StorageReference storageReference;
                     storageReference =  FirebaseStorage.getInstance().getReference();
-                    StorageReference pathReference = storageReference.child("messages/"+date_e.getText().toString());
+                    final StorageReference pathReference = storageReference.child("messages/"+date_e.getText().toString());
                     pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
 
-                            downloadfile(v.getContext(),date_e.getText().toString(), ".pdf", DIRECTORY_PICTURES, uri.toString());
+                            //downloadfile(v.getContext(),date_e.getText().toString(), ".pdf", DIRECTORY_PICTURES, uri.toString());
+                            downloadfile(v.getContext(),date_e.getText().toString(), "", DIRECTORY_PICTURES, uri.toString());
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {
