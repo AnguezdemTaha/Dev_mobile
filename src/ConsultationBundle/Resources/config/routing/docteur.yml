@@ -1,0 +1,24 @@
+docteur_index:
+    path:     /
+    defaults: { _controller: "ConsultationBundle:Docteur:index" }
+    methods:  GET
+
+docteur_show:
+    path:     /{id}/show
+    defaults: { _controller: "ConsultationBundle:Docteur:show" }
+    methods:  GET
+
+docteur_new:
+    path:     /new
+    defaults: { _controller: "ConsultationBundle:Docteur:new" }
+    methods:  [GET, POST]
+
+docteur_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ConsultationBundle:Docteur:edit" }
+    methods:  [GET, POST]
+
+docteur_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ConsultationBundle:Docteur:delete" }
+    methods:  DELETE

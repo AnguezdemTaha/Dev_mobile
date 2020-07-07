@@ -1,0 +1,24 @@
+consultation_homepage:
+    path:     /
+    defaults: { _controller: ConsultationBundle:Default:index }
+
+cons_path:
+    resource:   "@ConsultationBundle/Resources/config/routing/cons.yml"
+    prefix: /cons
+
+
+Patient_path:
+    resource:   "@ConsultationBundle/Resources/config/routing/patient.yml"
+    prefix: /patient
+
+user_path:
+    resource:   "@ConsultationBundle/Resources/config/routing/user.yml"
+    prefix: /user
+
+docteur_path:
+    resource:   "@ConsultationBundle/Resources/config/routing/docteur.yml"
+    prefix: /docteur
+
+
+
+
