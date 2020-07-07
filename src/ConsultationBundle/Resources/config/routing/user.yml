@@ -1,0 +1,4 @@
+user_index:
+  path:     /
+  defaults: { _controller: "AppBundle:Security:viewUser" }
+  methods:  [GET, POST]

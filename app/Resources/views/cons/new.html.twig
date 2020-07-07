@@ -1,0 +1,21 @@
+{% extends 'ConsultationBundle:Default:base.html.twig' %}
+
+{%block body %}
+<center>
+    <br><br>
+    <h1> Ajouter une nouvelle consultation</h1>
+    {% form_theme formCons 'bootstrap_4_layout.html.twig' %}
+    {{form_start(formCons)}}
+    
+    <div><label>Patient</lable>{{form_widget(formCons.patient)}}</div>
+    <div><label>Docteur</lable>{{form_widget(formCons.doc)}}</div>
+    <div><label>Date</lable>{{form_widget(formCons.date)}}</div>
+    <div><label>Heure</lable>{{form_widget(formCons.heure)}}</div>
+    <div><label></lable>{{form_widget(formCons.remarques.setRendered())}}</div>
+    <div><label></lable>{{form_widget(formCons.venu.setRendered())}}</div>
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+    
+    {{form_end(formCons)}}
+    
+</center>
+{%endblock body %}

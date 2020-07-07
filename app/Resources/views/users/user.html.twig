@@ -1,0 +1,34 @@
+{% extends 'ConsultationBundle:Default:base.html.twig' %}
+
+{% block body %}
+    <h1>Liste des utilisateurs</h1>
+    <br>
+    <div class="row">
+        <a href="{{ absolute_url(asset('')) }}app_dev.php/user/createuser" class="btn btn-primary">Ajouter un utilisateur</a>
+    </div>
+    <br><br><br>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            
+            <th scope="row">Nom utilisateur</th>
+            <th scope="row">Email</th>
+            <th scope="row">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                
+                <td><a>{{ user.username }}</a></td>
+                <td><a>{{ user.email }}</a></td>
+                <td>
+                    <a href="{{ absolute_url(asset('')) }}app_dev.php/user/updateuser/{{ user.id }}" class="btn btn-success">Modifier</a>
+                    <a href="{{ absolute_url(asset('')) }}app_dev.php/user/deleteuser/{{ user.id }}" class="btn btn-danger">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
